@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaMethods", "McdaMethods\McdaMethods.csproj", "{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaMethods.UnitTests", "McdaMethods.UnitTests\McdaMethods.UnitTests.csproj", "{675DE565-59A0-4865-A306-B12FCC64EF1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
