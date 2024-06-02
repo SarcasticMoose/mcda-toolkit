@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaMethods", "McdaMethods\McdaMethods.csproj", "{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit", "McdaToolkit\McdaToolkit.csproj", "{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaMethods.UnitTests", "McdaMethods.UnitTests\McdaMethods.UnitTests.csproj", "{675DE565-59A0-4865-A306-B12FCC64EF1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.UnitTests", "McdaToolkit.UnitTests\McdaToolkit.UnitTests.csproj", "{675DE565-59A0-4865-A306-B12FCC64EF1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
