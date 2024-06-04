@@ -1,7 +1,5 @@
 
-using System.Numerics;
-
-namespace McdaToolkit.NormalizationMethods.Abstraction;
+namespace McdaToolkit.NormalizationMethods.Interfaces;
 
 public interface INormalizationMethod
 {

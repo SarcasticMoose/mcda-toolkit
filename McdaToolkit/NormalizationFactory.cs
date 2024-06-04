@@ -1,17 +1,17 @@
 ﻿using System.Numerics;
 using McdaToolkit.Enums;
 using McdaToolkit.NormalizationMethods;
-using McdaToolkit.NormalizationMethods.Abstraction;
+using McdaToolkit.NormalizationMethods.Interfaces;
 
 namespace McdaToolkit;
 
 internal static class NormalizationFactory
 {
-    public static INormalizationMethod CreateNormalizationMethod(NormalizationMethod method)
+    public static INormalizationMethod CreateNormalizationMethod(NormalizationMethodEnum methodEnum)
     {
-        return method switch
+        return methodEnum switch
         {
-            NormalizationMethod.MinMax => new MinMaxNormalization(),
+            NormalizationMethodEnum.MinMax => new MinMaxNormalization(),
             _ => throw new Exception("Not existing normalization")
         };
     }
