@@ -15,11 +15,11 @@ public abstract class TestHelpers
 
         foreach (var item in result)
         {
-            if (Math.Abs(item.expected - item.result) > epsilon)
+            if (Math.Abs(item.expected - item.result) < epsilon)
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

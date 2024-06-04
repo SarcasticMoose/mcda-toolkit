@@ -4,5 +4,5 @@ namespace McdaToolkit.Options;
 
 public class McdaMethodOptions
 {
-    public NormalizationMethod NormalizationMethod { get; set; } = NormalizationMethod.MinMax;
+    public NormalizationMethodEnum NormalizationMethodEnum { get; set; } = NormalizationMethodEnum.MinMax;
 }

@@ -1,33 +1,35 @@
 using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Mcda.Abstraction;
+using McdaToolkit.Enums;
+using McdaToolkit.Mcda.Interfaces;
 using McdaToolkit.Normalization;
 using McdaToolkit.Options;
 
 namespace McdaToolkit.Mcda;
 
-public class TopsisMethod : McdaMethod
+public class TopsisMethod : IMethod
 {
+    private DataNormalizationService _normalizationServiceService;
     public TopsisMethod()
-    {
-        
+    { 
+        _normalizationServiceService = new DataNormalizationService(NormalizationMethodEnum.MinMax);
     }
     
     public TopsisMethod(McdaMethodOptions options)
     { 
-        DataNormalization = new DataNormalization(options.NormalizationMethod);
+        _normalizationServiceService = new DataNormalizationService(options.NormalizationMethodEnum);
     }
 
-    public override MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(double[,] matrix, double[] weights,
+    public MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(double[,] matrix, double[] weights,
         int[] criteriaDirections)
     {
         var convertedMatrix = Matrix<double>.Build.DenseOfArray(matrix);
         return Calculate(convertedMatrix,weights, criteriaDirections);
     }
     
-    private MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(Matrix<double> matrix, double[] weights, int[] criteriaDirections)
+    private MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(Matrix<double>? matrix, double[] weights, int[] criteriaDirections)
     {
-        var normalizedMatrix = DataNormalization.NormalizeMatrix(matrix, criteriaDirections);
+        var normalizedMatrix = _normalizationServiceService.NormalizeMatrix(matrix, criteriaDirections);
         var weightedMatrix = WeightedMatrix(normalizedMatrix, weights);
 
         var idealBest = IdealValues(weightedMatrix, true);
@@ -64,7 +66,8 @@ public class TopsisMethod : McdaMethod
         return MathNet.Numerics.LinearAlgebra.Vector<double>.Build
             .DenseOfArray(matrix
                 .EnumerateRows()
-                .Select(row => row.Subtract(ideal)
+                .Select(row => row
+                    .Subtract(ideal)
                     .PointwisePower(2)
                     .PointwiseSqrt()
                     .Sum())

@@ -1,6 +1,6 @@
 ﻿namespace McdaToolkit.Enums;
 
-public enum NormalizationMethod
+public enum NormalizationMethodEnum
 {
     MinMax
 }

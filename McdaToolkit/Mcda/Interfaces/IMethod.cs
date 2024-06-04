@@ -1,4 +1,4 @@
-namespace McdaToolkit.Mcda.Abstraction;
+namespace McdaToolkit.Mcda.Interfaces;
 
 public interface IMethod
 {

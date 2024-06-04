@@ -1,5 +1,5 @@
 using System.Numerics;
-using McdaToolkit.NormalizationMethods.Abstraction;
+using McdaToolkit.NormalizationMethods.Interfaces;
 
 namespace McdaToolkit.NormalizationMethods;
 
@@ -7,17 +7,19 @@ public class MinMaxNormalization : INormalizationMethod
 {
     public MathNet.Numerics.LinearAlgebra.Vector<double> Normalize(MathNet.Numerics.LinearAlgebra.Vector<double> data, bool cost = false)
     {
-        double difference = data.Maximum() - data.Minimum();
+        var max = data.Maximum();
+        var min = data.Minimum();
+        var difference = max - min;
         
-        if (Math.Abs(difference) < double.Epsilon)
+        if (Math.Abs(difference) < 1.11e-16)
         {
             return MathNet.Numerics.LinearAlgebra.Vector<double>.Build.Dense(data.Count, (i) => 1);
         }
         
         if (cost)
         {
-            return (data.Maximum() - data) / difference;
+            return (max - data) / difference;
         }
-        return (data - data.Minimum()) / difference;
+        return (data - min) / difference;
     }
 }
