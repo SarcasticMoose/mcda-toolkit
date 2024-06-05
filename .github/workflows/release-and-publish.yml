@@ -33,6 +33,7 @@ jobs:
         net-version: ['8.x']
       fail-fast: false
     steps:
+      - uses: actions/checkout@v4
       - name: Test
         run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.net-version }}"
       - name: Upload dotnet test results
