@@ -13,7 +13,7 @@ jobs:
       - name: Setup .NET 8.x
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix..net-version }}
+          dotnet-version: ${{ matrix.net-version }}
       - name: Install dependencies
         run: dotnet restore
       - name: Build
