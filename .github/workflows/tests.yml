@@ -19,4 +19,4 @@ jobs:
       - name: Build
         run: dotnet build
       - name: Test
-        run: dotnet test --logger trx --results-directory "TestResults-${{ matrix..net-version }}"
+        run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.net-version }}"
