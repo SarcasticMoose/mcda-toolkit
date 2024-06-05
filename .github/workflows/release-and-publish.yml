@@ -1,13 +1,20 @@
 name: Worflow CI
-on: [push, pull_request]
+on: 
+  pull_request:
+    branches: [ "master" ]
+  push:
+    branches: [ "master"]
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  setup:
+    runs-on: ${{matrix.os}}
     strategy:
-      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         net-version: ['8.x']
+      fail-fast: false
+  build:
+    needs: setup
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET 8.x
@@ -19,14 +26,13 @@ jobs:
       - name: Build
         run: dotnet build
   test:
-    needs: [build]
+    needs: [build,setup]
     runs-on: ${{matrix.os}}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        net-version: ['8.x']
     steps:
       - uses: actions/checkout@v4
       - name: Test
         run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.net-version }}"
+
+  versionize:
+    needs : [setup,build,test]
+    runs-on: ${{matrix.os}}
