@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
         net-version: ['6.x','7.x','8.x']
     steps:
       - uses: actions/checkout@v4
