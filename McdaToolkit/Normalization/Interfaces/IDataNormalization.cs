@@ -4,5 +4,5 @@ namespace McdaToolkit.Normalization.Interfaces;
 
 public interface IDataNormalization
 {
-    Matrix<double> NormalizeMatrix(Matrix<double>? matrix, int[] criteriaTypes);
+    Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes);
 }
