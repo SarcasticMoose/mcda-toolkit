@@ -32,7 +32,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test
         run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.net-version }}"
-
-  versionize:
-    needs : [setup,build,test]
-    runs-on: ${{matrix.os}}
