@@ -1,33 +1,27 @@
-using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
-using McdaToolkit.Mcda.Interfaces;
+using McdaToolkit.McdaMethods.Interfaces;
 using McdaToolkit.Normalization;
 using McdaToolkit.Options;
 
-namespace McdaToolkit.Mcda;
+namespace McdaToolkit.McdaMethods;
 
-public class TopsisMethod : IMethod
+public class TopsisMethod : McdaMethod
 {
     private DataNormalizationService _normalizationServiceService;
+
     public TopsisMethod()
-    { 
+    {
         _normalizationServiceService = new DataNormalizationService(NormalizationMethodEnum.MinMax);
     }
-    
+
     public TopsisMethod(McdaMethodOptions options)
-    { 
+    {
         _normalizationServiceService = new DataNormalizationService(options.NormalizationMethodEnum);
     }
-
-    public MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(double[,] matrix, double[] weights,
-        int[] criteriaDirections)
-    {
-        var convertedMatrix = Matrix<double>.Build.DenseOfArray(matrix);
-        return Calculate(convertedMatrix,weights, criteriaDirections);
-    }
     
-    private MathNet.Numerics.LinearAlgebra.Vector<double> Calculate(Matrix<double>? matrix, double[] weights, int[] criteriaDirections)
+    protected override Vector<double> Calculate(Matrix<double> matrix, double[] weights,
+        int[] criteriaDirections)
     {
         var normalizedMatrix = _normalizationServiceService.NormalizeMatrix(matrix, criteriaDirections);
         var weightedMatrix = WeightedMatrix(normalizedMatrix, weights);
@@ -41,6 +35,7 @@ public class TopsisMethod : IMethod
 
         return topsisScores;
     }
+
     private Matrix<double> WeightedMatrix(Matrix<double> matrix, double[] weights)
     {
         for (int i = 0; i < matrix.RowCount; i++)
@@ -50,20 +45,24 @@ public class TopsisMethod : IMethod
                 matrix[i, j] *= weights[j];
             }
         }
+
         return matrix;
     }
-    private MathNet.Numerics.LinearAlgebra.Vector<double> IdealValues(Matrix<double> matrix, bool pis)
+
+    private Vector<double> IdealValues(Matrix<double> matrix, bool pis)
     {
-        return MathNet.Numerics.LinearAlgebra.Vector<double>.Build
+        return Vector<double>.Build
             .Dense(matrix.ColumnCount, i =>
             {
                 var columnValues = matrix.Column(i).ToArray();
                 return pis ? columnValues.Max() : columnValues.Min();
             });
     }
-    private MathNet.Numerics.LinearAlgebra.Vector<double> CalculateEuclideanDistance(Matrix<double> matrix, MathNet.Numerics.LinearAlgebra.Vector<double> ideal)
+
+    private Vector<double> CalculateEuclideanDistance(Matrix<double> matrix,
+        Vector<double> ideal)
     {
-        return MathNet.Numerics.LinearAlgebra.Vector<double>.Build
+        return Vector<double>.Build
             .DenseOfArray(matrix
                 .EnumerateRows()
                 .Select(row => row
@@ -73,9 +72,9 @@ public class TopsisMethod : IMethod
                     .Sum())
                 .ToArray());
     }
-    private MathNet.Numerics.LinearAlgebra.Vector<double> CalculateTopsisScores(MathNet.Numerics.LinearAlgebra.Vector<double> distanceToBest, MathNet.Numerics.LinearAlgebra.Vector<double> distanceToWorst)
+
+    private Vector<double> CalculateTopsisScores(Vector<double> distanceToBest, Vector<double> distanceToWorst)
     {
-        return distanceToWorst
-            .PointwiseDivide(distanceToBest.Add(distanceToWorst));
+        return distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
     }
 }

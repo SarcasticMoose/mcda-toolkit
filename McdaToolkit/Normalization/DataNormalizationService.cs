@@ -13,7 +13,7 @@ public class DataNormalizationService(NormalizationMethodEnum methodEnum) : IDat
 {
     private readonly INormalizationMethod _method = NormalizationFactory.CreateNormalizationMethod(methodEnum);
 
-    public Matrix<double> NormalizeMatrix(Matrix<double>? matrix, int[] criteriaTypes)
+    public Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes)
     {
         var normalizedMatrix = Matrix<double>.Build.Dense(matrix.RowCount, matrix.ColumnCount);
         
