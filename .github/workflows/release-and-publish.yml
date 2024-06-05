@@ -1,34 +1,43 @@
-name: Worflow CI
+name: Workflow CI
+
 on: 
   pull_request:
     branches: [ "master" ]
   push:
-    branches: [ "master"]
+    branches: [ "master" ]
+
 jobs:
-  setup:
-    runs-on: ${{matrix.os}}
+  build:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [ubuntu-latest]
         net-version: ['8.x']
       fail-fast: false
-  build:
-    needs: setup
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: Setup .NET 8.x
+      - name: Setup .NET ${{ matrix.net-version}}
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.net-version }}
+          dotnet-version: ${{ matrix.net-version}}
       - name: Install dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build
+
   test:
-    needs: [build,setup]
-    runs-on: ${{matrix.os}}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        net-version: ['8.x']
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET ${{ matrix['net-version'] }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix['net-version'] }}
       - name: Test
         run: dotnet test --logger trx --results-directory "TestResults-${{ matrix.net-version }}"
