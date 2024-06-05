@@ -1,0 +1,23 @@
+name: Build package as nuget, and publish it to nuget repository
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup .NET 8.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build
+      - name: Install Versionize
+        run: dotnet tool install --global Versionize
+      - name: Versionize package
+        id: versionize
+        run: versionize --changelog-all --skip-dirty
+        continue-on-error: true
