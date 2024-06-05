@@ -1,6 +1,6 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Mcda;
+using McdaToolkit.McdaMethods;
 using McdaToolkit.UnitTests.Helpers;
 using Xunit.Abstractions;
 

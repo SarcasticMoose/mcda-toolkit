@@ -1,12 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!--Nuget info-->
+    <PackageId>McdaToolkit</PackageId>
     <Version>1.0.1</Version>
+    <Authors>Jakub Tokarczyk</Authors>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
+    <Copyright>© 2024 Jakub Tokarczyk</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
