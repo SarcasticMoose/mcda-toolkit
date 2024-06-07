@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
@@ -6,8 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit", "McdaToolkit\McdaToolkit.csproj", "{EC147B8B-336E-4744-8F54-43D1BB0E4FC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.UnitTests", "McdaToolkit.UnitTests\McdaToolkit.UnitTests.csproj", "{675DE565-59A0-4865-A306-B12FCC64EF1F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUddsadsada", "TestUddsadsada\TestUddsadsada.csproj", "{C7D4020C-DC44-47E3-BB9C-2D4CCFA88A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675DE565-59A0-4865-A306-B12FCC64EF1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7D4020C-DC44-47E3-BB9C-2D4CCFA88A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7D4020C-DC44-47E3-BB9C-2D4CCFA88A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7D4020C-DC44-47E3-BB9C-2D4CCFA88A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7D4020C-DC44-47E3-BB9C-2D4CCFA88A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
