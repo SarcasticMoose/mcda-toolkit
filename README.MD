@@ -1,5 +1,8 @@
 # MCDA Toolkit
-![NuGet Version](https://img.shields.io/nuget/vpre/McdaToolkit?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMcdaToolkit)
+
+[mcdatoolkit]: https://www.nuget.org/packages/McdaToolkit
+[mcdatoolkit-shield]: https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMcdaToolkit
+[![][mcdatoolkit-shield]][mcdatoolkit]
 
 ## Introduction
 The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).  
