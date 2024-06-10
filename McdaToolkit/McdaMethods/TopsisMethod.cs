@@ -1,3 +1,4 @@
+using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
 using McdaToolkit.McdaMethods.Interfaces;
@@ -8,7 +9,7 @@ namespace McdaToolkit.McdaMethods;
 
 public class TopsisMethod : McdaMethod
 {
-    private DataNormalizationService _normalizationServiceService;
+    private readonly DataNormalizationService _normalizationServiceService;
 
     public TopsisMethod()
     {
@@ -20,7 +21,7 @@ public class TopsisMethod : McdaMethod
         _normalizationServiceService = new DataNormalizationService(options.NormalizationMethodEnum);
     }
     
-    protected override Vector<double> Calculate(Matrix<double> matrix, double[] weights,
+    protected override Result<Vector<double>> Calculate(Matrix<double> matrix, double[] weights,
         int[] criteriaDirections)
     {
         var normalizedMatrix = _normalizationServiceService.NormalizeMatrix(matrix, criteriaDirections);
@@ -33,7 +34,7 @@ public class TopsisMethod : McdaMethod
         var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
         var topsisScores = CalculateTopsisScores(distanceToBest, distanceToWorst);
 
-        return topsisScores;
+        return Result.Ok(topsisScores);
     }
 
     private Matrix<double> WeightedMatrix(Matrix<double> matrix, double[] weights)
