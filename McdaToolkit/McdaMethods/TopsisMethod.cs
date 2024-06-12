@@ -55,7 +55,7 @@ public class TopsisMethod : McdaMethod
         return Vector<double>.Build
             .Dense(matrix.ColumnCount, i =>
             {
-                var columnValues = matrix.Column(i).ToArray();
+                var columnValues = matrix.Column(i);
                 return pis ? columnValues.Max() : columnValues.Min();
             });
     }
