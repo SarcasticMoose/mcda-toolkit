@@ -9,7 +9,7 @@ namespace McdaToolkit.Normalization;
 
 public class DataNormalizationService(NormalizationMethodEnum methodEnum) : IDataNormalization
 {
-    private readonly INormalizationMethod _method = NormalizationFactory.CreateNormalizationMethod(methodEnum);
+    private readonly INormalize<double> _method = NormalizationFactory.CreateNormalizationMethod(methodEnum);
 
     public Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes)
     {

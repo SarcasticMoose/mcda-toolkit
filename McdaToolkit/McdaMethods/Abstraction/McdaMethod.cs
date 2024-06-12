@@ -1,12 +1,10 @@
 ﻿using LightResults;
-using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Extensions;
 using McdaToolkit.McdaMethods.Errors;
 using McdaToolkit.McdaMethods.Helpers;
 using McdaToolkit.McdaMethods.Interfaces;
 
-namespace McdaToolkit.McdaMethods;
+namespace McdaToolkit.McdaMethods.Abstraction;
 
 public abstract class McdaMethod : IMethod
 {
@@ -57,6 +55,5 @@ public abstract class McdaMethod : IMethod
         var matrixTypeOfMatrix = Matrix<double>.Build.DenseOfArray(matrix);
         return Calculate(matrixTypeOfMatrix, weights, criteriaDirections);
     }
-    
     protected abstract Result<Vector<double>> Calculate(Matrix<double> matrix, double[] weights, int[] criteriaDirections);
 }
