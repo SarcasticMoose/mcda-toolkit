@@ -1,19 +1,15 @@
 # MCDA Toolkit
-
-[![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge)](https://www.nuget.org/packages/McdaToolkit)
-[![License](https://img.shields.io/github/license/SarcasticMoose/mcda-toolkit?style=for-the-badge)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
+![NuGet Version](https://img.shields.io/nuget/vpre/McdaToolkit?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMcdaToolkit)
 
 ## Introduction
 The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).  
 
 ## Key feature
-- .NET  6+ support
-- Easy to use
+- .NET  5+ support
 
-## Dependencies
+## Datatypes
 
-- [Math.Net Numerics](https://numerics.mathdotnet.com/)
-- [Light Results](https://github.com/jscarle/LightResults)
+The ```Matrix<double>``` and ```Vector<double>``` types provided by [Math.Net Numerics](https://numerics.mathdotnet.com/) are used for internal operations.
 
 ## Calculation process
 
@@ -32,7 +28,6 @@ double[] data = new double[,]
 ```
 
 ### Prepare weights matrix 
-Weights are discribed by double precision numbers ∈<0,1>, and they have to ``sum to 1``.
 ```csharp
 double[] weights = new double[]
 {
@@ -41,7 +36,6 @@ double[] weights = new double[]
 ```
 
 ### Prepare types matrix
-Types are discribed by two integer numbers ``-1``(cost) and ``1``(profit).
 ```csharp
 int[] types = new int[]
 {
@@ -50,22 +44,7 @@ int[] types = new int[]
 ```
 ### Run calculation
 
-The final result of the calculation is ``Result<Vector<double>>``.
-This object contains information about the success or failure of the operation.
-Before obtaining the ``Value`` from the result object, it is necessary to check that no errors have occurred.
-
 ```csharp
 IMethod topsis = new TopsisMethod();
-Result<Vector<double>> result = topsis.Calculate(data,weights,types);
-
-if(topsisResult.IsFailed)
-{
-    foreach (var error in topsisResult.Errors)
-    {
-        Console.WriteLine(error.Message);
-    }
-    return;
-}
-Vector<double> result.Value;
+Vector<double> result = topsis.Calculate(data,weights,types);
 ```
-More info about ``Result`` type and pattern at: [Light Results](https://github.com/jscarle/LightResults) and [Fluent Results](https://github.com/altmann/FluentResults)
