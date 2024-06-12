@@ -1,9 +1,9 @@
-using McdaToolkit.NormalizationMethods.Interfaces;
 using MathNet.Numerics.LinearAlgebra;
+using McdaToolkit.NormalizationMethods.Interfaces;
 
-namespace McdaToolkit.NormalizationMethods;
+namespace McdaToolkit.NormalizationMethods.Types.Linear;
 
-public class MinMaxNormalization : INormalizationMethod
+public class MinMaxNormalization : INormalize<double>
 {
     private const double MaxError = 1.11e-16;
     
@@ -12,9 +12,10 @@ public class MinMaxNormalization : INormalizationMethod
         var max = data.Maximum();
         var min = data.Minimum();
         var difference = max - min;
+        
         if (Math.Abs(difference) < MaxError)
         {
-            return Vector<double>.Build.Dense(data.Count, (i) => 1);
+            return Vector<double>.Build.Dense(data.Count, _ => 1);
         }
         
         if (cost)

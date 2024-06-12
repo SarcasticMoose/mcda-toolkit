@@ -25,5 +25,9 @@
     <PackageReference Include="LightResults" Version="8.0.9" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="NormalizationMethods\Types\" />
+  </ItemGroup>
 
 </Project>

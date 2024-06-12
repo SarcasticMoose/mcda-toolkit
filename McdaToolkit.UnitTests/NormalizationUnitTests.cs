@@ -2,45 +2,65 @@
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
 using McdaToolkit.Normalization;
+using McdaToolkit.UnitTests.Helpers;
 
 namespace McdaToolkit.UnitTests;
 
 public class NormalizationUnitTests
 {
+    private readonly Matrix<double> _matrixToNormalize = Matrix<double>.Build.DenseOfArray(new double[,]
+    {
+        { 32.57, 14.56, 87.12, 56.34, 47.89 },
+        { 93.23, 76.34, 33.78, 25.68, 64.23 },
+        { 78.45, 68.92, 45.67, 87.34, 39.45 },
+        { 54.12, 34.56, 56.89, 92.56, 81.56 },
+        { 21.76, 53.23, 73.21, 65.78, 57.34 },
+        { 85.34, 98.45, 38.45, 23.45, 62.89 },
+        { 42.68, 27.34, 49.67, 74.12, 53.21 }
+    });
+        
+    private readonly int[] _types = [-1, -1, 1, 1, -1];
+    
     [Fact]
     public void Normalize_MinMaxNormalization_ShouldReturnedExpectedValues()
     {
-        var matrixToNormalize = Matrix<double>.Build.DenseOfArray(new double[,]
-        {
-            { 66, 56, 95 },
-            { 61, 55, 166 },
-            { 65, 49, 113 },
-            { 95, 56, 99 },
-            { 63, 43, 178 },
-            { 74, 59, 140 },
-        });
-        
         var expected = new double[][]
         {
-            [0.85294118, 0.1875, 0.0], 
-            [1.0, 0.25, 0.85542169],
-            [0.88235294, 0.625, 0.21686747],
-            [0.0, 0.1875, 0.04819277],
-            [0.94117647, 1.0, 1.0],
-            [0.61764706, 0.0, 0.54216867]
+            [0.84874773, 1, 1, 0.47590797, 0.79957255],
+            [0, 0.26355942, 0, 0.03226740, 0.41154120],
+            [0.20680006, 0.35200858, 0.22290964, 0.92446824, 1],
+            [0.54722261, 0.76159256, 0.43325834, 1, 0],
+            [1, 0.53903922, 0.73922010, 0.61250181, 0.57516029],
+            [0.11039597, 0, 0.08755156, 0, 0.44336262],
+            [0.70728977, 0.84765765, 0.29790026, 0.73317899, 0.67323676]
         };
-        
-        int[] types = [-1,-1, 1];
-        
         var dataNormalization = new DataNormalizationService(NormalizationMethodEnum.MinMax);
 
-        var normalizedMatrix = dataNormalization.NormalizeMatrix(matrixToNormalize,types);
-
-        var equalityResult = normalizedMatrix
-            .EnumerateRows()
-            .Select((x, i) => Helpers.TestHelpers.IsResultTheSame(x, expected[i]))
-            .All(y => y);
-
+        var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
+        
+        var equalityResult = TestHelpers.CheckEquality(normalizedMatrix, expected);
+        equalityResult.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void Normalize_VectorNormalization_ShouldReturnedExpectedValues()
+    {
+        var normalizationType = NormalizationMethodEnum.Vector;
+        var expected = new double[][]
+        {
+            [0.80678026, 0.90838501, 0.57002794, 0.32313221, 0.69529318],
+            [0.44691814, 0.51965053, 0.22102323, 0.14728497, 0.59132764],
+            [0.53459968, 0.56633894, 0.29881974, 0.50092948, 0.74899386],
+            [0.67893607, 0.78254024, 0.37223243, 0.53086825, 0.48106309],
+            [0.87090999, 0.66506416, 0.47901452, 0.37727434, 0.63516623],
+            [0.49372513, 0.38052914, 0.25157913, 0.13449503, 0.59985358],
+            [0.74680324, 0.82797021, 0.32499182, 0.42510755, 0.66144393]
+        };
+        var dataNormalization = new DataNormalizationService(normalizationType);
+        
+        var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
+        
+        var equalityResult = TestHelpers.CheckEquality(normalizedMatrix, expected);
         equalityResult.Should().BeTrue();
     }
 }

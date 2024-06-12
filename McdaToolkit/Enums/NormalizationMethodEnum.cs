@@ -2,5 +2,6 @@
 
 public enum NormalizationMethodEnum
 {
-    MinMax
+    MinMax,
+    Vector
 }

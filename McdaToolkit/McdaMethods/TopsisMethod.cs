@@ -1,6 +1,7 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
+using McdaToolkit.McdaMethods.Abstraction;
 using McdaToolkit.McdaMethods.Interfaces;
 using McdaToolkit.Normalization;
 using McdaToolkit.Options;
