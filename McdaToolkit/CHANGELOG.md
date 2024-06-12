@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://www.github.com/SarcasticMoose/mcda-toolkit/releases/tag/v2.0.1) (2024-06-12)
+
+### Bug Fixes
+
+* remove redundant casting ([6db1dbc](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/6db1dbc1f88f2e342d8b3d7aa81364d90e4dfab5))
+* update broken project ([ea46d0d](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/ea46d0d1c43ba0c25c957fbc6dd60e70dfd88326))
+
 <a name="2.0.0"></a>
 ## [2.0.0](https://www.github.com/SarcasticMoose/mcda-toolkit/releases/tag/v2.0.0) (2024-06-12)
 
