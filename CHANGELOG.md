@@ -8,7 +8,8 @@ All notable changes to this project will be documented in this file. See [versio
 ### Features
 
 * add vector normalization ([c819676](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/c81967667e032413cdad426a9a5a0e6dfecd6804))
-  <a name="2.0.1"></a>
+
+<a name="2.0.1"></a>
 ## [2.0.1](https://www.github.com/SarcasticMoose/mcda-toolkit/releases/tag/v2.0.1) (2024-06-12)
 
 ### Bug Fixes
