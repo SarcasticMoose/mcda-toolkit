@@ -63,4 +63,26 @@ public class NormalizationUnitTests
         var equalityResult = TestHelpers.CheckEquality(normalizedMatrix, expected);
         equalityResult.Should().BeTrue();
     }
+    
+    [Fact]
+    public void Normalize_Logarithmic_ShouldReturnedExpectedValues()
+    {
+        var normalizationType = NormalizationMethodEnum.Logarithmic;
+        var expected = new double[][]
+        {
+            [0.87403010, 0.89954564, 0.16128664, 0.14438272, 0.86315596],
+            [0.83599827, 0.83739945, 0.12708112, 0.11624356, 0.85277256],
+            [0.84224030, 0.84123458, 0.13796910, 0.16008394, 0.87001329],
+            [0.85566609, 0.86712382, 0.14590034, 0.16216292, 0.84432373],
+            [0.88861531, 0.85092357, 0.15500620, 0.14993079, 0.85678609],
+            [0.83919604, 0.82785947, 0.13175623, 0.11299010, 0.85351828],
+            [0.86425385, 0.87591345, 0.14100037, 0.15420595, 0.85943008]
+        };
+        var dataNormalization = new DataNormalizationService(normalizationType);
+        
+        var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
+        
+        var equalityResult = TestHelpers.CheckEquality(normalizedMatrix, expected);
+        equalityResult.Should().BeTrue();
+    }
 }

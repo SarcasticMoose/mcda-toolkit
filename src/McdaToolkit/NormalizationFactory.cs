@@ -15,6 +15,7 @@ internal static class NormalizationFactory
         {
             NormalizationMethodEnum.MinMax => new MinMaxNormalization(),
             NormalizationMethodEnum.Vector => new VectorNormalization(),
+            NormalizationMethodEnum.Logarithmic => new LogarithmicNormalization(),
             _ => throw new Exception("Not existing normalization")
         };
     }
