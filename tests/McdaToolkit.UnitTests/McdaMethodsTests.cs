@@ -1,7 +1,9 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.McdaMethods;
-using McdaToolkit.McdaMethods.Errors;
+using McdaToolkit.Enums;
+using McdaToolkit.Mcda.Errors;
+using McdaToolkit.Mcda.Methods;
+using McdaToolkit.Options;
 using Xunit.Abstractions;
 
 namespace McdaToolkit.UnitTests;
@@ -42,7 +44,11 @@ public class McdaMethodsTests
             0.38805147,0.76189759,0.58509479,0.06374247,0.97647059,0.43681786
         };
 
-        var topsis = new TopsisMethod();
+        var topsis = new Topsis(new McdaMethodOptions()
+        {
+            NormalizationMethod = NormalizationMethod.MinMax
+        });
+        
         var topsisResult = topsis.Calculate(matrix,weights,types);
 
         var final = topsisResult.Value;
@@ -56,8 +62,7 @@ public class McdaMethodsTests
     [Fact]
     public void Calculate_WeightAreNotEqualOne_ShouldReturnResultFail()
     {
-        var matrix = new double[,]
-        {
+        double[,] matrix = {
             { 66, 56, 95 },
             { 61, 55, 166 },
             { 65, 49, 113 },
@@ -65,18 +70,21 @@ public class McdaMethodsTests
             { 63, 43, 178 },
             { 74, 59, 140 },
         };
-        double[] weights = new double[]
-        {
+        double[] weights =
+        [
             0.8,0.25,0.35
-        };
-        int[] types = new int[]
-        {
+        ];
+        int[] types =
+        [
             -1,
             -1,
             1
-        };
+        ];
         
-        var topsis = new TopsisMethod();
+        var topsis = new Topsis(new McdaMethodOptions()
+        {
+            NormalizationMethod = NormalizationMethod.MinMax
+        });
         var topsisResult = topsis.Calculate(matrix, weights, types);
 
         topsisResult.IsSuccess.Should().BeFalse();
@@ -106,7 +114,11 @@ public class McdaMethodsTests
             1
         };
         
-        var topsis = new TopsisMethod();
+        var topsis = new Topsis(new McdaMethodOptions()
+        {
+            NormalizationMethod = NormalizationMethod.MinMax
+        });
+        
         var topsisResult = topsis.Calculate(matrix, weights, types);
 
         topsisResult.IsSuccess.Should().BeFalse();
@@ -137,7 +149,10 @@ public class McdaMethodsTests
             1
         };
         
-        var topsis = new TopsisMethod();
+        var topsis = new Topsis(new McdaMethodOptions()
+        {
+            NormalizationMethod = NormalizationMethod.MinMax
+        });
         var topsisResult = topsis.Calculate(matrix, weights, types);
 
         topsisResult.IsSuccess.Should().BeFalse();

@@ -1,31 +1,24 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Enums;
-using McdaToolkit.McdaMethods.Abstraction;
-using McdaToolkit.Normalization;
-using McdaToolkit.Normalization.Interfaces;
+using McdaToolkit.Mcda.Abstraction;
+using McdaToolkit.Normalization.Service;
+using McdaToolkit.Normalization.Service.Abstraction;
 using McdaToolkit.Options;
 
-namespace McdaToolkit.McdaMethods;
+namespace McdaToolkit.Mcda.Methods;
 
-public class TopsisMethod : McdaMethod
+public sealed class Topsis : McdaMethod
 {
-    private readonly IDataNormalization _normalizationServiceService;
-
-    public TopsisMethod()
+    private readonly IMatrixNormalizationService _normalizationServiceServiceService;
+    
+    public Topsis(McdaMethodOptions options)
     {
-        _normalizationServiceService = new DataNormalizationService(NormalizationMethodEnum.MinMax);
-    }
-
-    public TopsisMethod(McdaMethodOptions options)
-    {
-        _normalizationServiceService = new DataNormalizationService(options.NormalizationMethodEnum);
+        _normalizationServiceServiceService = new MatrixNormalizatorService(options.NormalizationMethod);
     }
     
-    protected override Result<Vector<double>> Calculate(Matrix<double> matrix, double[] weights,
-        int[] criteriaDirections)
+    protected override Result<Vector<double>> RunCalculation(Matrix<double> matrix, Vector<double> weights, int[] criteriaDirections)
     {
-        var normalizedMatrix = _normalizationServiceService.NormalizeMatrix(matrix, criteriaDirections);
+        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrix, criteriaDirections);
         var weightedMatrix = WeightedMatrix(normalizedMatrix, weights);
 
         var idealBest = IdealValues(weightedMatrix, true);
@@ -38,7 +31,7 @@ public class TopsisMethod : McdaMethod
         return Result.Ok(topsisScores);
     }
 
-    private Matrix<double> WeightedMatrix(Matrix<double> matrix, double[] weights)
+    private Matrix<double> WeightedMatrix(Matrix<double> matrix, Vector<double> weights)
     {
         for (int i = 0; i < matrix.RowCount; i++)
         {

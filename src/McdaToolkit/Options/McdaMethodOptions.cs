@@ -2,7 +2,10 @@
 
 namespace McdaToolkit.Options;
 
-public class McdaMethodOptions
+/// <summary>
+/// Configuration for Mcda methods
+/// </summary>
+public record McdaMethodOptions
 {
-    public NormalizationMethodEnum NormalizationMethodEnum { get; set; } = NormalizationMethodEnum.MinMax;
+    public NormalizationMethod NormalizationMethod { get; set; } = NormalizationMethod.MinMax;
 }
