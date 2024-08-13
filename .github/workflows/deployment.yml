@@ -40,11 +40,11 @@ jobs:
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v4.1.8
+        with:
+          name: nuget    
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
       - name: Publish to nuget repository
-        run: foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-              dotnet nuget push $file --api-key "${{ secrets.NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-          }
+        run: dotnet nuget push $file --api-key "${{ secrets.NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
