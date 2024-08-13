@@ -1,12 +1,12 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.NormalizationMethods.Interfaces;
 
-namespace McdaToolkit.NormalizationMethods.Types.Sum;
+namespace McdaToolkit.NormalizationMethods.Types.Linear;
 
-internal class LogarithmicNormalization : INormalize<double>
+internal class MaxNormalization : INormalize<double>
 {
     /// <summary>
-    /// Create normalized vector using logarithmic normalization method 
+    /// Create normalized vector using max normalization method 
     /// </summary>
     /// <param name="data">One-dimensional vector of data to normalize</param>
     /// <param name="cost">Describe type of vector, cost or profit</param>
@@ -15,14 +15,11 @@ internal class LogarithmicNormalization : INormalize<double>
     /// </returns>
     public Vector<double> Normalize(Vector<double> data, bool cost)
     {
-        var product  = data.Aggregate(1.0,(x,y) => x * y);
-        var exp = data.PointwiseLog() / Math.Log(product);
-        
         if (cost)
         {
-            return 1 - exp;
+            return 1 - data / data.Maximum();
         }
 
-        return exp;
+        return data / data.Maximum();
     }
 }
