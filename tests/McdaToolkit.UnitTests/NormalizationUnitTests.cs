@@ -2,6 +2,7 @@
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
 using McdaToolkit.Normalization;
+using McdaToolkit.Normalization.Service;
 using McdaToolkit.UnitTests.Helpers;
 
 namespace McdaToolkit.UnitTests;
@@ -34,7 +35,7 @@ public class NormalizationUnitTests
             [0.11039597, 0, 0.08755156, 0, 0.44336262],
             [0.70728977, 0.84765765, 0.29790026, 0.73317899, 0.67323676]
         };
-        var dataNormalization = new DataNormalizationService(NormalizationMethodEnum.MinMax);
+        var dataNormalization = new MatrixNormalizatorService(NormalizationMethod.MinMax);
 
         var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
         
@@ -45,7 +46,7 @@ public class NormalizationUnitTests
     [Fact]
     public void Normalize_VectorNormalization_ShouldReturnedExpectedValues()
     {
-        var normalizationType = NormalizationMethodEnum.Vector;
+        var normalizationType = NormalizationMethod.Vector;
         var expected = new double[][]
         {
             [0.80678026, 0.90838501, 0.57002794, 0.32313221, 0.69529318],
@@ -56,7 +57,7 @@ public class NormalizationUnitTests
             [0.49372513, 0.38052914, 0.25157913, 0.13449503, 0.59985358],
             [0.74680324, 0.82797021, 0.32499182, 0.42510755, 0.66144393]
         };
-        var dataNormalization = new DataNormalizationService(normalizationType);
+        var dataNormalization = new MatrixNormalizatorService(normalizationType);
         
         var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
         
@@ -67,7 +68,7 @@ public class NormalizationUnitTests
     [Fact]
     public void Normalize_Logarithmic_ShouldReturnedExpectedValues()
     {
-        var normalizationType = NormalizationMethodEnum.Logarithmic;
+        var normalizationType = NormalizationMethod.Logarithmic;
         var expected = new double[][]
         {
             [0.87403010, 0.89954564, 0.16128664, 0.14438272, 0.86315596],
@@ -78,7 +79,7 @@ public class NormalizationUnitTests
             [0.83919604, 0.82785947, 0.13175623, 0.11299010, 0.85351828],
             [0.86425385, 0.87591345, 0.14100037, 0.15420595, 0.85943008]
         };
-        var dataNormalization = new DataNormalizationService(normalizationType);
+        var dataNormalization = new MatrixNormalizatorService(normalizationType);
         
         var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
         
@@ -89,7 +90,7 @@ public class NormalizationUnitTests
     [Fact]
     public void Normalize_Sum_ShouldReturnedExpectedValues()
     {
-        var normalizationType = NormalizationMethodEnum.Sum;
+        var normalizationType = NormalizationMethod.Sum;
         var expected = new double[][]
         {
             [0.19968511, 0.36006754, 0.22640921, 0.13248054, 0.16546924],
@@ -100,7 +101,7 @@ public class NormalizationUnitTests
             [0.07620980, 0.05325123, 0.09992463, 0.05514144, 0.12600289],
             [0.15238388, 0.19175506, 0.12908340, 0.17428928, 0.14892543]
         };
-        var dataNormalization = new DataNormalizationService(normalizationType);
+        var dataNormalization = new MatrixNormalizatorService(normalizationType);
         
         var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
         
@@ -111,7 +112,7 @@ public class NormalizationUnitTests
     [Fact]
     public void Normalize_Max_ShouldReturnedExpectedValues()
     {
-        var normalizationType = NormalizationMethodEnum.Max;
+        var normalizationType = NormalizationMethod.Max;
         var expected = new double[][]
         {
             [0.65064893, 0.85210767, 1, 0.60868626, 0.41282491],
@@ -122,7 +123,7 @@ public class NormalizationUnitTests
             [0.08462941, 0, 0.44134527, 0.25334918, 0.22891123],
             [0.54220744, 0.72229558, 0.57013315, 0.80077787, 0.34759686]
         };
-        var dataNormalization = new DataNormalizationService(normalizationType);
+        var dataNormalization = new MatrixNormalizatorService(normalizationType);
         
         var normalizedMatrix = dataNormalization.NormalizeMatrix(_matrixToNormalize,_types);
         

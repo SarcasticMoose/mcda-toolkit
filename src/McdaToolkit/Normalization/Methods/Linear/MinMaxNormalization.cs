@@ -1,20 +1,13 @@
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.NormalizationMethods.Interfaces;
+using McdaToolkit.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.NormalizationMethods.Types.Linear;
+namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class MinMaxNormalization : INormalize<double>
+internal class MinMaxNormalization : INormalizationMethod
 {
     private const double MaxTolerance = 1.11e-16;
     
-    /// <summary>
-    /// Create normalized vector using vector normalization method 
-    /// </summary>
-    /// <param name="data">One-dimensional vector of data to normalize</param>
-    /// <param name="cost">Describe type of vector, cost or profit</param>
-    /// <returns>
-    /// Return normalized vector
-    /// </returns>
+    /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost = false)
     {
         var max = data.Maximum();

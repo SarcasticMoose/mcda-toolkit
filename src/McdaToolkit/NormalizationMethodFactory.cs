@@ -1,23 +1,21 @@
-﻿using System.Numerics;
-using McdaToolkit.Enums;
-using McdaToolkit.NormalizationMethods;
-using McdaToolkit.NormalizationMethods.Interfaces;
-using McdaToolkit.NormalizationMethods.Types.Linear;
-using McdaToolkit.NormalizationMethods.Types.Sum;
+﻿using McdaToolkit.Enums;
+using McdaToolkit.Normalization.Methods.Abstraction;
+using McdaToolkit.Normalization.Methods.Linear;
+using McdaToolkit.Normalization.Methods.Sum;
 
 namespace McdaToolkit;
 
 internal static class NormalizationMethodFactory
 {
-    public static INormalize<double> Create(NormalizationMethodEnum methodEnum)
+    public static IVectorNormalizator<double> Create(NormalizationMethod method)
     {
-        return methodEnum switch
+        return method switch
         {
-            NormalizationMethodEnum.MinMax => new MinMaxNormalization(),
-            NormalizationMethodEnum.Vector => new VectorNormalization(),
-            NormalizationMethodEnum.Logarithmic => new LogarithmicNormalization(),
-            NormalizationMethodEnum.Sum => new SumNormalization() ,
-            NormalizationMethodEnum.Max => new MaxNormalization(),
+            NormalizationMethod.MinMax => new MinMaxNormalization(),
+            NormalizationMethod.Vector => new VectorNormalization(),
+            NormalizationMethod.Logarithmic => new LogarithmicNormalization(),
+            NormalizationMethod.Sum => new SumNormalization(),
+            NormalizationMethod.Max => new MaxNormalization(),
             _ => throw new Exception("Not existing normalization")
         };
     }

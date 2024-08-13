@@ -1,9 +1,6 @@
-﻿using LightResults;
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.McdaMethods.Errors;
+﻿using MathNet.Numerics;
 
-namespace McdaToolkit.McdaMethods.Helpers;
+namespace McdaToolkit.Mcda.Helpers;
 
 public static class CheckDataHelper
 {
