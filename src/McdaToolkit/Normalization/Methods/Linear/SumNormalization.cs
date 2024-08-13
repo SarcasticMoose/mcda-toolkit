@@ -1,10 +1,11 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.NormalizationMethods.Interfaces;
+using McdaToolkit.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.NormalizationMethods.Types.Linear;
+namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class SumNormalization : INormalize<double>
+internal class SumNormalization : INormalizationMethod
 {
+    /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost)
     {
         if (cost)
