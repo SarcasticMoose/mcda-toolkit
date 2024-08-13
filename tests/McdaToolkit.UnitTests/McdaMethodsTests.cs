@@ -2,7 +2,6 @@ using FluentAssertions;
 using MathNet.Numerics;
 using McdaToolkit.McdaMethods;
 using McdaToolkit.McdaMethods.Errors;
-using McdaToolkit.UnitTests.Helpers;
 using Xunit.Abstractions;
 
 namespace McdaToolkit.UnitTests;
@@ -53,7 +52,7 @@ public class McdaMethodsTests
             .Should()
             .BeEquivalentTo(expectedTopsisScore);
     }
-
+    
     [Fact]
     public void Calculate_WeightAreNotEqualOne_ShouldReturnResultFail()
     {

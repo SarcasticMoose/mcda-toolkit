@@ -2,15 +2,15 @@ using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
 using McdaToolkit.McdaMethods.Abstraction;
-using McdaToolkit.McdaMethods.Interfaces;
 using McdaToolkit.Normalization;
+using McdaToolkit.Normalization.Interfaces;
 using McdaToolkit.Options;
 
 namespace McdaToolkit.McdaMethods;
 
 public class TopsisMethod : McdaMethod
 {
-    private readonly DataNormalizationService _normalizationServiceService;
+    private readonly IDataNormalization _normalizationServiceService;
 
     public TopsisMethod()
     {

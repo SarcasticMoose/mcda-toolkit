@@ -4,5 +4,7 @@ public enum NormalizationMethodEnum
 {
     MinMax,
     Vector,
-    Logarithmic
+    Logarithmic,
+    Sum,
+    Max
 }
