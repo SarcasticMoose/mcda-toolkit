@@ -11,12 +11,10 @@ on:
 
 env:
   NuGetDirectory: ${{ github.workspace}}/nuget
-  shell: pwsh
 
 defaults:
   run:
-    shell: ${{ env.shell }}
-
+    shell: pwsh
 jobs:
   build:
     runs-on: ubuntu-latest
