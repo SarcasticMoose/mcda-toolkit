@@ -11,6 +11,7 @@ on:
 
 env:
   NuGetDirectory: ${{ github.workspace}}/nuget
+  shell: pwsh
 
 jobs:
   build:
@@ -47,4 +48,4 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Publish to nuget repository
-        run: dotnet nuget push $file --api-key "${{ secrets.NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ${{ env.NuGetDirectory }}/*.nupkg --api-key "${{ secrets.NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
