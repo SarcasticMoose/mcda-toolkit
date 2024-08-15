@@ -23,6 +23,10 @@
         <None Include="..\..\Images\icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.UnitTests" />
+    </ItemGroup>
+
     <ItemGroup Label="Dependencies">
         <PackageReference Include="LightResults" Version="8.0.9" />
         <PackageReference Include="MathNet.Numerics" Version="5.0.0" />

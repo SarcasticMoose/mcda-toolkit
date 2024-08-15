@@ -21,7 +21,7 @@ internal static class EnumerableExtentions
     {
         var sourceToArray = source.ToArray();
         var rows = sourceToArray.Length;
-        var cols = sourceToArray.First().Count();
+        var cols = sourceToArray[0].Count();
         var result = new T[rows, cols];
         var i = 0;
         

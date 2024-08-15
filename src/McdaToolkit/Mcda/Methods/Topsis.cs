@@ -1,9 +1,9 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Mcda.Abstraction;
+using McdaToolkit.Mcda.Methods.Abstraction;
+using McdaToolkit.Mcda.Options;
 using McdaToolkit.Normalization.Service;
 using McdaToolkit.Normalization.Service.Abstraction;
-using McdaToolkit.Options;
 
 namespace McdaToolkit.Mcda.Methods;
 
@@ -16,21 +16,6 @@ public sealed class Topsis : McdaMethod
         _normalizationServiceServiceService = new MatrixNormalizatorService(options.NormalizationMethod);
     }
     
-    protected override Result<Vector<double>> RunCalculation(Matrix<double> matrix, Vector<double> weights, int[] criteriaDirections)
-    {
-        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrix, criteriaDirections);
-        var weightedMatrix = WeightedMatrix(normalizedMatrix, weights);
-
-        var idealBest = IdealValues(weightedMatrix, true);
-        var idealWorst = IdealValues(weightedMatrix, false);
-
-        var distanceToBest = CalculateEuclideanDistance(weightedMatrix, idealBest);
-        var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
-        var topsisScores = CalculateTopsisScores(distanceToBest, distanceToWorst);
-
-        return Result.Ok(topsisScores);
-    }
-
     private Matrix<double> WeightedMatrix(Matrix<double> matrix, Vector<double> weights)
     {
         for (int i = 0; i < matrix.RowCount; i++)
@@ -40,7 +25,6 @@ public sealed class Topsis : McdaMethod
                 matrix[i, j] *= weights[j];
             }
         }
-
         return matrix;
     }
 
@@ -54,8 +38,7 @@ public sealed class Topsis : McdaMethod
             });
     }
 
-    private Vector<double> CalculateEuclideanDistance(Matrix<double> matrix,
-        Vector<double> ideal)
+    private Vector<double> CalculateEuclideanDistance(Matrix<double> matrix, Vector<double> ideal)
     {
         return Vector<double>.Build
             .DenseOfArray(matrix
@@ -71,5 +54,22 @@ public sealed class Topsis : McdaMethod
     private Vector<double> CalculateTopsisScores(Vector<double> distanceToBest, Vector<double> distanceToWorst)
     {
         return distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
+    }
+
+    protected override Result<Vector<double>> RunCalculation(double[,] matrix,double[] weights,int[] criteriaDirections)
+    {
+        var matrixBuilded = Matrix<double>.Build.DenseOfArray(matrix);
+        var weightsBuilded = Vector<double>.Build.DenseOfArray(weights);
+        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrixBuilded, criteriaDirections);
+        var weightedMatrix = WeightedMatrix(normalizedMatrix, weightsBuilded);
+
+        var idealBest = IdealValues(weightedMatrix, true);
+        var idealWorst = IdealValues(weightedMatrix, false);
+
+        var distanceToBest = CalculateEuclideanDistance(weightedMatrix, idealBest);
+        var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
+        var topsisScores = CalculateTopsisScores(distanceToBest, distanceToWorst);
+
+        return Result.Ok(topsisScores);
     }
 }
