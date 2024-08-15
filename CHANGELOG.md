@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="2.2.0"></a>
+## [2.2.0](https://www.github.com/SarcasticMoose/mcda-toolkit/releases/tag/v2.2.0) (2024-08-15)
+
+### Features
+
+* add nuget icon ([1558c20](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/1558c2073cc0b7f565f826ba14e769c70986449f))
+* added errors ([6524831](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/65248318abca6fcd3d1c691c6f7e01317e4dff12))
+* added logarithmic normalization ([f65ce3e](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/f65ce3e69412df6c3fe6249f643c663b2980565a))
+* added sum and max normalization ([dc19047](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/dc19047207858938f4d53dc6e9b8b53f558d2cd0))
+
+### Bug Fixes
+
+* fixed invalid expected test data ([916dae5](https://www.github.com/SarcasticMoose/mcda-toolkit/commit/916dae51933866165bcc8b85e3d5587eb55d8ffb))
+
 <a name="2.1.0"></a>
 ## [2.1.0](https://www.github.com/SarcasticMoose/mcda-toolkit/releases/tag/v2.1.0) (2024-06-16)
 
