@@ -4,11 +4,8 @@
 name: Deployment
 
 on:
-  workflow_dispatch:
-  
-  pull_request:
+  push:
     branches: [ "master" ]
-
 env:
   NuGetDirectory: ${{ github.workspace}}/nuget
 
