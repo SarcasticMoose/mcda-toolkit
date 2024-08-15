@@ -1,9 +1,7 @@
-using System.Collections;
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace McdaToolkit.Mcda.Abstraction;
+namespace McdaToolkit.Mcda.Methods.Abstraction;
 
 public interface ICalculation<TValue> where TValue : struct, IEquatable<TValue>, IFormattable
 {

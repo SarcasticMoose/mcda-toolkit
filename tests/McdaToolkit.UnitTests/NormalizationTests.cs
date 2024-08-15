@@ -1,15 +1,13 @@
 ﻿using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Enums;
-using McdaToolkit.Normalization;
 using McdaToolkit.Normalization.Service;
-using McdaToolkit.UnitTests.Helpers;
 
 namespace McdaToolkit.UnitTests;
 
-public class NormalizationUnitTests
+public class NormalizationTests
 {
-    private readonly Matrix<double> _matrixToNormalize = Matrix<double>.Build.DenseOfArray(new double[,]
+    private readonly Matrix<double> _matrixToNormalize = Matrix<double>.Build.DenseOfArray(new[,]
     {
         { 32.57, 14.56, 87.12, 56.34, 47.89 },
         { 93.23, 76.34, 33.78, 25.68, 64.23 },
