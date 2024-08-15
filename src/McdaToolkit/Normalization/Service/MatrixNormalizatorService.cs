@@ -17,7 +17,7 @@ public sealed class MatrixNormalizatorService : IMatrixNormalizationService
         _vectorNormalizatorMethod = NormalizationMethodFactory.Create(GetCurrentNormalizationName);
     }
 
-    /// <inheritdoc cref="IMatrixNormalizator{double}.NormalizeMatrix"/>
+    /// <inheritdoc cref="IMatrixNormalizator{T}.NormalizeMatrix}"/>
     public Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes)
     {
         foreach (var (col, index) in matrix.EnumerateColumns().Indexed())
@@ -34,7 +34,7 @@ public sealed class MatrixNormalizatorService : IMatrixNormalizationService
     {
         if (newMethod == GetCurrentNormalizationName)
         {
-            return Result.Fail(NormalizationServiceErrors.MethodsEqual());
+            return Result.Fail(new NormalizationMethodsEqualError());
         }
         _vectorNormalizatorMethod = NormalizationMethodFactory.Create(newMethod);
         return Result.Ok();
