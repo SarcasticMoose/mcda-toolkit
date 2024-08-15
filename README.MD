@@ -57,7 +57,10 @@ This object contains information about the success or failure of the operation.
 Before obtaining the ``Value`` from the result object, it is necessary to check that no errors have occurred.
 
 ```csharp
-IMethod topsis = new TopsisMethod();
+var topsis = new Topsis(new McdaMethodOptions()
+{
+    NormalizationMethod = NormalizationMethod.MinMax
+});
 Result<Vector<double>> result = topsis.Calculate(data,weights,types);
 
 if(topsisResult.IsFailed)
