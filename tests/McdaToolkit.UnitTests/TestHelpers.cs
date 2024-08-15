@@ -1,7 +1,7 @@
 ﻿using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.UnitTests.Helpers;
+namespace McdaToolkit.UnitTests;
 
 public abstract class TestHelpers
 {
