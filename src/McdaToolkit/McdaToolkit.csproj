@@ -20,7 +20,7 @@
 
     <ItemGroup Label="Resources">
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-        <None Include="..\..\Images\icon.png" Pack="true" PackagePath="\" />
+        <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
