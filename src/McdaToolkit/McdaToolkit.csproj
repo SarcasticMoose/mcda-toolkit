@@ -28,7 +28,10 @@
     </ItemGroup>
 
     <ItemGroup Label="Dependencies">
-        <PackageReference Include="LightResults" Version="8.0.10" />
         <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\SharedKernel\SharedKernel.csproj" />
     </ItemGroup>
 </Project>
