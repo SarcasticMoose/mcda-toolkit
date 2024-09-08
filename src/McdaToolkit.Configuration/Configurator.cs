@@ -3,23 +3,32 @@ using System.Linq;
 
 namespace McdaToolkit.Configuration
 {
-    public class Configurator : IConfigurator
+    public class Configurator : IConfigurator, IReadOnlyConfigurator
     {
         private readonly HashSet<IConfigOption> _options = new HashSet<IConfigOption>();
-    
+
+        public Configurator(IEnumerable<IConfigOption> options)
+        {
+            AddRange(options);
+        }
+        
+        public Configurator()
+        {
+        }
+        
         public IEnumerable<IConfigOption> GetOptions()
         {
             return _options.AsEnumerable();
         }
-
-        public IConfigOption? GetOption(string key)
+        
+        public IConfigOption<T>? GetOptionOrDefault<T>(string key)
         {
-            return _options.FirstOrDefault(x => x.Key == key);
+            return (IConfigOption<T>?)GetOption(key);
         }
-
-        public IConfigOption<T>? GetOption<T>(string key)
+        
+        public IConfigOption<T> GetOption<T>(string key)
         {
-            return (IConfigOption<T>?)_options.FirstOrDefault(x => x.Key == key && x.Value is T);
+            return (IConfigOption<T>)GetOption(key)!;
         }
 
         public void AddOption(IConfigOption option)
@@ -33,6 +42,11 @@ namespace McdaToolkit.Configuration
             {
                 AddOption(option);
             }
+        }
+        
+        private IConfigOption? GetOption(string key)
+        {
+            return _options.FirstOrDefault(x => x.Key == key);
         }
     }
 }
