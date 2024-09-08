@@ -1,11 +1,13 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using LightResults;
+using McdaToolkit.FileIO.Path;
 
 namespace McdaToolkit.FileIO.Writer
 {
     public interface IFileWriter
     {
-        Task<Result> WriteFileAsync(byte[] buffer, string filePath, CancellationToken ct = default);
+        Result WriteFile(string text, IToolkitPath filePath);
     }
 }

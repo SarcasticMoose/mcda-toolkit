@@ -6,12 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup Label="Nugets">
+        <PackageReference Include="LightResults" Version="8.0.10" />
         <PackageReference Include="TestableIO.System.IO.Abstractions" Version="21.0.29" />
         <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="21.0.29" />
     </ItemGroup>
     
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.Exporter" />
+    </ItemGroup>
+    
     <ItemGroup Label="Referenced projects">
+        <ProjectReference Include="..\McdaToolkit.Builder.Abstraction\McdaToolkit.Builder.Abstraction.csproj" />
         <ProjectReference Include="..\McdaToolkit.Configuration\McdaToolkit.Configuration.csproj" />
-        <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
     </ItemGroup>
 </Project>

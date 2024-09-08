@@ -1,47 +1,44 @@
-﻿using System;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 using McdaToolkit.Configuration;
+using McdaToolkit.FileIO.Path.Factories;
 
 namespace McdaToolkit.FileIO.Path
 {
     internal sealed class PathBuilder : IPathBuilder
     {
-        private IConfigurator _configurator;
+        private Configurator _configurator;
 
-        public PathBuilder(IConfigurator? configurator = null)
+        public bool OverrideFilesWithSameName { get; set; } = true;
+
+        public PathBuilder(IReadOnlyConfigurator configuratorBase)
         {
-            _configurator = configurator ?? new Configurator();
+            _configurator = new Configurator(configuratorBase.GetOptions());
+        }
+        
+        public PathBuilder()
+        {
+            _configurator = new Configurator();
         }
 
         public IPathBuilder WithDirectory(string directoryName)
         {
-            _configurator.AddOption(new ConfigOption<string>(ConfigKeysConstants.PathDictionaryName, directoryName));
+            _configurator.AddOption(new ConfigOption<string>("path.directory", directoryName));
             return this;
         }
         
         public IPathBuilder WithFileName(string fileName)
         {
-            _configurator.AddOption(new ConfigOption<string>(ConfigKeysConstants.PathFileName, fileName));
+            _configurator.AddOption(new ConfigOption<string>("path.filename", fileName));
             return this;
         }
-
-        public Path Build()
+        
+        public IToolkitPath Build()
         {
-            var fileName = _configurator.GetOption<string>(ConfigKeysConstants.PathFileName)?.Value;
-            var directoryName = _configurator.GetOption<string>(ConfigKeysConstants.PathDictionaryName)?.Value;
-            var fileSystem = _configurator.GetOption<IFileSystem>(ConfigKeysConstants.FileSystem)?.Value ?? new FileSystem();;
+            var fileName = _configurator.GetOptionOrDefault<string>("path.filename")?.Value;
+            var directoryName = _configurator.GetOptionOrDefault<string>("path.directory")?.Value;
+            var fileSystem = _configurator.GetOption<IFileSystem>("filesystem").Value;
 
-            if (fileName is null)
-            {
-                fileName = DateTime.Now.ToString("yyyy-MM-dd");
-            }
-
-            if (directoryName is null)
-            {
-                directoryName = fileSystem.Directory.GetCurrentDirectory();
-            }
-            
-            var path = Path.Create(fileName,directoryName);
+            var path = new PathFactory(fileSystem).Create(fileName, directoryName);
             return path;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Configuration
+﻿namespace McdaToolkit.Builder.Abstraction
 {
     public interface IBuilder<out T> 
     {
