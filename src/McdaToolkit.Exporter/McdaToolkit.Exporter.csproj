@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\McdaToolkit.Builder.Abstraction\McdaToolkit.Builder.Abstraction.csproj" />
+      <ProjectReference Include="..\McdaToolkit.Configuration\McdaToolkit.Configuration.csproj" />
+      <ProjectReference Include="..\McdaToolkit.FileIO\McdaToolkit.FileIO.csproj" />
+      <ProjectReference Include="..\McdaToolkit.Serializer\McdaToolkit.Serializer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LightResults" Version="8.0.10" />
+    </ItemGroup>
+
+</Project>
