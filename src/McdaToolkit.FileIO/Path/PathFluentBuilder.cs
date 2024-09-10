@@ -4,30 +4,31 @@ using McdaToolkit.FileIO.Path.Factories;
 
 namespace McdaToolkit.FileIO.Path
 {
-    internal sealed class PathBuilder : IPathBuilder
+    internal sealed class PathFluentBuilder : IPathFluentBuilder
     {
         private Configurator _configurator;
 
         public bool OverrideFilesWithSameName { get; set; } = true;
 
-        public PathBuilder(IReadOnlyConfigurator configuratorBase)
+        public PathFluentBuilder(IBaseConfiguration configuratorBase)
         {
             _configurator = new Configurator(configuratorBase.GetOptions());
         }
         
-        public PathBuilder()
+        public PathFluentBuilder()
         {
             _configurator = new Configurator();
         }
 
-        public IPathBuilder WithDirectory(string directoryName)
+        public IPathFluentBuilder WithDirectory(string directoryName)
         {
             _configurator.AddOption(new ConfigOption<string>("path.directory", directoryName));
             return this;
         }
         
-        public IPathBuilder WithFileName(string fileName)
+        public IPathFluentBuilder WithFileName(string fileName)
         {
+            var fileSystem = _configurator.GetOption<IFileSystem>("filesystem").Value;
             _configurator.AddOption(new ConfigOption<string>("path.filename", fileName));
             return this;
         }

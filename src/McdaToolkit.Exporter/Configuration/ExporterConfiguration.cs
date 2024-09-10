@@ -17,7 +17,8 @@ namespace McdaToolkit.Exporter.Configuration
         {
             SetFileWriter();
         }
-        public IReadOnlyConfigurator GetConfiguration() => _configurator;
+
+        public IBaseConfiguration GetConfiguration() => _configurator;
         
         public IToolkitPath GetPath()
         {

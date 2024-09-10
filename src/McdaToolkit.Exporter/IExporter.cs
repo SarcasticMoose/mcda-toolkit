@@ -4,6 +4,7 @@ namespace McdaToolkit.Exporter
 {
     public interface IExporter
     {
-        Result Export<T>(T data);
+        Result Export<T>(T data)
+            where T : IExportable;
     }
 }

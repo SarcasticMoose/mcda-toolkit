@@ -7,7 +7,7 @@ namespace McdaToolkit.Exporter.Configuration
 {
     public interface IExporterConfiguration
     {
-        IReadOnlyConfigurator GetConfiguration();
+        IBaseConfiguration GetConfiguration();
         IToolkitPath GetPath();
         ISerializer GetSerializer();
         IFileWriter GetFileWriter();

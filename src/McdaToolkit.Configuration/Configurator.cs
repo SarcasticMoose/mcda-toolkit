@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace McdaToolkit.Configuration
 {
-    public class Configurator : IConfigurator, IReadOnlyConfigurator
+    public class Configurator : IConfigurator, IReadConfigurator, IBaseConfiguration
     {
         private readonly HashSet<IConfigOption> _options = new HashSet<IConfigOption>();
 
@@ -18,7 +18,7 @@ namespace McdaToolkit.Configuration
         
         public IEnumerable<IConfigOption> GetOptions()
         {
-            return _options.AsEnumerable();
+            return _options;
         }
         
         public IConfigOption<T>? GetOptionOrDefault<T>(string key)

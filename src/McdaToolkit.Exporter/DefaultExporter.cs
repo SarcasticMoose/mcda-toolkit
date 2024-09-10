@@ -19,6 +19,7 @@ namespace McdaToolkit.Exporter
         }
 
         public Result Export<T>(T data)
+            where T : IExportable
         {
             var serializationResult = _serializer.Serialize(data);
             if (serializationResult.IsFailed)

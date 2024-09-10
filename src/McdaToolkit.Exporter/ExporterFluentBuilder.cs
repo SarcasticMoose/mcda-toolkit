@@ -5,19 +5,19 @@ using McdaToolkit.Serializer.Abstraction;
 
 namespace McdaToolkit.Exporter
 {
-    public sealed class ExporterBuilder : IExporterBuilder
+    public sealed class ExporterFluentBuilder : IExporterFluentBuilder
     {
         private readonly ExporterConfiguration _configuration = new ExporterConfiguration();
 
-        public IExporterBuilder WithFormatter(ISerializer serializer)
+        public IExporterFluentBuilder WithFormatter(ISerializer serializer)
         {
             _configuration.SetSerializer(serializer);
             return this;
         }
         
-        public IExporterBuilder WithPath(Action<IPathBuilder> configure)
+        public IExporterFluentBuilder WithPath(Action<IPathFluentBuilder> configure)
         {
-            var pathBuilder = new PathBuilder(_configuration.GetConfiguration());
+            var pathBuilder = new PathFluentBuilder(_configuration.GetConfiguration());
             configure.Invoke(pathBuilder);
             _configuration.SetPath(pathBuilder.Build());
             return this;

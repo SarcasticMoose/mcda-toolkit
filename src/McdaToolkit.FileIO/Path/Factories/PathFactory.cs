@@ -17,7 +17,7 @@ namespace McdaToolkit.FileIO.Path.Factories
         {
             directory ??= "export";
             extension ??= "xml";
-
+            
             if (string.IsNullOrEmpty(filename))
             {
                 filename = GenerateFileName(directory,canOverrideFileNames);
@@ -25,7 +25,7 @@ namespace McdaToolkit.FileIO.Path.Factories
             
             return new ToolkitPath(filename,directory,extension);
         }
-
+        
         private string GenerateFileName(string directory, bool canOverrideNames)
         {
             return !canOverrideNames ? _defaultNamePattern : GenerateIncrementedFileName(directory);
