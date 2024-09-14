@@ -7,26 +7,26 @@ namespace McdaToolkit.Exporter
 {
     public sealed class ExporterFluentBuilder : IExporterFluentBuilder
     {
-        private readonly ExporterConfiguration _configuration = new ExporterConfiguration();
+        private readonly ExporterConfigurator _configurator = new ExporterConfigurator();
 
         public IExporterFluentBuilder WithFormatter(ISerializer serializer)
         {
-            _configuration.SetSerializer(serializer);
+            _configurator.SetSerializer(serializer);
             return this;
         }
         
         public IExporterFluentBuilder WithPath(Action<IPathFluentBuilder> configure)
         {
-            var pathBuilder = new PathFluentBuilder(_configuration.GetConfiguration());
+            var pathBuilder = new PathFluentBuilder(_configurator.GetConfiguration());
             configure.Invoke(pathBuilder);
-            _configuration.SetPath(pathBuilder.Build());
+            _configurator.SetPath(pathBuilder.Build());
             return this;
         }
 
         public IExporter Build()
         {
-            var path = _configuration.GetPath();
-            return new ExporterFactory().Create(_configuration);
+            var path = _configurator.GetPath();
+            return new ExporterFactory().Create(_configurator);
         }
     }
 }

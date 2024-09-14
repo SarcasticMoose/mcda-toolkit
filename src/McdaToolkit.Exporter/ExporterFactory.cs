@@ -4,11 +4,11 @@ namespace McdaToolkit.Exporter
 {
     internal class ExporterFactory
     {
-        public IExporter Create(IExporterConfiguration configuration)
+        public IExporter Create(IExporterConfigurator configurator)
         {
-            var serializer = configuration.GetSerializer();
-            var fileWriter = configuration.GetFileWriter();
-            var path = configuration.GetPath();
+            var serializer = configurator.GetSerializer();
+            var fileWriter = configurator.GetFileWriter();
+            var path = configurator.GetPath();
             return new DefaultExporter(serializer,fileWriter, path);
         }
     }

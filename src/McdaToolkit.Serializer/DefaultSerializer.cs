@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using LightResults;
@@ -8,18 +7,15 @@ using McdaToolkit.Serializer.Abstraction;
 
 namespace McdaToolkit.Serializer
 {
-    public class DefaultSerializer : ISerializer
+    public class DefaultXmlSerializer : ISerializer
     {
         public Result<T> Deserialize<T>(string text)
         {
             try
             {
                 XmlSerializer xsSubmit = new XmlSerializer(typeof(T));
-                using (var reader = new XmlTextReader(new StringReader(text)))
-                {
-                    return Result.Ok((T)xsSubmit.Deserialize(reader));
-                }
-                
+                using var reader = new XmlTextReader(new StringReader(text));
+                return Result.Ok((T)xsSubmit.Deserialize(reader));
             }
             catch (Exception ex)
             {
@@ -32,14 +28,10 @@ namespace McdaToolkit.Serializer
             try
             {
                 XmlSerializer xsSubmit = new XmlSerializer(typeof(T));
-                using (var sww = new StringWriter())
-                {
-                    using (XmlTextWriter writer = new XmlTextWriter(sww))
-                    {
-                        xsSubmit.Serialize(writer, obj);
-                        return Result.Ok(sww.ToString());
-                    }
-                }
+                using var sww = new StringWriter();
+                using XmlTextWriter writer = new XmlTextWriter(sww);
+                xsSubmit.Serialize(writer, obj);
+                return Result.Ok(sww.ToString());
             }
             catch (Exception ex)
             {

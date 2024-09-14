@@ -5,9 +5,8 @@ using McdaToolkit.Serializer.Abstraction;
 
 namespace McdaToolkit.Exporter.Configuration
 {
-    public interface IExporterConfiguration
+    public interface IExporterConfigurator : IConfigurator
     {
-        IBaseConfiguration GetConfiguration();
         IToolkitPath GetPath();
         ISerializer GetSerializer();
         IFileWriter GetFileWriter();

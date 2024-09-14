@@ -4,4 +4,8 @@
         <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LightResults" Version="8.0.10" />
+    </ItemGroup>
 </Project>

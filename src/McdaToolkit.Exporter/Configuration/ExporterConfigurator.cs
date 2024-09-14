@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.IO.Abstractions;
 using McdaToolkit.Configuration;
+using McdaToolkit.FileIO.Configuration;
 using McdaToolkit.FileIO.Path;
 using McdaToolkit.FileIO.Path.Factories;
 using McdaToolkit.FileIO.Writer;
@@ -9,20 +9,20 @@ using McdaToolkit.Serializer.Abstraction;
 
 namespace McdaToolkit.Exporter.Configuration
 {
-    internal class ExporterConfiguration : IExporterConfiguration
+    internal class ExporterConfigurator : IExporterConfigurator
     {
-        private readonly Configurator _configurator = new Configurator();
+        private readonly ToolkitConfiguration _toolkitConfiguration = new ToolkitConfiguration();
 
-        public ExporterConfiguration()
+        public ExporterConfigurator()
         {
             SetFileWriter();
         }
 
-        public IBaseConfiguration GetConfiguration() => _configurator;
+        public IToolkitConfiguration GetConfiguration() => _toolkitConfiguration;
         
         public IToolkitPath GetPath()
         {
-            var pathConfig = _configurator.GetOptionOrDefault<IToolkitPath>("exporter.path");
+            var pathConfig = _toolkitConfiguration.GetOptionOrDefault<IToolkitPath>(ExporterConfigKeys.ExporterOutputPath);
             if (pathConfig != null)
             {
                 return pathConfig.Value;
@@ -35,49 +35,49 @@ namespace McdaToolkit.Exporter.Configuration
 
         public void SetPath(IToolkitPath path)
         {
-            _configurator.AddOption(new ConfigOption<IToolkitPath>("exporter.path", path));
+            _toolkitConfiguration.AddOption(new ConfigOption<IToolkitPath>(ExporterConfigKeys.ExporterOutputPath, path));
         }
         
         public ISerializer GetSerializer()
         {
-            var serializerConfig = _configurator.GetOptionOrDefault<ISerializer>("exporter.serializer");
+            var serializerConfig = _toolkitConfiguration.GetOptionOrDefault<ISerializer>(ExporterConfigKeys.ExporterSerializer);
             if (serializerConfig != null)
             {
                 return serializerConfig.Value;
             }
-            var serializer = new DefaultSerializer();
+            var serializer = new DefaultXmlSerializer();
             SetSerializer(serializer);
             return serializer;
         }
         
         public void SetSerializer(ISerializer serializer)
         {
-            _configurator.AddOption(new ConfigOption<ISerializer>("exporter.serializer", serializer));
+            _toolkitConfiguration.AddOption(new ConfigOption<ISerializer>(ExporterConfigKeys.ExporterSerializer, serializer));
         }
 
         public IFileSystem GetFileSystem()
         {
-            var fileSystemConfig = _configurator.GetOptionOrDefault<IFileSystem>("filesystem");
+            var fileSystemConfig = _toolkitConfiguration.GetOptionOrDefault<IFileSystem>(FileIoConfigKeys.FileSystem);
             if (fileSystemConfig is null)
             {
                 SetFileSystem(new FileSystem());
             }
-            return _configurator.GetOption<IFileSystem>("filesystem").Value;
+            return _toolkitConfiguration.GetOption<IFileSystem>(FileIoConfigKeys.FileSystem).Value;
         }
 
         public IFileWriter GetFileWriter()
         {
-            return _configurator.GetOption<IFileWriter>("exporter.filewriter").Value;
+            return _toolkitConfiguration.GetOption<IFileWriter>(ExporterConfigKeys.ExporterWriter).Value;
         }
 
         private void SetFileSystem(IFileSystem fileSystem)
         {
-            _configurator.AddOption(new ConfigOption<IFileSystem>("filesystem", fileSystem));
+            _toolkitConfiguration.AddOption(new ConfigOption<IFileSystem>(FileIoConfigKeys.FileSystem, fileSystem));
         }
         
         private void SetFileWriter()
         {
-            _configurator.AddOption(new ConfigOption<IFileWriter>("exporter.filewriter", new FileWriter(GetFileSystem())));
+            _toolkitConfiguration.AddOption(new ConfigOption<IFileWriter>(ExporterConfigKeys.ExporterWriter, new FileWriter(GetFileSystem())));
         }
     }
 }
