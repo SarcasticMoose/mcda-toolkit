@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9585D34A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Configuration.UnitTests", "tests\McdaToolkit.Configuration.UnitTests\McdaToolkit.Configuration.UnitTests.csproj", "{BEB77E6E-68CF-4A68-B603-D7C1F850536F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Serializer.Extensions.JsonSerializer", "src\McdaToolkit.Serializer.Extensions.JsonSerializer\McdaToolkit.Serializer.Extensions.JsonSerializer.csproj", "{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{BEB77E6E-68CF-4A68-B603-D7C1F850536F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEB77E6E-68CF-4A68-B603-D7C1F850536F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEB77E6E-68CF-4A68-B603-D7C1F850536F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +82,6 @@ Global
 		{7AA6AC26-D73A-4177-80F7-99B7B4E5EA06} = {6B956DCE-9C66-4FED-9417-90ACBE698F6E}
 		{C16A9430-0ABA-44D5-B9D2-256DEA133D38} = {9585D34A-493D-4B37-8FCF-EF13C52D327D}
 		{BEB77E6E-68CF-4A68-B603-D7C1F850536F} = {9585D34A-493D-4B37-8FCF-EF13C52D327D}
+		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF} = {6B956DCE-9C66-4FED-9417-90ACBE698F6E}
 	EndGlobalSection
 EndGlobal
