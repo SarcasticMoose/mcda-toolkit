@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace McdaToolkit.FileIO.Path
+﻿namespace McdaToolkit.FileIO.Path
 {
     internal class ToolkitPath : IToolkitPath
     {
