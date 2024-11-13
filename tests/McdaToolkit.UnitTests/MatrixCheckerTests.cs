@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using McdaToolkit.Mcda.Helpers.Errors;
-using McdaToolkit.Mcda.Services;
+using McdaToolkit.Mcda.Services.MatrixChecker;
+using McdaToolkit.Mcda.Services.MatrixChecker.Errors;
 
 namespace McdaToolkit.UnitTests;
 
