@@ -1,33 +1,26 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Mcda.Methods.Abstraction;
-using McdaToolkit.Mcda.Options;
-using McdaToolkit.Normalization.Service;
-using McdaToolkit.Normalization.Service.Abstraction;
+using McdaToolkit.Mcda.Providers;
+using McdaToolkit.Normalization.Services.Abstraction;
+using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
-namespace McdaToolkit.Mcda.Methods;
+namespace McdaToolkit.Mcda.Methods.Topsis;
 
-public sealed class Topsis : McdaMethod
+public sealed class Topsis : ITopsisMethod
 {
     private readonly IMatrixNormalizationService _normalizationServiceServiceService;
     
-    public Topsis(McdaMethodOptions options)
+    private Topsis(McdaMethodOptions options)
     {
         _normalizationServiceServiceService = new MatrixNormalizatorService(options.NormalizationMethod);
     }
-    
-    private Matrix<double> WeightedMatrix(Matrix<double> matrix, Vector<double> weights)
-    {
-        for (int i = 0; i < matrix.RowCount; i++)
-        {
-            for (int j = 0; j < matrix.ColumnCount; j++)
-            {
-                matrix[i, j] *= weights[j];
-            }
-        }
-        return matrix;
-    }
 
+    internal static Topsis Create(McdaMethodOptions options)
+    {
+        return new Topsis(options);
+    }
+    
     private Vector<double> IdealValues(Matrix<double> matrix, bool pis)
     {
         return Vector<double>.Build
@@ -56,20 +49,29 @@ public sealed class Topsis : McdaMethod
         return distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
     }
 
-    protected override Result<Vector<double>> RunCalculation(double[,] matrix,double[] weights,int[] criteriaDirections)
+    private IResult<TopsisScore> ComputeScore(Matrix<double> matrix, Vector<double> weights, int[] criteriaDecisions)
     {
-        var matrixBuilded = Matrix<double>.Build.DenseOfArray(matrix);
-        var weightsBuilded = Vector<double>.Build.DenseOfArray(weights);
-        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrixBuilded, criteriaDirections);
-        var weightedMatrix = WeightedMatrix(normalizedMatrix, weightsBuilded);
+        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrix, criteriaDecisions);
+        var weightedMatrix = normalizedMatrix.MapIndexed((i, j, value) => weights[j] * matrix[i, j]);
 
         var idealBest = IdealValues(weightedMatrix, true);
         var idealWorst = IdealValues(weightedMatrix, false);
 
         var distanceToBest = CalculateEuclideanDistance(weightedMatrix, idealBest);
         var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
-        var topsisScores = CalculateTopsisScores(distanceToBest, distanceToWorst);
+        var scores = CalculateTopsisScores(distanceToBest, distanceToWorst);
 
-        return Result.Ok(topsisScores);
+        return Result.Ok(new TopsisScore(scores));
+    }
+    
+    public IResult<TopsisScore> Run(IDataProvider dataProvider)
+    {
+        var data = dataProvider.GetData();
+        return ComputeScore(data.Matrix,data.Weights,data.Types);
+    }
+
+    IResult IMcdaMethod.Run(IDataProvider dataProvider)
+    {
+        return Run(dataProvider);
     }
 }
