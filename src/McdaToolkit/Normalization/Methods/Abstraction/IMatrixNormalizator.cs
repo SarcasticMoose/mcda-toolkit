@@ -1,6 +1,6 @@
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.Normalization.Service.Abstraction;
+namespace McdaToolkit.Normalization.Methods.Abstraction;
 
 /// <summary>
 /// Matrix normalization generic abstraction

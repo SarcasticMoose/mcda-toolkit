@@ -1,6 +1,6 @@
-﻿using McdaToolkit.Enums;
+﻿using McdaToolkit.Normalization.Enums;
 
-namespace McdaToolkit.Mcda.Options;
+namespace McdaToolkit.Mcda;
 
 /// <summary>
 /// Configuration for Mcda methods

@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Enums;
+﻿namespace McdaToolkit.Normalization.Enums;
 
 public enum NormalizationMethod
 {
