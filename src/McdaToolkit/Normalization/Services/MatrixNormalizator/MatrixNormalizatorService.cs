@@ -1,11 +1,12 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Enums;
 using McdaToolkit.Extensions;
+using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Normalization.Service.Abstraction;
+using McdaToolkit.Normalization.Services.Abstraction;
+using McdaToolkit.Normalization.Services.MatrixNormalizator.Errors;
 
-namespace McdaToolkit.Normalization.Service;
+namespace McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 public sealed class MatrixNormalizatorService : IMatrixNormalizationService
 {
@@ -30,7 +31,7 @@ public sealed class MatrixNormalizatorService : IMatrixNormalizationService
 
     public NormalizationMethod GetCurrentNormalizationName { get; }
     
-    public Result ChangeNormalizationMethod(NormalizationMethod newMethod)
+    public IResult ChangeNormalizationMethod(NormalizationMethod newMethod)
     {
         if (newMethod == GetCurrentNormalizationName)
         {

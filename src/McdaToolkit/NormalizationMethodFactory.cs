@@ -1,4 +1,4 @@
-﻿using McdaToolkit.Enums;
+﻿using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Methods.Abstraction;
 using McdaToolkit.Normalization.Methods.Linear;
 using McdaToolkit.Normalization.Methods.Sum;
