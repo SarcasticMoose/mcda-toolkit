@@ -13,7 +13,11 @@ namespace McdaToolkit.FileIO.Path.Factories
             _fileSystem = fileSystem;
         }
         
-        public IToolkitPath Create(string? filename = null, string? directory = null, string? extension = null, bool canOverrideFileNames = true)
+        public IToolkitPath Create(
+            string? filename = null,
+            string? directory = null,
+            string? extension = null,
+            bool canOverrideFileNames = true)
         {
             directory ??= "export";
             extension ??= "xml";

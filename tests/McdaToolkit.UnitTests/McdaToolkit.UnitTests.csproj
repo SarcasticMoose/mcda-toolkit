@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\McdaToolkit\McdaToolkit.csproj" />
+      <ProjectReference Include="..\..\src\McdaToolkit.Core\McdaToolkit.Core.csproj" />
     </ItemGroup>
 
 </Project>

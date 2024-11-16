@@ -6,13 +6,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.UnitTests", "te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6B956DCE-9C66-4FED-9417-90ACBE698F6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit", "src\McdaToolkit\McdaToolkit.csproj", "{8BC78DDE-5F83-499B-B3C5-B0B68C5AFB3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Core", "src\McdaToolkit.Core\McdaToolkit.Core.csproj", "{8BC78DDE-5F83-499B-B3C5-B0B68C5AFB3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Configuration", "src\McdaToolkit.Configuration\McdaToolkit.Configuration.csproj", "{87741541-41BA-4046-B09F-B262A554BC45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.FileIO", "src\McdaToolkit.FileIO\McdaToolkit.FileIO.csproj", "{7FA5154E-6AEC-471A-8508-7FF234AF97C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Builder.Abstraction", "src\McdaToolkit.Builder.Abstraction\McdaToolkit.Builder.Abstraction.csproj", "{4170F936-4EB4-410C-B0B0-F983B2382A9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Fluent.Core", "src\McdaToolkit.Fluent.Core\McdaToolkit.Fluent.Core.csproj", "{4170F936-4EB4-410C-B0B0-F983B2382A9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Exporter", "src\McdaToolkit.Exporter\McdaToolkit.Exporter.csproj", "{C583D9BC-F1AA-49E6-8DD9-6DAA2648BDA2}"
 EndProject
@@ -23,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Configuration.UnitTests", "tests\McdaToolkit.Configuration.UnitTests\McdaToolkit.Configuration.UnitTests.csproj", "{BEB77E6E-68CF-4A68-B603-D7C1F850536F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Serializer.Extensions.JsonSerializer", "src\McdaToolkit.Serializer.Extensions.JsonSerializer\McdaToolkit.Serializer.Extensions.JsonSerializer.csproj", "{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.FileIO.UnitTests", "tests\McdaToolkit.FileIO.UnitTests\McdaToolkit.FileIO.UnitTests.csproj", "{6D08EECD-7E2F-492E-8C5F-7469FF92547F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D08EECD-7E2F-492E-8C5F-7469FF92547F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D08EECD-7E2F-492E-8C5F-7469FF92547F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D08EECD-7E2F-492E-8C5F-7469FF92547F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D08EECD-7E2F-492E-8C5F-7469FF92547F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +89,6 @@ Global
 		{C16A9430-0ABA-44D5-B9D2-256DEA133D38} = {9585D34A-493D-4B37-8FCF-EF13C52D327D}
 		{BEB77E6E-68CF-4A68-B603-D7C1F850536F} = {9585D34A-493D-4B37-8FCF-EF13C52D327D}
 		{8C61E0C3-6A93-4673-BFE4-B9F1BC2394BF} = {6B956DCE-9C66-4FED-9417-90ACBE698F6E}
+		{6D08EECD-7E2F-492E-8C5F-7469FF92547F} = {9585D34A-493D-4B37-8FCF-EF13C52D327D}
 	EndGlobalSection
 EndGlobal

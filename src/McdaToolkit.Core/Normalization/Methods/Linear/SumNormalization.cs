@@ -1,0 +1,18 @@
+﻿using MathNet.Numerics.LinearAlgebra;
+using McdaToolkit.Core.Normalization.Methods.Abstraction;
+
+namespace McdaToolkit.Core.Normalization.Methods.Linear;
+
+internal class SumNormalization : INormalizationMethod
+{
+    /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
+    public Vector<double> Normalize(Vector<double> data, bool cost)
+    {
+        if (cost)
+        {
+            return 1 / data / data.Sum(x => 1/x);
+        }
+
+        return data / data.Sum();
+    }
+}

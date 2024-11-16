@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Enums;
-using McdaToolkit.Normalization.Service;
+using McdaToolkit.Core.Enums;
+using McdaToolkit.Core.Normalization.Service;
 
 namespace McdaToolkit.UnitTests;
 

@@ -1,8 +1,8 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Enums;
-using McdaToolkit.Mcda.Methods;
-using McdaToolkit.Mcda.Options;
+using McdaToolkit.Core.Enums;
+using McdaToolkit.Core.Mcda.Methods;
+using McdaToolkit.Core.Mcda.Options;
 
 namespace McdaToolkit.UnitTests;
 
