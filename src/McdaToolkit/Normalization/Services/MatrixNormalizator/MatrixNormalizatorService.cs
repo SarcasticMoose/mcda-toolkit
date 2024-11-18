@@ -21,11 +21,13 @@ public sealed class MatrixNormalizatorService : IMatrixNormalizationService
     /// <inheritdoc cref="IMatrixNormalizator{T}.NormalizeMatrix}"/>
     public Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes)
     {
-        foreach (var (col, index) in matrix.EnumerateColumns().Indexed())
-            matrix.SetColumn(columnIndex: index,
-                column: criteriaTypes[index] == 1
-                    ? _vectorNormalizatorMethod.Normalize(data: col, cost: false)
-                    : _vectorNormalizatorMethod.Normalize(data: col, cost: true));
+        for (int colIndex = 0; colIndex < matrix.ColumnCount; colIndex++)
+        {
+            matrix.SetColumn(columnIndex: colIndex,
+                column: criteriaTypes[colIndex] == 1
+                    ? _vectorNormalizatorMethod.Normalize(data: matrix.Column(colIndex), cost: false)
+                    : _vectorNormalizatorMethod.Normalize(data: matrix.Column(colIndex), cost: true));
+        }
         return matrix;
     }
 

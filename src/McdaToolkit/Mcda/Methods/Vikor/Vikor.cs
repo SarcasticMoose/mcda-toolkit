@@ -28,27 +28,30 @@ public class Vikor : IVikorMethod
 
         var fStar = normalizedMatrix.GetColMax();
         var fMinus = normalizedMatrix.GetColMin();
-
-        var weightedF = matrix.MapIndexed((i, j, value) => weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
         
+        var weightedF = matrix.MapIndexed((i, j, value) => weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
+
         var s = weightedF.RowSums();
-        var r = weightedF.GetColMax();
+        var r = weightedF.Transpose().GetColMax();
 
         var sStar = s.Minimum();
         var sMinus = s.Maximum();
         var rStar = r.Minimum();
         var rMinus = r.Maximum();
-
-        var q = s.MapIndexed((i, value) => parameters.V * (value - sStar) / (sMinus - sStar) + (1 - parameters.V) * (r[i] - rStar) / (rMinus - rStar));
+        
+        var sNormalized = (s - sStar) / (sMinus - sStar);
+        var rNormalized = (r - rStar) / (rMinus - rStar);
+        
+        var q = parameters.V * sNormalized + (1 - parameters.V) * rNormalized;
         return Result.Ok(new VikorScore(s, r, q));
     }
 
     public IResult<VikorScore> Run(IDataProvider dataProvider)
     {
         var data = dataProvider.GetData();
-        return ComputeScore(data.Matrix,data.Weights,data.Types,(VikorParameters)data.Parameters);
+        return ComputeScore(data.Matrix,data.Weights,data.Types,(VikorParameters)data.Parameters!);
     }
-
+    
     IResult IMcdaMethod.Run(IDataProvider dataProvider)
     {
         return Run(dataProvider);

@@ -2,8 +2,8 @@ using FluentAssertions;
 using MathNet.Numerics;
 using McdaToolkit.Mcda;
 using McdaToolkit.Mcda.Factories;
-using McdaToolkit.Mcda.Methods.Abstraction;
 using McdaToolkit.Mcda.Methods.Vikor;
+using McdaToolkit.Normalization.Enums;
 
 namespace McdaToolkit.UnitTests;
 
@@ -41,23 +41,31 @@ public class McdaMethodsTests
     {
         var matrix = new double[,]
         {
-            { 78, 56, 34, 6 },
-            { 4, 45, 3, 97 },
-            { 18, 2, 50, 63 },
-            { 9, 14, 11, 92 },
-            { 85, 9, 100, 29 },
+            {3, 6, 4, 20, 2, 30000 },
+            {4, 4, 6, 15, 2.2, 32000 },
+            {6, 5, 9, 18, 3, 32100 },
+            {5, 6, 3, 23, 2.8, 28000 },
+            {4, 8, 7, 30, 1.5, 29000 },
+            {8, 3, 6, 35, 1.9, 27000 },
+            {7, 2, 5, 33, 1.7, 28500 },
+            {3, 8, 3, 34, 1.6, 30500 },
+            {8, 4, 8, 40, 2.5, 33000 },
+            {9, 3, 7, 34, 2, 29800 }
         };
-        double[] weights = [0.25, 0.25, 0.25, 0.25];
-        int[] types = [1, 1, 1, 1];
-        double[] expectedVikorScore = [0.5679, 0.7667, 1, 0.7493, 0];
+        double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
+        int[] types = [1,1,1,-1,-1,-1];
+        double[] expectedVikorScore = [0.297,0.661,0.630,0.123,0.050,0.272,0.497,0.436,1.0,0.404];
 
         var dataProvider = DefaultDataProviderFactory.CreateDataProvider();
-        dataProvider.ProvideData(matrix, weights, types, VikorParameters.CreateDefault());
-        var vikor = MethodFactory.CreateVikor(new McdaMethodOptions());
+        var provideResult = dataProvider.ProvideData(matrix, weights, types, VikorParameters.CreateDefault());
+        var vikor = MethodFactory.CreateVikor(new McdaMethodOptions()
+        {
+            NormalizationMethod = NormalizationMethod.Vector
+        });
         var vikorResult = vikor.Run(dataProvider);
         
         vikorResult.Value.Q.Enumerate()
-            .Select(x => x.Round(4))
+            .Select(x => x.Round(3))
             .Should()
             .BeEquivalentTo(expectedVikorScore);
     }
