@@ -1,5 +1,6 @@
 ﻿using LightResults;
 using MathNet.Numerics.LinearAlgebra;
+using McdaToolkit.Extensions;
 using McdaToolkit.Mcda.Methods.Abstraction;
 using McdaToolkit.Mcda.Services.MatrixChecker;
 
@@ -17,7 +18,13 @@ internal class DefaultDataProvider : IDataProvider
     {
         _matrixCheckerService = matrixCheckerService;
     }
-    
+
+    public IResult ProvideData(IEnumerable<IEnumerable<double>> matrix, IEnumerable<double> weights, IEnumerable<int> criteriaTypes,
+        IMcdaAdditionalParameters? additionalParameters = null)
+    {
+        return ProvideData(matrix.To2DArray(),weights.ToArray(),criteriaTypes.ToArray(),additionalParameters);
+    }
+
     public McdaInputData GetData() => new McdaInputData(_matrix, _weights, _types, _additionalParameters);
 
     public IResult ProvideData(double[,] matrix, double[] weights, int[] criteriaTypes,

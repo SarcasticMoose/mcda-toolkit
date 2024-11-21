@@ -1,40 +1,26 @@
-﻿namespace McdaToolkit.Extensions;
-
-internal static class EnumerableExtentions
+﻿namespace McdaToolkit.Extensions
 {
-    public static IEnumerable<(T item, int index)> Indexed<T>(this IEnumerable<T> source)
+    public static class EnumerableExtentions
     {
-        if (source is null)
+        public static T[,] To2DArray<T>(this IEnumerable<IEnumerable<T>> source)
         {
-            throw new ArgumentNullException();
-        }
+            var sourceToArray = source.ToArray();
+            var rows = sourceToArray.Length;
+            var cols = sourceToArray[0].Count();
+            var result = new T[rows, cols];
+            var i = 0;
         
-        var i = 0;
-        foreach (var item in source)
-        {
-            yield return (item, i);
-            ++i;
-        }
-    }
-
-    public static T[,] To2DArray<T>(this IEnumerable<IEnumerable<T>> source)
-    {
-        var sourceToArray = source.ToArray();
-        var rows = sourceToArray.Length;
-        var cols = sourceToArray[0].Count();
-        var result = new T[rows, cols];
-        var i = 0;
-        
-        foreach (var row in sourceToArray)
-        {
-            var j = 0;
-            foreach (var value in row)
+            foreach (var row in sourceToArray)
             {
-                result[i, j] = value;
-                j++;
+                var j = 0;
+                foreach (var value in row)
+                {
+                    result[i, j] = value;
+                    j++;
+                }
+                i++;
             }
-            i++;
+            return result;
         }
-        return result;
     }
 }

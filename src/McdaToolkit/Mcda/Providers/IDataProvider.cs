@@ -9,5 +9,11 @@ public interface IDataProvider
         double[] weights, 
         int[] criteriaTypes, 
         IMcdaAdditionalParameters? additionalParameters = null);
-    public McdaInputData GetData();
+    
+    public IResult ProvideData(IEnumerable<IEnumerable<double>> matrix,
+        IEnumerable<double> weights, 
+        IEnumerable<int> criteriaTypes, 
+        IMcdaAdditionalParameters? additionalParameters = null);
+    
+    internal McdaInputData GetData();
 }
