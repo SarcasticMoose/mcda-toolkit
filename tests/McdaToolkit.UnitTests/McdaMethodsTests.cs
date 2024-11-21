@@ -37,7 +37,7 @@ public class McdaMethodsTests
     }
     
     [Fact]
-    public void Calculate_VikorMethod_ShouldBeEqualToExpecteddsadas()
+    public void Calculate_VikorMethod_ShouldBeEqualToExpected()
     {
         var matrix = new double[,]
         {
