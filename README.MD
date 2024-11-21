@@ -7,7 +7,7 @@
 The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).  
 
 ## Key feature
-- .NET  6+ support
+- .NET 6 and .NET Standard 2.0
 - Easy to use
 
 ## Dependencies
@@ -57,20 +57,11 @@ This object contains information about the success or failure of the operation.
 Before obtaining the ``Value`` from the result object, it is necessary to check that no errors have occurred.
 
 ```csharp
-var topsis = new Topsis(new McdaMethodOptions()
+var dataProvider = DefaultDataProviderFactory.CreateDataProvider();
+var provideResult = dataProvider.ProvideData(matrix, weights, types, VikorParameters.CreateDefault());
+var vikor = MethodFactory.CreateVikor(new McdaMethodOptions()
 {
-    NormalizationMethod = NormalizationMethod.MinMax
+    NormalizationMethod = NormalizationMethod.Vector
 });
-Result<Vector<double>> result = topsis.Calculate(data,weights,types);
-
-if(topsisResult.IsFailed)
-{
-    foreach (var error in topsisResult.Errors)
-    {
-        Console.WriteLine(error.Message);
-    }
-    return;
-}
-Vector<double> result.Value;
+var vikorResult = vikor.Run(dataProvider);     
 ```
-More info about ``Result`` type and pattern at: [Light Results](https://github.com/jscarle/LightResults) and [Fluent Results](https://github.com/altmann/FluentResults)
