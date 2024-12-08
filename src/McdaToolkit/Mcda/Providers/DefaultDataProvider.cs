@@ -19,16 +19,14 @@ internal class DefaultDataProvider : IDataProvider
         _matrixCheckerService = matrixCheckerService;
     }
 
-    public IResult ProvideData(IEnumerable<IEnumerable<double>> matrix, IEnumerable<double> weights, IEnumerable<int> criteriaTypes,
-        IMcdaAdditionalParameters? additionalParameters = null)
+    public IResult ProvideData(IEnumerable<IEnumerable<double>> matrix, IEnumerable<double> weights, IEnumerable<int> criteriaTypes)
     {
-        return ProvideData(matrix.To2DArray(),weights.ToArray(),criteriaTypes.ToArray(),additionalParameters);
+        return ProvideData(matrix.To2DArray(),weights.ToArray(),criteriaTypes.ToArray());
     }
 
-    public McdaInputData GetData() => new McdaInputData(_matrix, _weights, _types, _additionalParameters);
+    internal McdaInputData GetData() => new(_matrix, _weights, _types);
 
-    public IResult ProvideData(double[,] matrix, double[] weights, int[] criteriaTypes,
-        IMcdaAdditionalParameters? additionalParameters)
+    public IResult ProvideData(double[,] matrix, double[] weights, int[] criteriaTypes)
     {
         var matrixChecked = _matrixCheckerService.ValidateData(matrix, weights, criteriaTypes);
 
@@ -39,7 +37,6 @@ internal class DefaultDataProvider : IDataProvider
         _matrix = Matrix<double>.Build.DenseOfArray(matrix);
         _weights = Vector<double>.Build.DenseOfArray(weights);
         _types = criteriaTypes;
-        _additionalParameters = additionalParameters;
         return Result.Ok();
     }
 }

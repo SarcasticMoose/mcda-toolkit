@@ -1,11 +1,14 @@
-﻿using LightResults;
-using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Normalization.Methods.Abstraction;
+﻿using MathNet.Numerics.LinearAlgebra;
 
 namespace McdaToolkit.Normalization.Services.Abstraction;
 
-internal interface IMatrixNormalizationService : IMatrixNormalizator<double>
+internal interface IMatrixNormalizationService
 {
-    public NormalizationMethod GetCurrentNormalizationName { get; }
-    public IResult ChangeNormalizationMethod(NormalizationMethod newMethod);
+    /// <summary>
+    /// Normalize provided matrix
+    /// </summary>
+    /// <param name="matrix">One-dimensional vector of data to normalize</param>
+    /// <param name="criteriaTypes">Describe type of vector, cost or profit</param>
+    /// <returns>Normalized matrix</returns>
+    Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes);
 }

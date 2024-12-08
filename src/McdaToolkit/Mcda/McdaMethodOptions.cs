@@ -3,12 +3,12 @@
 namespace McdaToolkit.Mcda;
 
 /// <summary>
-/// Configuration for Mcda methods
+/// Configuration for mcda methods
 /// </summary>
-public record McdaMethodOptions
+public interface IMcdaMethodOptions
 {
     /// <summary>
-    /// Current normalization method
+    /// Normalization method
     /// </summary>
-    public NormalizationMethod NormalizationMethod { get; set; } = NormalizationMethod.MinMax;
+    public NormalizationMethod NormalizationMethod { get; set; }
 }

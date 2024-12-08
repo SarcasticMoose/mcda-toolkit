@@ -1,9 +1,9 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.Normalization.Methods.Sum;
+namespace McdaToolkit.Normalization.Methods;
 
-internal class LogarithmicNormalization : INormalizationMethod
+internal class LogarithmicNormalization : IVectorNormalizator<double>
 {
     /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost)

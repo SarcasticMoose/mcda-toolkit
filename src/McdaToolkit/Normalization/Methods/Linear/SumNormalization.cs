@@ -3,7 +3,7 @@ using McdaToolkit.Normalization.Methods.Abstraction;
 
 namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class SumNormalization : INormalizationMethod
+internal class SumNormalization : IVectorNormalizator<double>
 {
     /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost)

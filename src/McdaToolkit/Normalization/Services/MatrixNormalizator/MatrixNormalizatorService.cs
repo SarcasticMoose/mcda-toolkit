@@ -1,24 +1,22 @@
-using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Extensions;
 using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Methods.Abstraction;
 using McdaToolkit.Normalization.Services.Abstraction;
-using McdaToolkit.Normalization.Services.MatrixNormalizator.Errors;
 
 namespace McdaToolkit.Normalization.Services.MatrixNormalizator;
 
-public sealed class MatrixNormalizatorService : IMatrixNormalizationService
+internal sealed class MatrixNormalizatorService : IMatrixNormalizationService
 {
-    private IVectorNormalizator<double> _vectorNormalizatorMethod;
+    private readonly IVectorNormalizator<double> _vectorNormalizatorMethod;
 
-    public MatrixNormalizatorService(NormalizationMethod name)
+    public MatrixNormalizatorService(
+        NormalizationMethodFactory normalizationMethodFactory,
+        NormalizationMethod normalizationMethod)
     {
-        GetCurrentNormalizationName = name;
-        _vectorNormalizatorMethod = NormalizationMethodFactory.Create(GetCurrentNormalizationName);
+        _vectorNormalizatorMethod = normalizationMethodFactory.Create(normalizationMethod).Value;
     }
 
-    /// <inheritdoc cref="IMatrixNormalizator{T}.NormalizeMatrix}"/>
+    /// <inheritdoc cref="IMatrixNormalizationService.NormalizeMatrix"/>
     public Matrix<double> NormalizeMatrix(Matrix<double> matrix, int[] criteriaTypes)
     {
         for (int colIndex = 0; colIndex < matrix.ColumnCount; colIndex++)
@@ -29,17 +27,5 @@ public sealed class MatrixNormalizatorService : IMatrixNormalizationService
                     : _vectorNormalizatorMethod.Normalize(data: matrix.Column(colIndex), cost: true));
         }
         return matrix;
-    }
-
-    public NormalizationMethod GetCurrentNormalizationName { get; }
-    
-    public IResult ChangeNormalizationMethod(NormalizationMethod newMethod)
-    {
-        if (newMethod == GetCurrentNormalizationName)
-        {
-            return Result.Fail(new NormalizationMethodsEqualError());
-        }
-        _vectorNormalizatorMethod = NormalizationMethodFactory.Create(newMethod);
-        return Result.Ok();
     }
 }

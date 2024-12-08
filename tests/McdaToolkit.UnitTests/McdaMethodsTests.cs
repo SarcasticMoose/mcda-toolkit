@@ -1,7 +1,7 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Mcda;
 using McdaToolkit.Mcda.Factories;
+using McdaToolkit.Mcda.Methods.Topsis;
 using McdaToolkit.Mcda.Methods.Vikor;
 using McdaToolkit.Normalization.Enums;
 
@@ -12,26 +12,34 @@ public class McdaMethodsTests
     [Fact]
     public void Calculate_TopsisMethod_ShouldBeEqualToExpected()
     {
-        var matrix = new double[,]
+        var matrix = new[,]
         {
-            { 66, 56, 95 },
-            { 61, 55, 166 },
-            { 65, 49, 113 },
-            { 95, 56, 99 },
-            { 63, 43, 178 },
-            { 74, 59, 140 },
+            {690, 3.1, 9, 7, 4},
+            {590, 3.9, 7, 6, 10},
+            {600, 3.6, 8, 8, 7},
+            {620, 3.8, 7, 10, 6},
+            {700, 2.8, 10, 4, 6},
+            {650, 4.0, 6, 9, 8}
         };
-        double[] weights = [0.4,0.25,0.35];
-        int[] types = [-1, -1, 1];
-        double[] expectedTopsisScore = [0.3881,0.7619,0.5851,0.0637,0.9765,0.4368];
+        double[] weights = [0.3, 0.2, 0.2, 0.15, 0.15];
+        int[] types = [1,1,1,1,1];
+        double[] expectedTopsisScore = [0.416704, 0.551900, 0.539620, 0.539926, 0.429128, 0.568142];
         
-        var dataProvider = DefaultDataProviderFactory.CreateDataProvider();
-        dataProvider.ProvideData(matrix, weights, types);
-        var topsis = MethodFactory.CreateTopsis(new McdaMethodOptions());
-        var topsisResult = topsis.Run(dataProvider);
+        var data = new DataProviderBuilder()
+            .AddWeights(weights)
+            .AddDecisionCriteria(types)
+            .AddDecisionMatrix(matrix)
+            .Build();
         
-        topsisResult.Value.Score
-            .Select(x => x.Round(4))
+        var topsis = MethodFactory.CreateTopsis(new TopsisOptions()
+        {
+            NormalizationMethod = NormalizationMethod.Vector
+        });
+        var topsisResult = topsis.Run(data);
+        
+        topsisResult
+            .Value.V
+            .Select(x => x.Round(6))
             .Should()
             .BeEquivalentTo(expectedTopsisScore);
     }
@@ -39,7 +47,7 @@ public class McdaMethodsTests
     [Fact]
     public void Calculate_VikorMethod_ShouldBeEqualToExpected()
     {
-        var matrix = new double[,]
+        var matrix = new[,]
         {
             {3, 6, 4, 20, 2, 30000 },
             {4, 4, 6, 15, 2.2, 32000 },
@@ -56,15 +64,23 @@ public class McdaMethodsTests
         int[] types = [1,1,1,-1,-1,-1];
         double[] expectedVikorScore = [0.297,0.661,0.630,0.123,0.050,0.272,0.497,0.436,1.0,0.404];
 
-        var dataProvider = DefaultDataProviderFactory.CreateDataProvider();
-        var provideResult = dataProvider.ProvideData(matrix, weights, types, VikorParameters.CreateDefault());
-        var vikor = MethodFactory.CreateVikor(new McdaMethodOptions()
-        {
-            NormalizationMethod = NormalizationMethod.Vector
-        });
-        var vikorResult = vikor.Run(dataProvider);
+        var data = new DataProviderBuilder()
+            .AddWeights(weights)
+            .AddDecisionCriteria(types)
+            .AddDecisionMatrix(matrix)
+            .Build();
         
-        vikorResult.Value.Q.Enumerate()
+        var vikor = MethodFactory.CreateVikor(new VikorOptions()
+        {
+            NormalizationMethod = NormalizationMethod.Vector,
+            VikorParameters = VikorParameters.Create(0.5)
+        });
+        
+        var vikorResult = vikor.Run(data);
+        
+        vikorResult
+            .Value.Q
+            .Enumerate()
             .Select(x => x.Round(3))
             .Should()
             .BeEquivalentTo(expectedVikorScore);

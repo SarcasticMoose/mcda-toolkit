@@ -2,7 +2,7 @@
 
 namespace McdaToolkit.Extensions;
 
-public static class MathNetExtensions
+public static class MatrixExtensions
 {
     public static Vector<T> GetColMax<T>(this Matrix<T> matrix) where T : struct, IEquatable<T>, IFormattable
     {

@@ -2,4 +2,4 @@
 
 namespace McdaToolkit.Mcda.Services.MatrixChecker.Errors;
 
-public class WeightNotSumToOneError() : Error("Sum of weight have to equal 1");
+public class WeightNotSumToOneError() : Error("Geometric of weight have to equal 1");

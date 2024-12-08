@@ -6,10 +6,10 @@ namespace McdaToolkit.Mcda.Methods.Abstraction;
 public interface IMcdaMethod<out TResult> : IMcdaMethod
 where TResult : IResult<IMcdaScore>
 {
-    new TResult Run(IDataProvider dataProvider);
+    new TResult Run(McdaInputData data);
 }
 
 public interface IMcdaMethod
 {
-    IResult Run(IDataProvider dataProvider);
+    IResult Run(McdaInputData data);
 }

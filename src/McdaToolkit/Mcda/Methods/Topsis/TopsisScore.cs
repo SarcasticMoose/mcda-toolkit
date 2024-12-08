@@ -3,7 +3,10 @@ using McdaToolkit.Mcda.Methods.Abstraction;
 
 namespace McdaToolkit.Mcda.Methods.Topsis;
 
-public record TopsisScore(Vector<double> Score) : IMcdaScore
+public record TopsisScore(Vector<double> V) : IMcdaScore
 {
-    public Vector<double> Score { get; } = Score;
+    /// <summary>
+    /// Preference values for alternative
+    /// </summary>
+    public Vector<double> V { get; } = V;
 }

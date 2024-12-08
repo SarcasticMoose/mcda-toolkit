@@ -2,6 +2,6 @@
 
 public enum McdaMethods
 {
-    TOPSIS = 0,
-    VIKOR = 1
+    Topsis = 0,
+    Vikor = 1
 }

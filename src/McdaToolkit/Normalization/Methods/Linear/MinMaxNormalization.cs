@@ -3,7 +3,7 @@ using McdaToolkit.Normalization.Methods.Abstraction;
 
 namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class MinMaxNormalization : INormalizationMethod
+internal class MinMaxNormalization : IVectorNormalizator<double>
 {
     private const double MaxTolerance = 1.11e-16;
     

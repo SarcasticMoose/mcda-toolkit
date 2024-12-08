@@ -3,7 +3,7 @@ using McdaToolkit.Normalization.Methods.Abstraction;
 
 namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class MaxNormalization : INormalizationMethod
+internal class MaxNormalization : IVectorNormalizator<double>
 {
     /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost)

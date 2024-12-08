@@ -2,37 +2,35 @@
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Extensions;
 using McdaToolkit.Mcda.Methods.Abstraction;
-using McdaToolkit.Mcda.Providers;
 using McdaToolkit.Normalization.Services.Abstraction;
-using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Mcda.Methods.Vikor;
 
 public class Vikor : IVikorMethod
 {
-    IMatrixNormalizationService _normalizationService;
+    private readonly IMatrixNormalizationService _matrixNormalizationService;
+    private readonly VikorParameters _parameters;
 
-    private Vikor(McdaMethodOptions options)
+    internal Vikor(
+        IMatrixNormalizationService normalizationMatrixService,
+        VikorParameters parameters)
     {
-        _normalizationService = new MatrixNormalizatorService(options.NormalizationMethod);
-    }
-
-    internal static Vikor Create(McdaMethodOptions options)
-    {
-        return new Vikor(options);
+        _matrixNormalizationService = normalizationMatrixService;
+        _parameters = parameters;
     }
     
-    private Result<VikorScore> ComputeScore(Matrix<double> matrix, Vector<double> weights, int[] types, VikorParameters parameters)
+    private IResult<VikorScore> ComputeScore(Matrix<double> matrix, Vector<double> weights, int[] types)
     {
-        var normalizedMatrix = _normalizationService.NormalizeMatrix(matrix,types);
+        
+        var normalizedMatrix = _matrixNormalizationService.NormalizeMatrix(matrix,types);
 
         var fStar = normalizedMatrix.GetColMax();
         var fMinus = normalizedMatrix.GetColMin();
         
-        var weightedF = matrix.MapIndexed((i, j, value) => weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
+        var weightedMatrix = matrix.MapIndexed((i, j, value) => weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
 
-        var s = weightedF.RowSums();
-        var r = weightedF.Transpose().GetColMax();
+        var s = weightedMatrix.RowSums();
+        var r = weightedMatrix.Transpose().GetColMax();
 
         var sStar = s.Minimum();
         var sMinus = s.Maximum();
@@ -42,18 +40,17 @@ public class Vikor : IVikorMethod
         var sNormalized = (s - sStar) / (sMinus - sStar);
         var rNormalized = (r - rStar) / (rMinus - rStar);
         
-        var q = parameters.V * sNormalized + (1 - parameters.V) * rNormalized;
+        var q = _parameters.V * sNormalized + (1 - _parameters.V) * rNormalized;
         return Result.Ok(new VikorScore(s, r, q));
     }
 
-    public IResult<VikorScore> Run(IDataProvider dataProvider)
+    public IResult<VikorScore> Run(McdaInputData data)
     {
-        var data = dataProvider.GetData();
-        return ComputeScore(data.Matrix,data.Weights,data.Types,(VikorParameters)data.Parameters!);
+        return ComputeScore(data.Matrix,data.Weights,data.Types);
     }
     
-    IResult IMcdaMethod.Run(IDataProvider dataProvider)
+    IResult IMcdaMethod.Run(McdaInputData data)
     {
-        return Run(dataProvider);
+        return Run(data);
     }
 }
