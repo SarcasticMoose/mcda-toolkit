@@ -2,7 +2,7 @@ using LightResults;
 
 namespace McdaToolkit.Validation.Abstraction;
 
-public abstract class ValidationServiceBase : IValidationService
+internal abstract class ValidationServiceBase : IValidationService
 {
     protected ICollection<IValidationRule> Rules { get; } = new List<IValidationRule>();
     
