@@ -1,5 +1,5 @@
 ﻿using LightResults;
 
-namespace McdaToolkit.Mcda.Services.MatrixChecker.Errors;
+namespace McdaToolkit.Validation.MatrixValidation.Errors;
 
 public class WeightNotSumToOneError() : Error("Geometric of weight have to equal 1");

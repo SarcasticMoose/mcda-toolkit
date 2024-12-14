@@ -2,7 +2,7 @@
 
 namespace McdaToolkit.Mcda.Methods.Vikor;
 
-public class VikorParameters : IMcdaAdditionalParameters
+public record VikorParameters : IMcdaAdditionalParameters
 {
     public double V { get; }
 
