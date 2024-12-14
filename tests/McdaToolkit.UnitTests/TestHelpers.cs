@@ -12,7 +12,7 @@ public abstract class TestHelpers
             .Select((x, i) => IsResultTheSame(x, expected[i]))
             .All(y => y);
     }
-    private static bool IsResultTheSame(Vector<double> vector,double[] expected)
+    public static bool IsResultTheSame(Vector<double> vector,double[] expected)
     {
         var epsilon = 1.11e-16;
         var result = vector

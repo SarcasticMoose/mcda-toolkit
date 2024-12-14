@@ -7,11 +7,11 @@
 
     <PropertyGroup Label="Nuget Info">
         <PackageId>McdaToolkit</PackageId>
-        <Version>2.2.0</Version>
+        <Version>3.0.0</Version>
         <Authors>Jakub Tokarczyk</Authors>
         <LangVersion>latest</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <TargetFrameworks>netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
         <Copyright>© 2024 Jakub Tokarczyk</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup Label="Dependencies">
-        <PackageReference Include="LightResults" Version="8.0.9" />
+        <PackageReference Include="LightResults" Version="8.0.11" />
         <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     </ItemGroup>
 </Project>

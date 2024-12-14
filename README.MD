@@ -7,7 +7,7 @@
 The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).  
 
 ## Key feature
-- .NET  6+ support
+- .NET 6 and .NET Standard 2.0
 - Easy to use
 
 ## Dependencies
@@ -57,20 +57,36 @@ This object contains information about the success or failure of the operation.
 Before obtaining the ``Value`` from the result object, it is necessary to check that no errors have occurred.
 
 ```csharp
-var topsis = new Topsis(new McdaMethodOptions()
-{
-    NormalizationMethod = NormalizationMethod.MinMax
-});
-Result<Vector<double>> result = topsis.Calculate(data,weights,types);
-
-if(topsisResult.IsFailed)
-{
-    foreach (var error in topsisResult.Errors)
+var matrix = new[,]
     {
-        Console.WriteLine(error.Message);
-    }
-    return;
-}
-Vector<double> result.Value;
+        {3, 6, 4, 20, 2, 30000 },
+        {4, 4, 6, 15, 2.2, 32000 },
+        {6, 5, 9, 18, 3, 32100 },
+        {5, 6, 3, 23, 2.8, 28000 },
+        {4, 8, 7, 30, 1.5, 29000 },
+        {8, 3, 6, 35, 1.9, 27000 },
+        {7, 2, 5, 33, 1.7, 28500 },
+        {3, 8, 3, 34, 1.6, 30500 },
+        {8, 4, 8, 40, 2.5, 33000 },
+        {9, 3, 7, 34, 2, 29800 }
+    };
+double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
+int[] types = [1,1,1,-1,-1,-1];
+        
+var data = new DataProviderBuilder()
+    .AddWeights(weights)
+    .AddDecisionCriteria(types)
+    .AddDecisionMatrix(matrix)
+    .Build();
+        
+var vikor = MethodFactory.CreateVikor(new VikorOptions()
+{
+    NormalizationMethod = NormalizationMethod.Vector,
+    VikorParameters = VikorParameters.Create(0.5)
+});
+        
+var vikorResult = vikor.Run(data);
+        
+var scores = vikorResult
+    .Value.Q;
 ```
-More info about ``Result`` type and pattern at: [Light Results](https://github.com/jscarle/LightResults) and [Fluent Results](https://github.com/altmann/FluentResults)

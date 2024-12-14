@@ -1,17 +1,18 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.Normalization.Methods.Linear;
+namespace McdaToolkit.Normalization.Methods.Geometric;
 
-internal class MaxNormalization : IVectorNormalizator<double>
+internal class VectorL2Normalization : IVectorNormalizator<double>
 {
     /// <inheritdoc cref="IVectorNormalizator{T}.Normalize"/>
     public Vector<double> Normalize(Vector<double> data, bool cost)
     {
+        var squaresOfSum = data / Math.Sqrt(data.PointwisePower(2).Sum());
         if (cost)
         {
-            return 1 - data / data.Maximum();
+            return 1 - squaresOfSum;
         }
-        return data / data.Maximum();
+        return squaresOfSum;
     }
 }

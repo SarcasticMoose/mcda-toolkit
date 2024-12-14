@@ -3,7 +3,7 @@ using MathNet.Numerics.LinearAlgebra;
 namespace McdaToolkit.Normalization.Methods.Abstraction;
 
 /// <summary>
-/// Vector normalization generic abstraction
+/// Column normalization generic abstraction
 /// </summary>
 internal interface IVectorNormalizator<T> where T : struct, IEquatable<T>, IFormattable
 {
