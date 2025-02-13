@@ -16,11 +16,15 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
         <PackageIcon>icon.png</PackageIcon>
+        <Description>The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).</Description>
+        <PackageProjectUrl>https://github.com/SarcasticMoose/mcda-toolkit</PackageProjectUrl>
+        <PackageLicenseUrl>License.txt</PackageLicenseUrl>
     </PropertyGroup>
 
     <ItemGroup Label="Resources">
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
+        <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
