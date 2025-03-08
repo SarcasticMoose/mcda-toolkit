@@ -10,7 +10,7 @@ namespace McdaToolkit;
 
 internal class NormalizationMethodFactory
 {
-    public Result<IVectorNormalizator<double>> Create(NormalizationMethod method)
+    public IVectorNormalizator<double> Create(NormalizationMethod method)
     {
         return method switch
         {
@@ -19,7 +19,7 @@ internal class NormalizationMethodFactory
             NormalizationMethod.Logarithmic => new LogarithmicNormalization(),
             NormalizationMethod.Sum => new SumNormalization(),
             NormalizationMethod.Max => new MaxNormalization(),
-            _ => Result.Fail<IVectorNormalizator<double>>(new NormalizationMethodNotExistsError())
+            _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
         };
     }
 }
