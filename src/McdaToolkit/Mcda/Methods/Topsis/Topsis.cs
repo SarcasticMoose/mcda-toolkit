@@ -7,7 +7,7 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Mcda.Methods.Topsis;
 
-public sealed class Topsis : ITopsisMethod
+public sealed class Topsis : McdaMethodBase<TopsisScore>
 {
     private readonly IMatrixNormalizationService _normalizationServiceServiceService;
     
@@ -59,13 +59,8 @@ public sealed class Topsis : ITopsisMethod
         return Result.Ok(new TopsisScore(scores));
     }
     
-    public IResult<TopsisScore> Run(McdaInputData data)
+    public override IResult<TopsisScore> Run(McdaInputData data)
     {
         return ComputeScore(data.Matrix,data.Weights,data.Types);
-    }
-
-    IResult IMcdaMethod.Run(McdaInputData data)
-    {
-        return Run(data);
     }
 }
