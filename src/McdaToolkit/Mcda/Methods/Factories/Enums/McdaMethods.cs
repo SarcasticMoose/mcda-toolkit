@@ -3,5 +3,6 @@
 public enum McdaMethods
 {
     Topsis = 0,
-    Vikor = 1
+    Vikor = 1,
+    Promethee2 = 2
 }
