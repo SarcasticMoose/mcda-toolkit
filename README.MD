@@ -14,8 +14,6 @@ The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision
 
 - [Math.Net Numerics](https://numerics.mathdotnet.com/)
 - [Light Results](https://github.com/jscarle/LightResults)
-- [Xunit](https://github.com/xunit/xunit)
-- [FluentAssertions](https://github.com/fluentassertions/fluentassertions)
 
 ## Calculation process
 
