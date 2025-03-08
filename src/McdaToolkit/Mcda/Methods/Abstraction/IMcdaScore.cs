@@ -1,6 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
-
-namespace McdaToolkit.Mcda.Methods.Abstraction;
+﻿namespace McdaToolkit.Mcda.Methods.Abstraction;
 
 public interface IMcdaScore
 {

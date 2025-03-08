@@ -1,15 +1,14 @@
 ﻿using LightResults;
-using McdaToolkit.Mcda.Providers;
 
 namespace McdaToolkit.Mcda.Methods.Abstraction;
 
-public interface IMcdaMethod<out TResult> : IMcdaMethod
-where TResult : IResult<IMcdaScore>
+public interface IMcdaMethod<out T> : IMcdaMethod
+where T : IMcdaScore
 {
-    new TResult Run(McdaInputData data);
+    new IResult<T> Run(McdaInputData data);
 }
 
 public interface IMcdaMethod
 {
-    IResult Run(McdaInputData data);
+    IResult<IMcdaScore> Run(McdaInputData data);
 }

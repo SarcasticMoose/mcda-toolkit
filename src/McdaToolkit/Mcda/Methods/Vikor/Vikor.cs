@@ -6,7 +6,7 @@ using McdaToolkit.Normalization.Services.Abstraction;
 
 namespace McdaToolkit.Mcda.Methods.Vikor;
 
-public class Vikor : IVikorMethod
+public class Vikor : McdaMethodBase<VikorScore>
 {
     private readonly IMatrixNormalizationService _matrixNormalizationService;
     private readonly VikorParameters _parameters;
@@ -44,13 +44,8 @@ public class Vikor : IVikorMethod
         return Result.Ok(new VikorScore(s, r, q));
     }
 
-    public IResult<VikorScore> Run(McdaInputData data)
+    public override IResult<VikorScore> Run(McdaInputData data)
     {
         return ComputeScore(data.Matrix,data.Weights,data.Types);
-    }
-    
-    IResult IMcdaMethod.Run(McdaInputData data)
-    {
-        return Run(data);
     }
 }
