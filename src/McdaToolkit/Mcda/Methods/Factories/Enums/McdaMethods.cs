@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Mcda.Factories.Enums;
+﻿namespace McdaToolkit.Mcda.Methods.Factories.Enums;
 
 public enum McdaMethods
 {

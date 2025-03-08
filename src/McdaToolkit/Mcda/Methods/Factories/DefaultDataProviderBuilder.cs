@@ -1,7 +1,7 @@
 ﻿using McdaToolkit.Mcda.Providers;
 using McdaToolkit.Validation.MatrixValidation;
 
-namespace McdaToolkit.Mcda.Factories;
+namespace McdaToolkit.Mcda.Methods.Factories;
 
 public class  DefaultDataProviderBuilder
 {

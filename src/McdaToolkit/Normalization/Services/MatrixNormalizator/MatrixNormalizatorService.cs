@@ -9,11 +9,9 @@ internal sealed class MatrixNormalizatorService : IMatrixNormalizationService
 {
     private readonly IVectorNormalizator<double> _vectorNormalizatorMethod;
 
-    public MatrixNormalizatorService(
-        NormalizationMethodFactory normalizationMethodFactory,
-        NormalizationMethod normalizationMethod)
+    public MatrixNormalizatorService(IVectorNormalizator<double> vectorNormalizatorMethod)
     {
-        _vectorNormalizatorMethod = normalizationMethodFactory.Create(normalizationMethod).Value;
+        _vectorNormalizatorMethod = vectorNormalizatorMethod;
     }
 
     /// <inheritdoc cref="IMatrixNormalizationService.NormalizeMatrix"/>
