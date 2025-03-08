@@ -1,6 +1,6 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Mcda.Factories;
+using McdaToolkit.Mcda.Methods.Factories;
 using McdaToolkit.Mcda.Methods.Topsis;
 using McdaToolkit.Mcda.Methods.Vikor;
 using McdaToolkit.Normalization.Enums;

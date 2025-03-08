@@ -1,5 +1,5 @@
 using FluentAssertions;
-using McdaToolkit.Mcda.Factories;
+using McdaToolkit.Mcda.Methods.Factories;
 
 namespace McdaToolkit.UnitTests;
 

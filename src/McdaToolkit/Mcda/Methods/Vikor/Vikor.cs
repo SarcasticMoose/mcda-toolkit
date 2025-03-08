@@ -9,14 +9,14 @@ namespace McdaToolkit.Mcda.Methods.Vikor;
 public class Vikor : McdaMethodBase<VikorScore>
 {
     private readonly IMatrixNormalizationService _matrixNormalizationService;
-    private readonly VikorParameters _parameters;
+    private readonly double _v;
 
     internal Vikor(
         IMatrixNormalizationService normalizationMatrixService,
-        VikorParameters parameters)
+        double v)
     {
         _matrixNormalizationService = normalizationMatrixService;
-        _parameters = parameters;
+        _v = v;
     }
     
     private IResult<VikorScore> ComputeScore(Matrix<double> matrix, Vector<double> weights, int[] types)
@@ -40,7 +40,7 @@ public class Vikor : McdaMethodBase<VikorScore>
         var sNormalized = (s - sStar) / (sMinus - sStar);
         var rNormalized = (r - rStar) / (rMinus - rStar);
         
-        var q = _parameters.V * sNormalized + (1 - _parameters.V) * rNormalized;
+        var q = _v * sNormalized + (1 - _v) * rNormalized;
         return Result.Ok(new VikorScore(s, r, q));
     }
 
