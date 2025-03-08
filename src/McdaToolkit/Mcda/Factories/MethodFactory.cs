@@ -24,13 +24,13 @@ public static class MethodFactory
         };
     }
 
-    public static IVikorMethod CreateVikor(VikorOptions options)
+    public static Vikor CreateVikor(VikorOptions options)
     {
-        return (IVikorMethod)CreateMethod(McdaMethods.Vikor, options);
+        return (Vikor)CreateMethod(McdaMethods.Vikor, options);
     }
     
-    public static ITopsisMethod CreateTopsis(TopsisOptions options)
+    public static Topsis CreateTopsis(TopsisOptions options)
     {
-        return (ITopsisMethod)CreateMethod(McdaMethods.Topsis, options);
+        return (Topsis)CreateMethod(McdaMethods.Topsis, options);
     }
 }
