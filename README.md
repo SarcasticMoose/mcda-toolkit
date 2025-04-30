@@ -3,24 +3,38 @@
 [![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge)](https://www.nuget.org/packages/McdaToolkit)
 [![License](https://img.shields.io/github/license/SarcasticMoose/mcda-toolkit?style=for-the-badge)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
 
-## Introduction
-The MCDA Toolkit is a lightweight .NET tool designed for Multi-Criteria Decision Analysis (MCDA).  
+## 🧭 Introduction
 
-## Key feature
-- .NET 6 and .NET Standard 2.0
-- Easy to use
+MCDA Toolkit is a lightweight and flexible .NET library designed to support Multi-Criteria Decision Analysis (MCDA) processes. 
+It helps developers and analysts structure, evaluate, and solve decision-making problems.
+
+## 🚀 Key Features
+
+🧩 .NET 6 and .NET Standard 2.0 Compatibility
+Fully compatible with both .NET 6 and .NET Standard 2.0, ensuring support for a wide range of application
+
+🧠 Simple and Intuitive API
+Built with a fluent interface that makes setup fast and readable. Easily configure decision-making data with minimal code and maximum clarity.
+
+⚡ Quick Integration
+Plug-and-play design means you can get started in seconds. No complex setup or learning curve—just import and go.
+
+## Documentation
+Make sure to read the docs for the full API.
 
 ## Dependencies
 
 - [Math.Net Numerics](https://numerics.mathdotnet.com/)
 - [Light Results](https://github.com/jscarle/LightResults)
 
-## Calculation process
+## Quick Example
 
-### Prepare data matrix
+Here's a simple example to show how to prepare and structure your data for an MCDA calculation using the MCDA Toolkit.
 
+### 1️⃣   Define the Decision Matrix
+Each row represents an alternative, and each column corresponds to a criterion.
 ```csharp
-double[] data = new double[,]
+double[,] matrix = new double[,]
 {
     { 66, 56, 95 },
     { 61, 55, 166 },
@@ -31,60 +45,54 @@ double[] data = new double[,]
 };
 ```
 
-### Prepare weights matrix 
-Weights are discribed by double precision numbers ∈<0,1>, and they have to ``sum to 1``.
+
+### 2️⃣   Prepare Weights
+They must be double values between 0 and 1, and must ``sum to 1``
 ```csharp
 double[] weights = new double[]
 {
-    0.4,0.25,0.35
+    0.4, 0.25, 0.35
 };
 ```
+### 3️⃣   Define Criteria Types
 
-### Prepare types matrix
-Types are discribed by two integer numbers ``-1``(cost) and ``1``(profit).
+Each criterion is marked as either a cost (-1) or a benefit (1).
 ```csharp
 int[] types = new int[]
 {
-    -1,-1,1
+    -1, -1, 1
 };
 ```
-### Run calculation
 
-The final result of the calculation is ``Result<Vector<double>>``.
-This object contains information about the success or failure of the operation.
-Before obtaining the ``Value`` from the result object, it is necessary to check that no errors have occurred.
-
+### 4️⃣  Build the Data Object
 ```csharp
-var matrix = new[,]
-    {
-        {3, 6, 4, 20, 2, 30000 },
-        {4, 4, 6, 15, 2.2, 32000 },
-        {6, 5, 9, 18, 3, 32100 },
-        {5, 6, 3, 23, 2.8, 28000 },
-        {4, 8, 7, 30, 1.5, 29000 },
-        {8, 3, 6, 35, 1.9, 27000 },
-        {7, 2, 5, 33, 1.7, 28500 },
-        {3, 8, 3, 34, 1.6, 30500 },
-        {8, 4, 8, 40, 2.5, 33000 },
-        {9, 3, 7, 34, 2, 29800 }
-    };
-double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
-int[] types = [1,1,1,-1,-1,-1];
-        
 var data = new DataProviderBuilder()
-    .AddWeights(weights)
-    .AddDecisionCriteria(types)
-    .AddDecisionMatrix(matrix)
-    .Build();
-        
-var vikor = MethodFactory.CreateVikor(new VikorOptions()
-{
-    NormalizationMethod = NormalizationMethod.Vector,
-    VikorParameters = VikorParameters.Create(0.5)
-});
-        
-var vikorResult = vikor.Run(data);
-        
-var scores = vikorResult
-    .Value.Q;
+    .AddWeights(weights)            
+    .AddDecisionCriteria(types)      
+    .AddDecisionMatrix(matrix)       
+    .Build();                     
 ```
+
+### 5️⃣  Create MCDA method
+```csharp
+var vikor = MethodFactory
+    .CreateVikor(new VikorOptions())
+```
+
+### 6️⃣  Run
+```csharp
+var result = vikor.Run();
+```
+
+## Outcome
+
+The result of the calculation is returned as an object of type ``Result<T>``, provided by the [LightResults](https://github.com/jscarle/LightResults) library. 
+This structure not only contains the output data ``Value``, but also encapsulates information about whether the operation failed or succeed.
+
+Before accessing the ``Value`` property of the result object, it is essential to verify that the operation completed successfully. 
+Attempting to access the value without this check may throw ``InvalidOperationException``
+
+This approach follows the principles of Railway Oriented Programming, 
+a functional programming pattern that models the flow of data along two possible tracks — one for success and one for failure. 
+
+More about ``Result`` type can be readed on official [LightResult documentation ](https://jscarle.github.io/LightResults/)
