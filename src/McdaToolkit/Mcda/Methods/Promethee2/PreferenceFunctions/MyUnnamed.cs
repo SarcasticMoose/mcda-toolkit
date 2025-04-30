@@ -1,18 +1,17 @@
-using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Abstraction;
 
 namespace McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions;
 
-internal class Usual : PreferenceFunctionBase
+internal class MyUnnamed : PreferenceFunctionBase
 {
-    Dictionary<Func<double>, Func<double,bool>> criterias = new();
+    Dictionary<Func<double,double>, Func<double,bool>> criterias = new();
 
-    public Usual()
+    public MyUnnamed()
     {
-        criterias.Add(() => 0.0, (parameters) => parameters <= 0);
-        criterias.Add(() => 1.0, (parameters) => parameters > 0);
+        criterias.Add((_) => 0.0, (parameters) => parameters <= 0);
+        criterias.Add((parameter) => parameter, (parameters) => parameters > 0);
     }
-   
+    
     public override double ExecuteOne(double d)
     {
         double output = 0.0;
@@ -20,10 +19,10 @@ internal class Usual : PreferenceFunctionBase
         {
             if (criteria.Value.Invoke(d))
             {
-                output = criteria.Key.Invoke();
+                output = criteria.Key.Invoke(d);
                 break;
             }
         }
-        return output;
+        return output;   
     }
 }
