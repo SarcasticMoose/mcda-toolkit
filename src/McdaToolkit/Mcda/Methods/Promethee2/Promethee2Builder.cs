@@ -2,7 +2,7 @@ using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Factory;
 using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
-namespace McdaToolkit.Mcda.Methods.Builders;
+namespace McdaToolkit.Mcda.Methods.Promethee2;
 
 public class Promethee2Builder
 {
@@ -22,11 +22,11 @@ public class Promethee2Builder
         return this;
     }
     
-    public Promethee2.Promethee2 Build()
+    public Promethee2 Build()
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
         var normalizationService = new MatrixNormalizatorService(normalizationMethod);
         var preferenceFunction = new PreferenceFunctionFactory().Create(_preferenceFunction);
-        return new Promethee2.Promethee2(normalizationService, preferenceFunction);
+        return new Promethee2(normalizationService, preferenceFunction);
     }
 }

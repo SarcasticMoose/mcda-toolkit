@@ -24,22 +24,42 @@ public sealed class Promethee2 : McdaMethodBase<Promethee2Score>
         var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(data.Matrix, data.Types);
         var diffrentialMatrix = GetAlternativeDiffrence(normalizedMatrix);
         var afterPreferenceFunction = _preferenceFunction.Execute(diffrentialMatrix);
-        var afterWeights = GetWeightedMatrix(afterPreferenceFunction, data.Weights);
-        throw new NotImplementedException();
+        var weightedPreferenceMatrix = GetWeightedMatrix(afterPreferenceFunction, data.Weights);
+        var flowMatrix = AggregatePreferenceFlows(weightedPreferenceMatrix, normalizedMatrix.RowCount);
+        var leavingFlows = flowMatrix.RowSums() / (flowMatrix.RowCount - 1);
+        var enteringFlows = flowMatrix.ColumnSums() / (flowMatrix.ColumnCount - 1);
+        var netFlows = leavingFlows - enteringFlows;
+        
+        var score = new Promethee2Score
+        {
+            Ranking = netFlows
+                .Select((value, index) => new { index, value })
+                .OrderByDescending(x => x.value)
+                .Select((x, index) => new Promethee2ScoreRanking()
+                {
+                    Rank = index + 1,
+                    Alternative = x.index + 1,
+                    Score = x.value
+                })
+                .OrderBy(x => x.Alternative)
+                .ToList()
+        };
+        return Result.Ok(score);
     }
 
     private Matrix<double> GetAlternativeDiffrence(Matrix<double> matrix)
     {
         var rows = matrix.RowCount;
         var cols = matrix.ColumnCount;  
-        var alternativeMatrix = Matrix<double>.Build.Dense(rows * rows, cols);
+        var alternativeMatrix = Matrix<double>.Build.Dense((rows * rows) - rows, cols);
 
         var iindex = 0;
         for (int i = 0; i < rows; i++)
         {
             var row = matrix.Row(i);
-            for (int j = 1; j < rows; j++)
+            for (int j = 0; j < rows; j++)
             {
+                if(i == j) continue;
                 var nextRow = row - matrix.Row(j);
                 alternativeMatrix.SetRow(iindex, nextRow);
                 iindex++;
@@ -55,5 +75,22 @@ public sealed class Promethee2 : McdaMethodBase<Promethee2Score>
             matrix.SetRow(i, matrix.Row(i).PointwiseMultiply(weights));
         }
         return matrix;
+    }
+    
+    private Matrix<double> AggregatePreferenceFlows(Matrix<double> weightedMatrix, int alternativesCount)
+    {
+        var flowMatrix = Matrix<double>.Build.Dense(alternativesCount, alternativesCount);
+        int k = 0;
+        for (int i = 0; i < alternativesCount; i++)
+        {
+            for (int j = 0; j < alternativesCount; j++)
+            {
+                if (i == j) continue;
+                var preference = weightedMatrix.Row(k).Sum();
+                flowMatrix[i, j] = preference;
+                k++;
+            }
+        }
+        return flowMatrix;
     }
 }
