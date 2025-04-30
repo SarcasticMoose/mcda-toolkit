@@ -1,6 +1,8 @@
 using FluentAssertions;
 using MathNet.Numerics;
 using McdaToolkit.Mcda.Methods.Factories;
+using McdaToolkit.Mcda.Methods.Promethee2;
+using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Factory;
 using McdaToolkit.Mcda.Methods.Topsis;
 using McdaToolkit.Mcda.Methods.Vikor;
 using McdaToolkit.Normalization.Enums;
@@ -81,5 +83,42 @@ public class McdaMethodsTests
             .Select(x => x.Round(3))
             .Should()
             .BeEquivalentTo(expectedVikorScore);
+    }
+    
+    [Fact]
+    public void Calculate_Promethee2Method_ShouldBeEqualToExpected()
+    {
+        double[,] matrix = new double[,]
+        {
+            { 1900, 0.83, 24, 3.5, 8.5, 3, 4, 30, 4, 1 },
+            { 2200, 0.77, 22, 3,   7.5, 1, 5, 14, 3, 1 },
+            { 1300, 0.67, 20, 3,   5,   0, 4, 7,  3, 1 },
+            { 1800, 0.74, 20, 4,  10,   0, 5, 14, 4, 3 }
+        };
+        double[] weights = [    0.2122, // C1 - cena
+            0.1678, // C2 - sylabus
+            0.0633, // C3 - czas trwania kursu
+            0.0345, // C4 - funkcjonalność platformy
+            0.1123, // C5 - materiały wideo i przewodniki
+            0.0798, // C6 - konsultacje online
+            0.0112, // C7 - komunikacja
+            0.0860, // C8 - dostępność materiałów
+            0.1584, // C9 - przydatność zawodowa
+            0.0745];
+        int[] types = [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+        var data = new DefaultDataProviderBuilder()
+            .AddWeights(weights)
+            .AddDecisionCriteria(types)
+            .AddDecisionMatrix(matrix)
+            .Build();
+
+        var vikorResult = MethodFactory
+            .CreatePromethee2(new Promethee2Options()
+            {
+                NormalizationMethod = NormalizationMethod.MinMax,
+                PreferenceFunction = PreferenceFunction.Unnamed
+            })
+            .Run(data);
     }
 }
