@@ -88,6 +88,33 @@ public class McdaMethodsTests
     [Fact]
     public void Calculate_Promethee2Method_ShouldBeEqualToExpected()
     {
+        var expectedRanking = new List<Promethee2ScoreRanking>()
+        {
+            new()
+            {
+                Alternative = 1,
+                Rank = 1,
+                Score = 0.371
+            },
+            new()
+            {
+                Alternative = 2,
+                Rank = 3,
+                Score = -0.250
+            },
+            new()
+            {
+                Alternative = 3,
+                Rank = 4,
+                Score = -0.309
+            },
+            new()
+            {
+                Alternative = 4,
+                Rank = 2,
+                Score = 0.188
+            }
+        };
         double[,] matrix = new double[,]
         {
             { 1900, 0.83, 24, 3.5, 8.5, 3, 4, 30, 4, 1 },
@@ -95,15 +122,16 @@ public class McdaMethodsTests
             { 1300, 0.67, 20, 3,   5,   0, 4, 7,  3, 1 },
             { 1800, 0.74, 20, 4,  10,   0, 5, 14, 4, 3 }
         };
-        double[] weights = [    0.2122, // C1 - cena
-            0.1678, // C2 - sylabus
-            0.0633, // C3 - czas trwania kursu
-            0.0345, // C4 - funkcjonalność platformy
-            0.1123, // C5 - materiały wideo i przewodniki
-            0.0798, // C6 - konsultacje online
-            0.0112, // C7 - komunikacja
-            0.0860, // C8 - dostępność materiałów
-            0.1584, // C9 - przydatność zawodowa
+        double[] weights = [   
+            0.2122,
+            0.1678, 
+            0.0633, 
+            0.0345, 
+            0.1123, 
+            0.0798, 
+            0.0112, 
+            0.0860, 
+            0.1584, 
             0.0745];
         int[] types = [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
@@ -113,12 +141,17 @@ public class McdaMethodsTests
             .AddDecisionMatrix(matrix)
             .Build();
 
-        var vikorResult = MethodFactory
+        var promethee2Result = MethodFactory
             .CreatePromethee2(new Promethee2Options()
             {
                 NormalizationMethod = NormalizationMethod.MinMax,
                 PreferenceFunction = PreferenceFunction.Unnamed
             })
-            .Run(data);
+            .Run(data)
+            .Value
+            .Ranking
+            .Select(x => (x with { Score = x.Score.Round(3) }))
+            .Should()
+            .BeEquivalentTo(expectedRanking);
     }
 }

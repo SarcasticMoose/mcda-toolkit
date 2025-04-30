@@ -1,7 +1,7 @@
 using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
-namespace McdaToolkit.Mcda.Methods.Builders;
+namespace McdaToolkit.Mcda.Methods.Vikor;
 
 public class VikorBuilder 
 {
@@ -20,12 +20,12 @@ public class VikorBuilder
         return this;
     }
     
-    public Vikor.Vikor Build()
+    public Vikor Build()
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
         var matrixNormalizationService = new MatrixNormalizatorService(normalizationMethod);
         
-        return new Vikor.Vikor(
+        return new Vikor(
             matrixNormalizationService,
             _v);
     }
