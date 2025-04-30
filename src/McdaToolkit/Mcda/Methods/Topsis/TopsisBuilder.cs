@@ -1,7 +1,7 @@
 using McdaToolkit.Normalization.Enums;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
-namespace McdaToolkit.Mcda.Methods.Builders;
+namespace McdaToolkit.Mcda.Methods.Topsis;
 
 public class TopsisBuilder
 {
@@ -13,10 +13,10 @@ public class TopsisBuilder
         return this;
     }
     
-    public Topsis.Topsis Build()
+    public Topsis Build()
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
         var normalizationService = new MatrixNormalizatorService(normalizationMethod);
-        return new Topsis.Topsis(normalizationService);
+        return new Topsis(normalizationService);
     }
 }
