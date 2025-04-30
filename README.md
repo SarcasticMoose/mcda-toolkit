@@ -81,7 +81,7 @@ var vikor = MethodFactory
 
 ### 6️⃣  Run
 ```csharp
-var result = vikor.Run();
+var result = vikor.Run(data);
 ```
 
 ## Outcome
