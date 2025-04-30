@@ -13,24 +13,6 @@ internal class Ushape : PreferenceFunctionBase
         criterias.Add(_ => 0.0,parameters => parameters.Item1 <= parameters.Item2);
         criterias.Add(_ => 1.0,parameters => parameters.Item1 > parameters.Item2);
     }
-    
-    public Vector<double> Execute(Vector<double> input)
-    {
-        var output = Vector<double>.Build.Dense(input.Count);
-
-        foreach (var (index,d) in input.EnumerateIndexed())
-        {
-            foreach (var criteria in criterias)
-            {
-                if (criteria.Value.Invoke(new ValueTuple<double,double>(d,Q)))
-                {
-                    output[index] = criteria.Key.Invoke(d);
-                    break;
-                }
-            }
-        }
-        return output;
-    }
 
     public override double ExecuteOne(double d)
     {

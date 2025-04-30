@@ -9,7 +9,7 @@ public abstract class PreferenceFunctionBase : IPreferenceFunction
         var output = Matrix<double>.Build.Dense(input.RowCount, input.ColumnCount);
         foreach (var (i,row) in input.EnumerateRowsIndexed())
         {
-            output.InsertRow(i, ExecuteRow(row));
+            output.SetRow(i, ExecuteRow(row));
         }
         return output;
     }
@@ -17,9 +17,9 @@ public abstract class PreferenceFunctionBase : IPreferenceFunction
     private Vector<double> ExecuteRow(Vector<double> input)
     {
         var output = Vector<double>.Build.Dense(input.Count);
-        foreach (var d in input)
+        foreach (var (index,d) in input.EnumerateIndexed())
         {
-            output.Add(ExecuteOne(d));
+            output[index] = (ExecuteOne(d));
         }
         return output;
     }
