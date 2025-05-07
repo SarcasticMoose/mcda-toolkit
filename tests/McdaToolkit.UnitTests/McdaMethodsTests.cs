@@ -5,6 +5,7 @@ using McdaToolkit.Mcda.Methods.Promethee2;
 using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Factory;
 using McdaToolkit.Mcda.Methods.Topsis;
 using McdaToolkit.Mcda.Methods.Vikor;
+using McdaToolkit.Mcda.Ranking;
 using McdaToolkit.Normalization.Enums;
 
 namespace McdaToolkit.UnitTests;
@@ -25,7 +26,48 @@ public class McdaMethodsTests
         };
         double[] weights = [0.3, 0.2, 0.2, 0.15, 0.15];
         int[] types = [1,1,1,1,1];
-        double[] expectedTopsisScore = [0.416704, 0.551900, 0.539620, 0.539926, 0.429128, 0.568142];
+        var expectedTopsisScore = new Ranking<double>()
+        {
+            RankingItems = new List<RankingRow<double>>()
+            {
+                new RankingRow<double>
+                {
+                    Alternative = 1,
+                    Rank = 6,
+                    Score = 0.417
+                },
+                new RankingRow<double>
+                {
+                    Alternative = 2,
+                    Rank = 2,
+                    Score = 0.552
+                },
+                new RankingRow<double>
+                {
+                    Alternative = 3,
+                    Rank = 4,
+                    Score = 0.54
+                },
+                new RankingRow<double>
+                {
+                    Alternative = 4,
+                    Rank = 3,
+                    Score = 0.54
+                },
+                new RankingRow<double>
+                {
+                    Alternative = 5,
+                    Rank = 5,
+                    Score = 0.429
+                },
+                new RankingRow<double>
+                {
+                    Alternative = 6,
+                    Rank = 1,
+                    Score = 0.568
+                }
+            }
+        };
         
         var data = new DefaultDataProviderBuilder()
             .AddWeights(weights)
@@ -41,8 +83,11 @@ public class McdaMethodsTests
         var topsisResult = topsis.Run(data);
         
         topsisResult
-            .Value.V
-            .Select(x => x.Round(6))
+            .Value
+            .Select(x => x with
+            {
+                Score = x.Score.Round(3)
+            })
             .Should()
             .BeEquivalentTo(expectedTopsisScore);
     }
@@ -65,7 +110,22 @@ public class McdaMethodsTests
         };
         double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
         int[] types = [1,1,1,-1,-1,-1];
-        double[] expectedVikorScore = [0.297,0.661,0.630,0.123,0.050,0.272,0.497,0.436,1.0,0.404];
+        var expectedVikorScore = new Ranking<VikorScore>()
+        {
+            RankingItems = new List<RankingRow<VikorScore>>
+            {
+                new() { Alternative = 1, Rank = 7, Score = new() { Q = 0.297, R = 0.15, S = 0.473 } },
+                new() { Alternative = 2, Rank = 2, Score = new() { Q = 0.661, R = 0.25, S = 0.563 } },
+                new() { Alternative = 3, Rank = 3, Score = new() { Q = 0.63, R = 0.255, S = 0.529 } },
+                new() { Alternative = 4, Rank = 9, Score = new() { Q = 0.123, R = 0.1, S = 0.434 } },
+                new() { Alternative = 5, Rank = 10, Score = new() { Q = 0.05, R = 0.12, S = 0.337 } },
+                new() { Alternative = 6, Rank = 8, Score = new() { Q = 0.272, R = 0.167, S = 0.42 } },
+                new() { Alternative = 7, Rank = 4, Score = new() { Q = 0.497, R = 0.2, S = 0.532 } },
+                new() { Alternative = 8, Rank = 5, Score = new() { Q = 0.436, R = 0.175, S = 0.534 } },
+                new() { Alternative = 9, Rank = 1, Score = new() { Q = 1.0, R = 0.3, S = 0.733 } },
+                new() { Alternative = 10, Rank = 6, Score = new() { Q = 0.404, R = 0.167, S = 0.525 } }
+            }
+        };
 
         var data = new DefaultDataProviderBuilder()
             .AddWeights(weights)
@@ -78,9 +138,16 @@ public class McdaMethodsTests
             .Run(data);
         
         vikorResult
-            .Value.Q
-            .Enumerate()
-            .Select(x => x.Round(3))
+            .Value
+            .Select(x => x with 
+            { 
+                Score = new VikorScore
+                {
+                    Q = x.Score.Q.Round(3),
+                    R = x.Score.R.Round(3),
+                    S = x.Score.S.Round(3)
+                }
+            })
             .Should()
             .BeEquivalentTo(expectedVikorScore);
     }
@@ -88,31 +155,34 @@ public class McdaMethodsTests
     [Fact]
     public void Calculate_Promethee2Method_ShouldBeEqualToExpected()
     {
-        var expectedRanking = new List<Promethee2ScoreRanking>()
+        var expectedRanking = new Ranking<double>()
         {
-            new()
+            RankingItems = new List<RankingRow<double>>()
             {
-                Alternative = 1,
-                Rank = 1,
-                Score = 0.371
-            },
-            new()
-            {
-                Alternative = 2,
-                Rank = 3,
-                Score = -0.250
-            },
-            new()
-            {
-                Alternative = 3,
-                Rank = 4,
-                Score = -0.309
-            },
-            new()
-            {
-                Alternative = 4,
-                Rank = 2,
-                Score = 0.188
+                new()
+                {
+                    Alternative = 1,
+                    Rank = 1,
+                    Score = 0.371
+                },
+                new()
+                {
+                    Alternative = 2,
+                    Rank = 3,
+                    Score = -0.250
+                },
+                new()
+                {
+                    Alternative = 3,
+                    Rank = 4,
+                    Score = -0.309
+                },
+                new()
+                {
+                    Alternative = 4,
+                    Rank = 2,
+                    Score = 0.188
+                }   
             }
         };
         double[,] matrix = new double[,]
@@ -149,9 +219,8 @@ public class McdaMethodsTests
             })
             .Run(data)
             .Value
-            .Ranking
             .Select(x => (x with { Score = x.Score.Round(3) }))
             .Should()
-            .BeEquivalentTo(expectedRanking);
+            .BeEquivalentTo(expectedRanking.RankingItems);
     }
 }

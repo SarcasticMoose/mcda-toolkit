@@ -2,13 +2,7 @@
 
 namespace McdaToolkit.Mcda.Methods.Abstraction;
 
-public interface IMcdaMethod<out T> : IMcdaMethod
-where T : IMcdaScore
+public interface IMcdaMethod<out T>
 {
-    new IResult<T> Run(McdaInputData data);
-}
-
-public interface IMcdaMethod
-{
-    IResult<IMcdaScore> Run(McdaInputData data);
+     IResult<T> Run(McdaInputData data);
 }
