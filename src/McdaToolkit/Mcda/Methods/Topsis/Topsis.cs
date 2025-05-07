@@ -2,12 +2,13 @@ using LightResults;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Mcda.Methods.Abstraction;
+using McdaToolkit.Mcda.Ranking;
 using McdaToolkit.Normalization.Services.Abstraction;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Mcda.Methods.Topsis;
 
-public sealed class Topsis : McdaMethodBase<TopsisScore>
+public sealed class Topsis : IMcdaMethod<Ranking<double>>
 {
     private readonly IMatrixNormalizationService _normalizationServiceServiceService;
     
@@ -40,14 +41,11 @@ public sealed class Topsis : McdaMethodBase<TopsisScore>
                 .Select(row => Distance.Euclidean(row, point))
                 .ToArray());
     }
-    
-    private IResult<TopsisScore> ComputeScore(
-        Matrix<double> matrix, 
-        Vector<double> weights, 
-        int[] criteriaDecisions)
+
+    public IResult<Ranking<double>> Run(McdaInputData data)
     {
-        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(matrix, criteriaDecisions);
-        var weightedMatrix = normalizedMatrix.MapIndexed((i, j, value) => weights[j] * matrix[i, j]);
+        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(data.Matrix, data.Types);
+        var weightedMatrix = normalizedMatrix.MapIndexed((i, j, value) => data.Weights[j] * data.Matrix[i, j]);
 
         var idealBest = IdealValues(weightedMatrix, true);
         var idealWorst = IdealValues(weightedMatrix, false);
@@ -55,12 +53,7 @@ public sealed class Topsis : McdaMethodBase<TopsisScore>
         var distanceToBest = CalculateEuclideanDistance(weightedMatrix, idealBest);
         var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
         var scores = distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
-        
-        return Result.Ok(new TopsisScore(scores));
-    }
-    
-    public override IResult<TopsisScore> Run(McdaInputData data)
-    {
-        return ComputeScore(data.Matrix,data.Weights,data.Types);
+
+        return Result.Ok(new RankingFactory().CreateRanking(scores));
     }
 }

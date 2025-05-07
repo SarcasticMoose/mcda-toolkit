@@ -2,11 +2,12 @@ using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Mcda.Methods.Abstraction;
 using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Abstraction;
+using McdaToolkit.Mcda.Ranking;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Mcda.Methods.Promethee2;
 
-public sealed class Promethee2 : McdaMethodBase<Promethee2Score>
+public sealed class Promethee2 : IMcdaMethod<Ranking<double>>
 {
     private readonly MatrixNormalizatorService _normalizationServiceServiceService;
     private readonly IPreferenceFunction _preferenceFunction;
@@ -19,7 +20,7 @@ public sealed class Promethee2 : McdaMethodBase<Promethee2Score>
         _preferenceFunction = preferenceFunction;
     }
     
-    public override IResult<Promethee2Score> Run(McdaInputData data)
+    public IResult<Ranking<double>> Run(McdaInputData data)
     {
         var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(data.Matrix, data.Types);
         var diffrentialMatrix = GetAlternativeDiffrence(normalizedMatrix);
@@ -29,22 +30,7 @@ public sealed class Promethee2 : McdaMethodBase<Promethee2Score>
         var leavingFlows = flowMatrix.RowSums() / (flowMatrix.RowCount - 1);
         var enteringFlows = flowMatrix.ColumnSums() / (flowMatrix.ColumnCount - 1);
         var netFlows = leavingFlows - enteringFlows;
-        
-        var score = new Promethee2Score
-        {
-            Ranking = netFlows
-                .Select((value, index) => new { index, value })
-                .OrderByDescending(x => x.value)
-                .Select((x, index) => new Promethee2ScoreRanking()
-                {
-                    Rank = index + 1,
-                    Alternative = x.index + 1,
-                    Score = x.value
-                })
-                .OrderBy(x => x.Alternative)
-                .ToList()
-        };
-        return Result.Ok(score);
+        return Result.Ok(new RankingFactory().CreateRanking(netFlows));
     }
 
     private Matrix<double> GetAlternativeDiffrence(Matrix<double> matrix)

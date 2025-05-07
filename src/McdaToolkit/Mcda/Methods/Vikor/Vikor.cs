@@ -2,11 +2,12 @@
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Extensions;
 using McdaToolkit.Mcda.Methods.Abstraction;
+using McdaToolkit.Mcda.Ranking;
 using McdaToolkit.Normalization.Services.Abstraction;
 
 namespace McdaToolkit.Mcda.Methods.Vikor;
 
-public class Vikor : McdaMethodBase<VikorScore>
+public class Vikor : IMcdaMethod<Ranking<VikorScore>>
 {
     private readonly IMatrixNormalizationService _matrixNormalizationService;
     private readonly double _v;
@@ -19,15 +20,13 @@ public class Vikor : McdaMethodBase<VikorScore>
         _v = v;
     }
     
-    private IResult<VikorScore> ComputeScore(Matrix<double> matrix, Vector<double> weights, int[] types)
+    public IResult<Ranking<VikorScore>> Run(McdaInputData data)
     {
-        
-        var normalizedMatrix = _matrixNormalizationService.NormalizeMatrix(matrix,types);
-
+        var normalizedMatrix = _matrixNormalizationService.NormalizeMatrix(data.Matrix,data.Types);
         var fStar = normalizedMatrix.GetColMax();
         var fMinus = normalizedMatrix.GetColMin();
         
-        var weightedMatrix = matrix.MapIndexed((i, j, value) => weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
+        var weightedMatrix = data.Matrix.MapIndexed((i, j, value) => data.Weights[j] * (fStar[j] - value) / (fStar[j] - fMinus[j]));
 
         var s = weightedMatrix.RowSums();
         var r = weightedMatrix.Transpose().GetColMax();
@@ -41,11 +40,19 @@ public class Vikor : McdaMethodBase<VikorScore>
         var rNormalized = (r - rStar) / (rMinus - rStar);
         
         var q = _v * sNormalized + (1 - _v) * rNormalized;
-        return Result.Ok(new VikorScore(s, r, q));
-    }
 
-    public override IResult<VikorScore> Run(McdaInputData data)
-    {
-        return ComputeScore(data.Matrix,data.Weights,data.Types);
+        List<VikorScore> scores = new List<VikorScore>();
+        
+        for (int i = 0; i < q.Count; i++)
+        {
+            scores.Add(new VikorScore()
+            {
+                Q = q[i],
+                R = r[i],   
+                S = s[i]
+            });
+        }
+        
+        return Result.Ok(new RankingFactory().CreateRanking(scores));
     }
 }
