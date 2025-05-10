@@ -96,3 +96,50 @@ This approach follows the principles of Railway Oriented Programming,
 a functional programming pattern that models the flow of data along two possible tracks — one for success and one for failure. 
 
 More about ``Result`` type can be readed on official [LightResult documentation ](https://jscarle.github.io/LightResults/)
+
+Example returned success result:
+
+```csharp
+Ranking<double>()
+{
+    RankingItems = List<RankingRow<double>>()
+    {
+        RankingRow<double>
+        {
+            Alternative = 1,
+            Rank = 6,
+            Score = 0.417
+        },
+        RankingRow<double>
+        {
+            Alternative = 2,
+            Rank = 2,
+            Score = 0.552
+        },
+        RankingRow<double>
+        {
+            Alternative = 3,
+            Rank = 4,
+            Score = 0.54
+        },
+        RankingRow<double>
+        {
+            Alternative = 4,
+            Rank = 3,
+            Score = 0.54
+        },
+        RankingRow<double>
+        {
+            Alternative = 5,
+            Rank = 5,
+            Score = 0.429
+        },
+        RankingRow<double>
+        {
+            Alternative = 6,
+            Rank = 1,
+            Score = 0.568
+        }
+    }
+};
+```
