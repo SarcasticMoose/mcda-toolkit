@@ -3,7 +3,7 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Vikor;
 
-public class VikorBuilder 
+internal sealed class VikorBuilder 
 {
     private NormalizationMethod _normalizationMethod;
     private double _v;
