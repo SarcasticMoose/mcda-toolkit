@@ -4,7 +4,7 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Promethee2;
 
-public class Promethee2Builder
+internal sealed class Promethee2Builder
 {
     private NormalizationMethod _normalizationMethod;
 

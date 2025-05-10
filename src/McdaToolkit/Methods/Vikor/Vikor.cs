@@ -7,7 +7,7 @@ using McdaToolkit.Shared.Ranking;
 
 namespace McdaToolkit.Methods.Vikor;
 
-public class Vikor : IMcdaMethod<Ranking<VikorScore>>
+public sealed class Vikor : IMcdaMethod<Ranking<VikorScore>>
 {
     private readonly IMatrixNormalizationService _matrixNormalizationService;
     private readonly double _v;
