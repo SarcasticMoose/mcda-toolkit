@@ -1,12 +1,13 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Mcda.Methods.Factories;
-using McdaToolkit.Mcda.Methods.Promethee2;
-using McdaToolkit.Mcda.Methods.Promethee2.PreferenceFunctions.Factory;
-using McdaToolkit.Mcda.Methods.Topsis;
-using McdaToolkit.Mcda.Methods.Vikor;
-using McdaToolkit.Mcda.Ranking;
+using McdaToolkit.Methods.Promethee2;
+using McdaToolkit.Methods.Promethee2.PreferenceFunctions.Factory;
+using McdaToolkit.Methods.Topsis;
+using McdaToolkit.Methods.Vikor;
 using McdaToolkit.Normalization.Enums;
+using McdaToolkit.Shared.Factories;
+using McdaToolkit.Shared.Providers;
+using McdaToolkit.Shared.Ranking;
 
 namespace McdaToolkit.UnitTests;
 
@@ -211,12 +212,13 @@ public class McdaMethodsTests
             .AddDecisionMatrix(matrix)
             .Build();
 
-        var promethee2Result = MethodFactory
-            .CreatePromethee2(new Promethee2Options()
+        var options = new Promethee2Options()
             {
-                NormalizationMethod = NormalizationMethod.MinMax,
-                PreferenceFunction = PreferenceFunction.Unnamed
-            })
+                NormalizationMethod = NormalizationMethod.MinMax
+            };
+        options.PreferenceFunction = PreferenceFunction.Unnamed;
+        var promethee2Result = MethodFactory
+            .CreatePromethee2(options)
             .Run(data)
             .Value
             .Select(x => (x with { Score = x.Score.Round(3) }))
