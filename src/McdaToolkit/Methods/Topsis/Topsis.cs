@@ -1,8 +1,13 @@
 using LightResults;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
+<<<<<<< HEAD
 using McdaToolkit.Data.Normalization.Services.Abstraction;
 using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
+=======
+using McdaToolkit.Normalization.Services.Abstraction;
+using McdaToolkit.Normalization.Services.MatrixNormalizator;
+>>>>>>> cc9253a (feat: updated namespaces)
 using McdaToolkit.Shared.Abstraction;
 using McdaToolkit.Shared.Data;
 using McdaToolkit.Shared.Ranking;
@@ -55,6 +60,10 @@ public sealed class Topsis : IMcdaMethod<Ranking<double>>
         var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
         var scores = distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
 
+<<<<<<< HEAD
         return Result.Success(scores.CreateRanking());
+=======
+        return Result.Ok(scores.CreateRanking());
+>>>>>>> cc9253a (feat: updated namespaces)
     }
 }

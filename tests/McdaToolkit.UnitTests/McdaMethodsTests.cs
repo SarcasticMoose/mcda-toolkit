@@ -1,5 +1,6 @@
 using FluentAssertions;
 using MathNet.Numerics;
+<<<<<<< HEAD
 using McdaToolkit.Data.Builders;
 using McdaToolkit.Data.Normalization;
 using McdaToolkit.Models.Ranking;
@@ -7,6 +8,16 @@ using McdaToolkit.Models.School.European.Promethee.II;
 using McdaToolkit.Models.School.European.Promethee.PreferenceFunctions.Factory;
 using McdaToolkit.Models.School.European.Topsis;
 using McdaToolkit.Models.School.European.Vikor;
+=======
+using McdaToolkit.Methods.Promethee2;
+using McdaToolkit.Methods.Promethee2.PreferenceFunctions.Factory;
+using McdaToolkit.Methods.Topsis;
+using McdaToolkit.Methods.Vikor;
+using McdaToolkit.Normalization.Enums;
+using McdaToolkit.Shared.Factories;
+using McdaToolkit.Shared.Providers;
+using McdaToolkit.Shared.Ranking;
+>>>>>>> cc9253a (feat: updated namespaces)
 
 namespace McdaToolkit.UnitTests;
 
@@ -156,6 +167,7 @@ public class McdaMethodsTests
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
             .Build();
+<<<<<<< HEAD
         
         var promethee2 = Promethee2Builder
             .Create()
@@ -164,6 +176,16 @@ public class McdaMethodsTests
             .Build();
             
         var result  = promethee2    
+=======
+
+        var options = new Promethee2Options()
+            {
+                NormalizationMethod = NormalizationMethod.MinMax
+            };
+        options.PreferenceFunction = PreferenceFunction.Unnamed;
+        var promethee2Result = MethodFactory
+            .CreatePromethee2(options)
+>>>>>>> cc9253a (feat: updated namespaces)
             .Run(data)
             .IsSuccess(out var value);
             

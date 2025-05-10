@@ -1,9 +1,22 @@
 #nullable disable
 using LightResults;
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:src/McdaToolkit/Data/Validation/MatrixValidation/Rules/IsDataWeightsAndTypesHaveCorrectSizesRule.cs
+using McdaToolkit.Data.Validation.Abstraction;
+using McdaToolkit.Data.Validation.MatrixValidation.Errors;
+
+namespace McdaToolkit.Data.Validation.MatrixValidation.Rules;
+========
+>>>>>>> cc9253a (feat: updated namespaces)
 using McdaToolkit.Shared.Validation.Abstraction;
 using McdaToolkit.Shared.Validation.MatrixValidation.Errors;
 
 namespace McdaToolkit.Shared.Validation.MatrixValidation.Rules;
+<<<<<<< HEAD
+=======
+>>>>>>>> cc9253a (feat: updated namespaces):src/McdaToolkit/Shared/Validation/MatrixValidation/Rules/IsDataWeightsAndTypesHaveCorrectSizesRule.cs
+>>>>>>> cc9253a (feat: updated namespaces)
 
 public class IsDataWeightsAndTypesHaveCorrectSizesRule : IValidationRule
 {
