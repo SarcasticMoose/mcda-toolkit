@@ -1,6 +1,7 @@
 # MCDA Toolkit
 
-[![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge)](https://www.nuget.org/packages/McdaToolkit)
+[![](https://img.shields.io/nuget/vpre/McdaToolkit?style=for-the-badge&label=Pre-release)](https://www.nuget.org/packages/McdaToolkit)
+[![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge&label=Stable)](https://www.nuget.org/packages/McdaToolkit)
 [![License](https://img.shields.io/github/license/SarcasticMoose/mcda-toolkit?style=for-the-badge)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
 
 ## 🧭 Introduction
