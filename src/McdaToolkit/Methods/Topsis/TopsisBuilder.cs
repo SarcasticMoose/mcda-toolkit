@@ -3,7 +3,7 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Topsis;
 
-public class TopsisBuilder
+internal sealed class TopsisBuilder
 {
     private NormalizationMethod _normalizationMethod;
 
