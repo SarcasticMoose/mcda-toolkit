@@ -21,7 +21,8 @@ Built with a fluent interface that makes setup fast and readable. Easily configu
 Plug-and-play design means you can get started in seconds. No complex setup or learning curve—just import and go.
 
 ## Documentation
-Make sure to read the docs for the full API.
+
+Detailed documentation is under construction and will be available with stable release 4.0.0
 
 ## Dependencies
 
