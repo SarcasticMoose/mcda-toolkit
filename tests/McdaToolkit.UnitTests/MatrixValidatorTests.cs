@@ -1,7 +1,7 @@
 using FluentAssertions;
-using McdaToolkit.Mcda.Providers.Errors;
-using McdaToolkit.Validation.MatrixValidation;
-using McdaToolkit.Validation.MatrixValidation.Errors;
+using McdaToolkit.Shared.Providers.Errors;
+using McdaToolkit.Shared.Validation.MatrixValidation;
+using McdaToolkit.Shared.Validation.MatrixValidation.Errors;
 
 namespace McdaToolkit.UnitTests;
 
