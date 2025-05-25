@@ -22,7 +22,7 @@ Plug-and-play design means you can get started in seconds. No complex setup or l
 
 ## Documentation
 
-Detailed documentation is under construction and will be available with stable release 4.0.0
+Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs/docs)
 
 ## Dependencies
 
