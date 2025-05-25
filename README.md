@@ -15,7 +15,11 @@ Designed to be simple and straightforward — no unnecessary setup, no configura
 
 ## Documentation
 
+<<<<<<< HEAD
 Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs)
+=======
+Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs/docs/)
+>>>>>>> c9396c4 (fix(README.md): updated docs path)
 
 ## Dependencies
 
