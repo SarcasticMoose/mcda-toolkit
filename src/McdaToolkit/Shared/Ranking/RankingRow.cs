@@ -2,7 +2,17 @@ namespace McdaToolkit.Shared.Ranking;
 
 public record RankingRow<T> 
 {
-    public int Alternative { get; set; }
-    public int Rank { get; set; }
-    public T Score { get; set; }
+    internal RankingRow(
+        int alternative, 
+        int rank, 
+        T score)
+    {
+        Alternative = alternative;
+        Rank = rank;
+        Score = score;
+    }
+    
+    public int Alternative { get; }
+    public int Rank { get; }
+    public T Score { get; }
 }
