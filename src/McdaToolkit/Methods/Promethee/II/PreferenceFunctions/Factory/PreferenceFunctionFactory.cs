@@ -1,6 +1,6 @@
-using McdaToolkit.Methods.Promethee2.PreferenceFunctions.Abstraction;
+using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Abstraction;
 
-namespace McdaToolkit.Methods.Promethee2.PreferenceFunctions.Factory;
+namespace McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Factory;
 
 public class PreferenceFunctionFactory
 {

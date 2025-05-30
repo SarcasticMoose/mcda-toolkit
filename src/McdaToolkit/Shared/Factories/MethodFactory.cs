@@ -1,4 +1,4 @@
-using McdaToolkit.Methods.Promethee2;
+using McdaToolkit.Methods.Promethee.II;
 using McdaToolkit.Methods.Topsis;
 using McdaToolkit.Methods.Vikor;
 
