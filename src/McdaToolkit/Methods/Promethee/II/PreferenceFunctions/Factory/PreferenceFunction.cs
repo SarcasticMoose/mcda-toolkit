@@ -1,4 +1,4 @@
-namespace McdaToolkit.Methods.Promethee2.PreferenceFunctions.Factory;
+namespace McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Factory;
 
 public enum PreferenceFunction
 {
