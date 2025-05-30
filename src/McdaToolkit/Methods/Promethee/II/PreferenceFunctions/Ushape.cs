@@ -1,6 +1,6 @@
-using McdaToolkit.Methods.Promethee2.PreferenceFunctions.Abstraction;
+using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Abstraction;
 
-namespace McdaToolkit.Methods.Promethee2.PreferenceFunctions;
+namespace McdaToolkit.Methods.Promethee.II.PreferenceFunctions;
 
 internal class Ushape : PreferenceFunctionBase
 {

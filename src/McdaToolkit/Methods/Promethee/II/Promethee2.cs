@@ -1,14 +1,14 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Methods.Promethee2.PreferenceFunctions.Abstraction;
+using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Abstraction;
 using McdaToolkit.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Shared.Abstraction;
 using McdaToolkit.Shared.Data;
 using McdaToolkit.Shared.Ranking;
 
-namespace McdaToolkit.Methods.Promethee2;
+namespace McdaToolkit.Methods.Promethee.II;
 
-public sealed class Promethee2 : IMcdaMethod<Ranking<double>>
+public class Promethee2 : IMcdaMethod<Ranking<double>>
 {
     private readonly MatrixNormalizatorService _normalizationServiceServiceService;
     private readonly IPreferenceFunction _preferenceFunction;

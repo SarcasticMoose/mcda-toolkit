@@ -1,6 +1,6 @@
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.Methods.Promethee2.PreferenceFunctions.Abstraction;
+namespace McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Abstraction;
 
 public abstract class PreferenceFunctionBase : IPreferenceFunction
 {
