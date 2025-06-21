@@ -55,6 +55,6 @@ public sealed class Topsis : IMcdaMethod<Ranking<double>>
         var distanceToWorst = CalculateEuclideanDistance(weightedMatrix, idealWorst);
         var scores = distanceToWorst.PointwiseDivide(distanceToBest.Add(distanceToWorst));
 
-        return Result.Ok(scores.CreateRanking());
+        return Result.Success(scores.CreateRanking());
     }
 }

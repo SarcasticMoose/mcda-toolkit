@@ -31,7 +31,7 @@ public class Promethee2 : IMcdaMethod<Ranking<double>>
         var leavingFlows = flowMatrix.RowSums() / (flowMatrix.RowCount - 1);
         var enteringFlows = flowMatrix.ColumnSums() / (flowMatrix.ColumnCount - 1);
         var netFlows = leavingFlows - enteringFlows;
-        return Result.Ok(netFlows.CreateRanking());
+        return Result.Success(netFlows.CreateRanking());
     }
 
     private Matrix<double> GetAlternativeDiffrence(Matrix<double> matrix)
