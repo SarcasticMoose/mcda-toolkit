@@ -13,7 +13,7 @@ internal abstract class ValidationServiceBase : IValidationService
         {
             var ruleResult = rule.IsValid();
             rulesResult.Add(ruleResult);
-            if (ruleResult.IsFailed)
+            if (ruleResult.IsFailure())
             {
                 break;
             }
@@ -23,6 +23,6 @@ internal abstract class ValidationServiceBase : IValidationService
             .SelectMany(x => x.Errors)
             .ToArray();
         
-        return rulesErrors.Length > 0 ? Result.Fail(rulesErrors) : Result.Ok();
+        return rulesErrors.Length > 0 ? Result.Failure(rulesErrors) : Result.Success();
     }
 }

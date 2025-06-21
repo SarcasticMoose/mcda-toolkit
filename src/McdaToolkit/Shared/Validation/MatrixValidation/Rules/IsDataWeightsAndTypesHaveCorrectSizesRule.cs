@@ -23,8 +23,8 @@ public class IsDataWeightsAndTypesHaveCorrectSizesRule : IValidationRule
         var isCorrectSizes = matrixColumns == _weights.Length && matrixColumns == _criteriaDecision.Length;
         if (!isCorrectSizes)
         {
-            return Result.Fail(new MatrixColumnLengthNotEqualWeightsVectorLengthError());
+            return Result.Failure(new MatrixColumnLengthNotEqualWeightsVectorLengthError());
         }
-        return Result.Ok();
+        return Result.Success();
     }
 }

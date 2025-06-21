@@ -4,19 +4,18 @@ using McdaToolkit.Shared.Data;
 
 namespace McdaToolkit.Shared.Providers;
 
-internal class DefaultDataProvider
+internal sealed class DefaultDataProvider
 {
     private Matrix<double> _matrix;
     private Vector<double> _weights;
     private int[] _types;
-    
-    internal McdaInputData GetData() => new(_matrix, _weights, _types);
 
-    internal IResult ProvideData(double[,] matrix, double[] weights, int[] criteriaTypes)
+    public DefaultDataProvider(double[,] matrix, double[] weights, int[] criteriaTypes)
     {
         _matrix = Matrix<double>.Build.DenseOfArray(matrix);
         _weights = Vector<double>.Build.DenseOfArray(weights);
         _types = criteriaTypes;
-        return Result.Ok();
     }
+    
+    internal McdaInputData GetData() => new(_matrix, _weights, _types);
 }

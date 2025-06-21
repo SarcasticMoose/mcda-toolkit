@@ -30,16 +30,11 @@ public class  DefaultDataProviderBuilder
     public McdaInputData Build()
     {
         var matrixValidationResult = new MatrixValidation(_matrix, _weigths, _criteriaDecision).Validate();
-        if (matrixValidationResult.IsFailed)
+        if (matrixValidationResult.IsFailure())
         {
             throw new ArgumentNullException($"Failed to provide data because of: {string .Join(", ",matrixValidationResult.Errors)}");
         }
-        var provider = new DefaultDataProvider();
-        var provideResult = provider.ProvideData(_matrix, _weigths, _criteriaDecision);;
-        if (provideResult.IsFailed)
-        {
-            throw new ArgumentNullException($"Failed to provide data because of: {string .Join(", ", provideResult.Errors)}");
-        }
+        var provider = new DefaultDataProvider(_matrix, _weigths, _criteriaDecision);
         return provider.GetData();
     }
 }
