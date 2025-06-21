@@ -17,8 +17,8 @@ public class IsCriteriaDesisionBetweenMinusOneAndOneRule : IValidationRule
         var isCriteriaDecisionCorrect = _criteriaDecision.All(n => n is >= -1 and <= 1);
         if (!isCriteriaDecisionCorrect)
         {
-            return Result.Fail(new DecisionCriteriaHaveIncorrectValueError());
+            return Result.Failure(new DecisionCriteriaHaveIncorrectValueError());
         }
-        return Result.Ok();
+        return Result.Success();
     }
 }

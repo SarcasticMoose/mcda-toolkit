@@ -37,6 +37,6 @@ internal class IsMcdaInputDataNotNullRule : IValidationRule
             listOfErrors.Add(new NullCriteriaTypesDataError());
         }
 
-        return listOfErrors.Count > 0 ? Result.Fail(listOfErrors) : Result.Ok();
+        return listOfErrors.Count > 0 ? Result.Failure(listOfErrors) : Result.Success();
     }
 }
