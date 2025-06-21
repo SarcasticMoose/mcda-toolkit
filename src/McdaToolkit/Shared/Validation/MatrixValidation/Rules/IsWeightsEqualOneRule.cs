@@ -19,9 +19,9 @@ public class IsWeightsEqualOneRule : IValidationRule
         var isWeightsCorrect = _weights.Sum().AlmostEqual(1);
         if (!isWeightsCorrect)
         {
-            return Result.Fail(new WeightNotSumToOneError());
+            return Result.Failure(new WeightNotSumToOneError());
         }
 
-        return Result.Ok();
+        return Result.Success();
     }
 }

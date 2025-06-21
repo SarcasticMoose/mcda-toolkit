@@ -53,7 +53,9 @@ public class McdaMethodsTests
         var topsisResult = topsis.Run(data);
 
         topsisResult
-            .Value
+            .IsSuccess(out var value);
+            
+        value!
             .Select(x => new RankingRow<double>(x.Alternative, x.Rank, x.Score.Round(3)))
             .Should()
             .BeEquivalentTo(expectedTopsisScore);
@@ -102,8 +104,8 @@ public class McdaMethodsTests
             .CreateVikor(new VikorOptions())
             .Run(data);
 
-        vikorResult
-            .Value
+        vikorResult.IsSuccess(out var value);
+        value!
             .Select(x => new RankingRow<VikorScore>(
                 x.Alternative, 
                 x.Rank, 
@@ -159,7 +161,9 @@ public class McdaMethodsTests
         MethodFactory
             .CreatePromethee2(options)
             .Run(data)
-            .Value
+            .IsSuccess(out var value);
+            
+            value!
             .RankingItems
             .Select(x => new RankingRow<double>(x.Alternative, x.Rank, x.Score.Round(3)))
             .Should()

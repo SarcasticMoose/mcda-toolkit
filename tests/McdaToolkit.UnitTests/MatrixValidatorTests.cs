@@ -77,7 +77,7 @@ public class MatrixValidatorTests
         var matrixCheckerService = new MatrixValidation(matrix, weights, types);
         var result = matrixCheckerService.Validate();
 
-        result.IsSuccess.Should().BeFalse();
+        result.IsSuccess().Should().BeFalse();
         result.HasError<WeightNotSumToOneError>();
     }
     
@@ -98,7 +98,7 @@ public class MatrixValidatorTests
         var matrixCheckerService = new MatrixValidation(matrix, weights, types);
         var result = matrixCheckerService.Validate();
         
-        result.IsSuccess.Should().BeFalse();
+        result.IsSuccess().Should().BeFalse();
         result.HasError<DecisionCriteriaHaveIncorrectValueError>();
     }
     
@@ -119,7 +119,7 @@ public class MatrixValidatorTests
         var matrixCheckerService = new MatrixValidation(matrix, weights, types);
         var result = matrixCheckerService.Validate();
 
-        result.IsSuccess.Should().BeFalse();
+        result.IsSuccess().Should().BeFalse();
         result.HasError<MatrixColumnLengthNotEqualWeightsVectorLengthError>();
     }
 }

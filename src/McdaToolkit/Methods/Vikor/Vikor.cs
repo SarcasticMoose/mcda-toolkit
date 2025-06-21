@@ -53,6 +53,6 @@ public sealed class Vikor : IMcdaMethod<Ranking<VikorScore>>
             });
         }
         
-        return Result.Ok(scores.CreateRanking());
+        return Result.Success(scores.CreateRanking());
     }
 }
