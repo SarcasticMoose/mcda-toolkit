@@ -3,25 +3,25 @@ using McdaToolkit.Shared.Validation.MatrixValidation;
 
 namespace McdaToolkit.Shared.Providers;
 
-public class  DefaultDataProviderBuilder
+public class  DataBuilder
 {
     private double[,] _matrix;
     private double[] _weigths;
     private int[] _criteriaDecision;
     
-    public  DefaultDataProviderBuilder AddDecisionMatrix(double[,] matrix)
+    public  DataBuilder AddDecisionMatrix(double[,] matrix)
     {
         _matrix = matrix;
         return this;
     }
     
-    public  DefaultDataProviderBuilder AddWeights(double[] weights)
+    public  DataBuilder AddWeights(double[] weights)
     {
         _weigths = weights;
         return this;
     }
     
-    public  DefaultDataProviderBuilder AddDecisionCriteria(int[] criteriaDecision)
+    public  DataBuilder AddDecisionCriteria(int[] criteriaDecision)
     {
         _criteriaDecision = criteriaDecision;
         return this;

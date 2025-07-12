@@ -3,10 +3,12 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Topsis;
 
-internal sealed class TopsisBuilder
+public sealed class TopsisBuilder
 {
     private NormalizationMethod _normalizationMethod;
 
+    public static TopsisBuilder Create() => new TopsisBuilder();
+    
     public TopsisBuilder WithNormalizationMethod(NormalizationMethod normalizationMethod)
     {
         _normalizationMethod = normalizationMethod;

@@ -24,7 +24,7 @@ public class DataProviderBuilderTests
         double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
         int[] types = [1,1,1,-1,-1,-1];
 
-        var data = new DefaultDataProviderBuilder()
+        var data = new DataBuilder()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -57,7 +57,7 @@ public class DataProviderBuilderTests
         
         Action act = () =>
         {
-            new DefaultDataProviderBuilder()
+            new DataBuilder()
                 .AddWeights(weights)
                 .AddDecisionCriteria(types)
                 .Build();
