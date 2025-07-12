@@ -7,7 +7,11 @@
 
     <PropertyGroup Label="Nuget Info">
         <PackageId>McdaToolkit</PackageId>
+<<<<<<< HEAD
         <Version>4.0.0-rc3</Version>
+=======
+        <Version>4.0.0-rc1</Version>
+>>>>>>> bdefab3 (revert package changes)
         <Authors>Jakub Tokarczyk</Authors>
         <LangVersion>latest</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -16,8 +20,12 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
         <PackageIcon>icon.png</PackageIcon>
+<<<<<<< HEAD
         <PackageReleaseNotes>RC3</PackageReleaseNotes>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+=======
+        <PackageReleaseNotes>Added support for PrometheeII</PackageReleaseNotes>
+>>>>>>> bdefab3 (revert package changes)
     </PropertyGroup>
 
     <ItemGroup Label="Resources">
