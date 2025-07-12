@@ -3,11 +3,12 @@ using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Vikor;
 
-internal sealed class VikorBuilder 
+public sealed class VikorBuilder 
 {
     private NormalizationMethod _normalizationMethod;
     private double _v;
-
+    
+    public static VikorBuilder Create() => new VikorBuilder();
     public VikorBuilder WithNormalizationMethod(NormalizationMethod normalizationMethod)
     {
         _normalizationMethod = normalizationMethod;
