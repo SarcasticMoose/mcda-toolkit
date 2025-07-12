@@ -5,7 +5,6 @@ using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Factory;
 using McdaToolkit.Methods.Topsis;
 using McdaToolkit.Methods.Vikor;
 using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Shared.Factories;
 using McdaToolkit.Shared.Providers;
 using McdaToolkit.Shared.Ranking;
 
@@ -39,16 +38,16 @@ public class McdaMethodsTests
                 new(6, 1, 0.568)
             });
 
-        var data = new DefaultDataProviderBuilder()
+        var data = new DataBuilder()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
             .Build();
 
-        var topsis = MethodFactory.CreateTopsis(new TopsisOptions
-        {
-            NormalizationMethod = NormalizationMethod.Vector
-        });
+        var topsis = TopsisBuilder
+            .Create()
+            .WithNormalizationMethod(NormalizationMethod.Vector)
+            .Build();
 
         var topsisResult = topsis.Run(data);
 
@@ -94,17 +93,20 @@ public class McdaMethodsTests
             new(10, 6, new VikorScore { Q = 0.404, R = 0.167, S = 0.525 })
         });
 
-        var data = new DefaultDataProviderBuilder()
+        var data = new DataBuilder()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
             .Build();
 
-        var vikorResult = MethodFactory
-            .CreateVikor(new VikorOptions())
-            .Run(data);
-
-        vikorResult.IsSuccess(out var value);
+        var vikor = VikorBuilder
+            .Create()
+            .WithNormalizationMethod(NormalizationMethod.Vector)
+            .WithVParameter(0.5)
+            .Build();
+            
+        var result = vikor.Run(data);
+        result.IsSuccess(out var value);
         value!
             .Select(x => new RankingRow<VikorScore>(
                 x.Alternative, 
@@ -146,20 +148,19 @@ public class McdaMethodsTests
 
         int[] types = [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-        var data = new DefaultDataProviderBuilder()
+        var data = new DataBuilder()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
             .Build();
-
-        var options = new Promethee2Options
-        {
-            NormalizationMethod = NormalizationMethod.MinMax,
-            PreferenceFunction = PreferenceFunction.Unnamed
-        };
-
-        MethodFactory
-            .CreatePromethee2(options)
+        
+        var promethee2 = Promethee2Builder
+            .Create()
+            .WithNormalizationMethod(NormalizationMethod.MinMax)
+            .WithPreferenceFunction(PreferenceFunction.Unnamed)
+            .Build();
+            
+        var result  = promethee2    
             .Run(data)
             .IsSuccess(out var value);
             
