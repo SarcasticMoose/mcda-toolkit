@@ -1,4 +1,5 @@
-﻿using McdaToolkit.Shared.Data;
+﻿using MathNet.Numerics.LinearAlgebra.Double;
+using McdaToolkit.Shared.Data;
 using McdaToolkit.Shared.Validation.MatrixValidation;
 
 namespace McdaToolkit.Shared.Providers;
@@ -34,7 +35,6 @@ public class  DataBuilder
         {
             throw new ArgumentNullException($"Failed to provide data because of: {string .Join(", ",matrixValidationResult.Errors)}");
         }
-        var provider = new DefaultDataProvider(_matrix, _weigths, _criteriaDecision);
-        return provider.GetData();
+        return new(Matrix.Build.DenseOfArray(_matrix), Vector.Build.DenseOfArray(_weigths), _criteriaDecision);
     }
 }
