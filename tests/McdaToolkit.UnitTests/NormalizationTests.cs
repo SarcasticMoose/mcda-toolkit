@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Normalization.Methods;
-using McdaToolkit.Normalization.Methods.Geometric;
-using McdaToolkit.Normalization.Methods.Linear;
+using McdaToolkit.Data.Normalization.Methods.Geometric;
+using McdaToolkit.Data.Normalization.Methods.Linear;
+using McdaToolkit.Data.Normalization.Methods.NonLinear;
 
 namespace McdaToolkit.UnitTests;
 

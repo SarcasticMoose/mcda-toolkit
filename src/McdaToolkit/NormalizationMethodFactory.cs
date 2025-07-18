@@ -1,10 +1,8 @@
-﻿using LightResults;
-using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Normalization.Methods;
-using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Normalization.Methods.Geometric;
-using McdaToolkit.Normalization.Methods.Linear;
-using McdaToolkit.Normalization.Services.MatrixNormalizator.Errors;
+﻿using McdaToolkit.Data.Normalization;
+using McdaToolkit.Data.Normalization.Methods.Abstraction;
+using McdaToolkit.Data.Normalization.Methods.Geometric;
+using McdaToolkit.Data.Normalization.Methods.Linear;
+using McdaToolkit.Data.Normalization.Methods.NonLinear;
 
 namespace McdaToolkit;
 

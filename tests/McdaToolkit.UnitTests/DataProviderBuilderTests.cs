@@ -1,5 +1,6 @@
 using FluentAssertions;
-using McdaToolkit.Shared.Providers;
+using McdaToolkit.Data.Builders;
+using McdaToolkit.Data.Validation.Abstraction;
 
 namespace McdaToolkit.UnitTests;
 
@@ -63,6 +64,6 @@ public class DataProviderBuilderTests
                 .Build();
         };
 
-        act.Should().Throw<ArgumentNullException>();
+        act.Should().Throw<ValidationException>();
     }
 }
