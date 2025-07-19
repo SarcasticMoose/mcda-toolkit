@@ -1,10 +1,6 @@
 using FluentAssertions;
-<<<<<<< HEAD
 using McdaToolkit.Data.Builders;
 using McdaToolkit.Data.Validation.Abstraction;
-=======
-using McdaToolkit.Shared.Providers;
->>>>>>> cc9253a (feat: updated namespaces)
 
 namespace McdaToolkit.UnitTests;
 
