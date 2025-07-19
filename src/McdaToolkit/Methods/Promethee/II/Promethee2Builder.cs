@@ -1,6 +1,6 @@
+using McdaToolkit.Data.Normalization;
+using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Factory;
-using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Promethee.II;
 
