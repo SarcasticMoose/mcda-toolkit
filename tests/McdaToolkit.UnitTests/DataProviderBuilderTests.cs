@@ -1,5 +1,6 @@
 using FluentAssertions;
-using McdaToolkit.Shared.Providers;
+using McdaToolkit.Data.Builders;
+using McdaToolkit.Data.Validation.Abstraction;
 
 namespace McdaToolkit.UnitTests;
 
@@ -24,7 +25,8 @@ public class DataProviderBuilderTests
         double[] weights = [0.1,0.2,0.1,0.2,0.1,0.3];
         int[] types = [1,1,1,-1,-1,-1];
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -57,12 +59,13 @@ public class DataProviderBuilderTests
         
         Action act = () =>
         {
-            new DataBuilder()
+            DataBuilder
+                .Create()
                 .AddWeights(weights)
                 .AddDecisionCriteria(types)
                 .Build();
         };
 
-        act.Should().Throw<ArgumentNullException>();
+        act.Should().Throw<ValidationException>();
     }
 }

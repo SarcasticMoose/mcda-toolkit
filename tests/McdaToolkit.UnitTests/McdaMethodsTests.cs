@@ -1,12 +1,12 @@
 using FluentAssertions;
 using MathNet.Numerics;
-using McdaToolkit.Methods.Promethee.II;
-using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Factory;
-using McdaToolkit.Methods.Topsis;
-using McdaToolkit.Methods.Vikor;
-using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Shared.Providers;
-using McdaToolkit.Shared.Ranking;
+using McdaToolkit.Data.Builders;
+using McdaToolkit.Data.Normalization;
+using McdaToolkit.Models.Ranking;
+using McdaToolkit.Models.School.European.Promethee.II;
+using McdaToolkit.Models.School.European.Promethee.PreferenceFunctions.Factory;
+using McdaToolkit.Models.School.European.Topsis;
+using McdaToolkit.Models.School.European.Vikor;
 
 namespace McdaToolkit.UnitTests;
 
@@ -38,7 +38,8 @@ public class McdaMethodsTests
                 new(6, 1, 0.568)
             });
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -93,7 +94,8 @@ public class McdaMethodsTests
             new(10, 6, new VikorScore { Q = 0.404, R = 0.167, S = 0.525 })
         });
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -126,10 +128,10 @@ public class McdaMethodsTests
     {
         var expectedRanking = new Ranking<double>(new List<RankingRow<double>>
         {
-            new(1, 1, 0.371),
-            new(2, 3, -0.250),
-            new(3, 4, -0.309),
-            new(4, 2, 0.188)
+            new(1, 1, 0.448),
+            new(2, 3, -0.292),
+            new(3, 4, -0.41),
+            new(4, 2, 0.254)
         });
 
         double[,] matrix =
@@ -148,7 +150,8 @@ public class McdaMethodsTests
 
         int[] types = [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -157,7 +160,7 @@ public class McdaMethodsTests
         var promethee2 = Promethee2Builder
             .Create()
             .WithNormalizationMethod(NormalizationMethod.MinMax)
-            .WithPreferenceFunction(PreferenceFunction.Unnamed)
+            .WithPreferenceFunction(PreferenceFunction.Fshape)
             .Build();
             
         var result  = promethee2    
