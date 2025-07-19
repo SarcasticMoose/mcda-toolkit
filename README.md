@@ -90,6 +90,13 @@ It encapsulates both the Ranking<T> and information about whether the operation 
 
 Example returned success result:
 
+This approach follows the principles of Railway Oriented Programming, 
+a functional programming pattern that models the flow of data along two possible tracks — one for success and one for failure. 
+
+More about ``Result`` type can be readed on official [LightResult documentation ](https://jscarle.github.io/LightResults/)
+
+Example returned success result:
+
 ```csharp
 Ranking<double>()
 {
