@@ -14,6 +14,13 @@ public class DataBuilder
     private double[] _weigths;
     private int[] _criteriaDecision;
 
+    public static DataBuilder Create() => new();
+
+    private DataBuilder()
+    {
+        
+    }
+    
     /// <summary>
     /// Sets the decision matrix, where each row is an alternative and each column is a criterion.
     /// </summary>

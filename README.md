@@ -4,21 +4,14 @@
 [![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge&label=Stable)](https://www.nuget.org/packages/McdaToolkit)
 [![License](https://img.shields.io/github/license/SarcasticMoose/mcda-toolkit?style=for-the-badge)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
 
-## 🧭 Introduction
+**MCDA Toolkit** is a lightweight .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks. It helps developers and analysts define and solve decision-making problems, from simple comparisons to more structured evaluation models.
 
-MCDA Toolkit is a lightweight and flexible .NET library designed to support Multi-Criteria Decision Analysis (MCDA) processes. 
-It helps developers and analysts structure, evaluate, and solve decision-making problems.
+### 🚀 Key Features
+**.NET 6** and **.NET Standard 2.0** Support
+Compatible with both .NET 6 and .NET Standard 2.0, making it suitable for modern applications as well as legacy or cross-platform projects.
 
-## 🚀 Key Features
-
-🧩 .NET 6 and .NET Standard 2.0 Compatibility
-Fully compatible with both .NET 6 and .NET Standard 2.0, ensuring support for a wide range of application
-
-🧠 Simple and Intuitive API
-Built with a fluent interface that makes setup fast and readable. Easily configure decision-making data with minimal code and maximum clarity.
-
-⚡ Quick Integration
-Plug-and-play design means you can get started in seconds. No complex setup or learning curve—just import and go.
+### ⚡ Easy to Use
+Designed to be simple and straightforward — no unnecessary setup, no configuration files. You can define and run a decision model with just a few lines of code.
 
 ## Documentation
 
@@ -68,17 +61,21 @@ int[] types = new int[]
 
 ### 4️⃣  Build the Data Object
 ```csharp
-var data = new DataProviderBuilder()
-    .AddWeights(weights)            
-    .AddDecisionCriteria(types)      
-    .AddDecisionMatrix(matrix)       
-    .Build();                     
+var data = DataBuilder
+    .Create()
+    .AddWeights(weights)
+    .AddDecisionCriteria(types)
+    .AddDecisionMatrix(matrix)
+    .Build();                    
 ```
 
 ### 5️⃣  Create MCDA method
 ```csharp
-var vikor = MethodFactory
-    .CreateVikor(new VikorOptions())
+var vikor = VikorBuilder
+    .Create()
+    .WithNormalizationMethod(NormalizationMethod.Vector)
+    .WithVParameter(0.5)
+    .Build();
 ```
 
 ### 6️⃣  Run
@@ -88,16 +85,8 @@ var result = vikor.Run(data);
 
 ## Outcome
 
-The result of the calculation is returned as an object of type ``Result<T>``, provided by the [LightResults](https://github.com/jscarle/LightResults) library. 
-This structure not only contains the output data ``Value``, but also encapsulates information about whether the operation failed or succeed.
-
-Before accessing the ``Value`` property of the result object, it is essential to verify that the operation completed successfully. 
-Attempting to access the value without this check may throw ``InvalidOperationException``
-
-This approach follows the principles of Railway Oriented Programming, 
-a functional programming pattern that models the flow of data along two possible tracks — one for success and one for failure. 
-
-More about ``Result`` type can be readed on official [LightResult documentation ](https://jscarle.github.io/LightResults/)
+The result of the calculation is returned as an object of type Result<Ranking<T>>, provided by the [LightResults](https://github.com/jscarle/LightResults) library.
+It encapsulates both the Ranking<T> and information about whether the operation succeeded or failed.
 
 Example returned success result:
 

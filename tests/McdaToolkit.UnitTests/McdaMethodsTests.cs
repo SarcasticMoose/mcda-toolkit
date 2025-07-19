@@ -38,7 +38,8 @@ public class McdaMethodsTests
                 new(6, 1, 0.568)
             });
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -93,7 +94,8 @@ public class McdaMethodsTests
             new(10, 6, new VikorScore { Q = 0.404, R = 0.167, S = 0.525 })
         });
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
@@ -148,7 +150,8 @@ public class McdaMethodsTests
 
         int[] types = [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-        var data = new DataBuilder()
+        var data = DataBuilder
+            .Create()
             .AddWeights(weights)
             .AddDecisionCriteria(types)
             .AddDecisionMatrix(matrix)
