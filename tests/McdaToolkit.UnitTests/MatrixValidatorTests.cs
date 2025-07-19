@@ -1,12 +1,6 @@
 using FluentAssertions;
-<<<<<<< HEAD
 using McdaToolkit.Data.Validation.MatrixValidation;
 using McdaToolkit.Data.Validation.MatrixValidation.Errors;
-=======
-using McdaToolkit.Shared.Providers.Errors;
-using McdaToolkit.Shared.Validation.MatrixValidation;
-using McdaToolkit.Shared.Validation.MatrixValidation.Errors;
->>>>>>> cc9253a (feat: updated namespaces)
 
 namespace McdaToolkit.UnitTests;
 
