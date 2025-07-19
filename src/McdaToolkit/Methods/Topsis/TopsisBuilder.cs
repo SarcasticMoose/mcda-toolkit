@@ -1,5 +1,5 @@
-using McdaToolkit.Normalization.Enums;
-using McdaToolkit.Normalization.Services.MatrixNormalizator;
+using McdaToolkit.Data.Normalization;
+using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
 
 namespace McdaToolkit.Methods.Topsis;
 

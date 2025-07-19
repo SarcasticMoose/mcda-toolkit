@@ -1,7 +1,7 @@
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
+using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Methods.Promethee.II.PreferenceFunctions.Abstraction;
-using McdaToolkit.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Shared.Abstraction;
 using McdaToolkit.Shared.Data;
 using McdaToolkit.Shared.Ranking;

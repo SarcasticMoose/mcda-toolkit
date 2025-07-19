@@ -1,8 +1,8 @@
 using LightResults;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Normalization.Services.Abstraction;
-using McdaToolkit.Normalization.Services.MatrixNormalizator;
+using McdaToolkit.Data.Normalization.Services.Abstraction;
+using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Shared.Abstraction;
 using McdaToolkit.Shared.Data;
 using McdaToolkit.Shared.Ranking;
