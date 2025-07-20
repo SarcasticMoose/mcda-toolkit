@@ -104,7 +104,10 @@ public class McdaMethodsTests
         var vikor = VikorBuilder
             .Create()
             .WithNormalizationMethod(NormalizationMethod.Vector)
-            .WithVParameter(0.5)
+            .WithParameters(parameters =>
+            {
+                parameters.WithV(0.5);
+            })
             .Build();
             
         var result = vikor.Run(data);
