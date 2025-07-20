@@ -25,6 +25,8 @@ public record VikorParameters
                 v,
                 "Value must be between 0.0 and 1.0."
             );
+        {   
+            throw new ArgumentOutOfRangeException(nameof(v), v, "Value must be between 0.0 and 1.0.");
         }
         return new VikorParameters(v);
     }

@@ -12,8 +12,7 @@ public sealed class Vikor : McdaMethod<VikorScore>
 
     internal Vikor(
         IMatrixNormalizationService normalizationMatrixService,
-        VikorParameters parameters
-    )
+        VikorParameters parameters)
     {
         _matrixNormalizationService = normalizationMatrixService;
         _parameters = parameters;
@@ -39,7 +38,6 @@ public sealed class Vikor : McdaMethod<VikorScore>
 
         var sNormalized = (s - sStar) / (sMinus - sStar);
         var rNormalized = (r - rStar) / (rMinus - rStar);
-
         var q = _parameters.V * sNormalized + (1 - _parameters.V) * rNormalized;
 
         List<VikorScore> scores = new List<VikorScore>();

@@ -20,7 +20,6 @@ public sealed class VikorBuilder
     {
         var vikorParameterBuilder = VikorParametersBuilder.Create();
         builder.Invoke(vikorParameterBuilder);
-
         _vikorParameters = vikorParameterBuilder.Build();
         return this;
     }
@@ -30,6 +29,8 @@ public sealed class VikorBuilder
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
         var matrixNormalizationService = new MatrixNormalizatorService(normalizationMethod);
 
-        return new Vikor(matrixNormalizationService, _vikorParameters);
+        return new Vikor(
+            matrixNormalizationService,
+            _vikorParameters);
     }
 }
