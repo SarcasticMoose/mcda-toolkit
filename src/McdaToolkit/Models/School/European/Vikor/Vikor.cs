@@ -10,14 +10,14 @@ namespace McdaToolkit.Models.School.European.Vikor;
 public sealed class Vikor : IMcdaMethod<Ranking<VikorScore>>
 {
     private readonly IMatrixNormalizationService _matrixNormalizationService;
-    private readonly double _v;
+    private readonly VikorParameters _parameters;
 
     internal Vikor(
         IMatrixNormalizationService normalizationMatrixService,
-        double v)
+        VikorParameters parameters)
     {
         _matrixNormalizationService = normalizationMatrixService;
-        _v = v;
+        _parameters = parameters;
     }
     
     public IResult<Ranking<VikorScore>> Run(McdaInputData data)
@@ -39,7 +39,7 @@ public sealed class Vikor : IMcdaMethod<Ranking<VikorScore>>
         var sNormalized = (s - sStar) / (sMinus - sStar);
         var rNormalized = (r - rStar) / (rMinus - rStar);
         
-        var q = _v * sNormalized + (1 - _v) * rNormalized;
+        var q = _parameters.V * sNormalized + (1 - _parameters.V) * rNormalized;
 
         List<VikorScore> scores = new List<VikorScore>();
         
