@@ -15,15 +15,7 @@ Designed to be simple and straightforward — no unnecessary setup, no configura
 
 ## Documentation
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs)
-=======
-Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs/docs/)
->>>>>>> c9396c4 (fix(README.md): updated docs path)
-=======
-Make sure to read the [docs](https://sarcasticmoose.github.io/mcda-toolkit-docs)
->>>>>>> 99d5ee3 (fix(README.MD): remove /docs/ part from docs path)
 
 ## Dependencies
 
@@ -96,14 +88,7 @@ var result = vikor.Run(data);
 The result of the calculation is returned as an object of type Result<Ranking<T>>, provided by the [LightResults](https://github.com/jscarle/LightResults) library.
 It encapsulates both the Ranking<T> and information about whether the operation succeeded or failed.
 
-Example returned success result:
-
-This approach follows the principles of Railway Oriented Programming, 
-a functional programming pattern that models the flow of data along two possible tracks — one for success and one for failure. 
-
-More about ``Result`` type can be readed on official [LightResult documentation ](https://jscarle.github.io/LightResults/)
-
-Example returned success result:
+Example returned success result
 
 ```csharp
 Ranking<double>()
