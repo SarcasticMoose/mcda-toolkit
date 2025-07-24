@@ -1,8 +1,8 @@
 # MCDA Toolkit
 
-[![](https://img.shields.io/nuget/vpre/McdaToolkit?style=for-the-badge&label=Pre-release)](https://www.nuget.org/packages/McdaToolkit)
-[![](https://img.shields.io/nuget/v/McdaToolkit?style=for-the-badge&label=Stable)](https://www.nuget.org/packages/McdaToolkit)
-[![License](https://img.shields.io/github/license/SarcasticMoose/mcda-toolkit?style=for-the-badge)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
+[![Preview](https://badgen.net/nuget/v/mcdatoolkit/pre?color=orange&label=Preview)](https://www.nuget.org/packages/McdaToolkit)
+[![Stable](https://badgen.net/nuget/v/mcdatoolkit/v?color=blue&label=Stable)](https://www.nuget.org/packages/McdaToolkit)
+[![License](https://badgen.net/badge/license/MIT/blue?label=License)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
 
 **MCDA Toolkit** is a lightweight .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks. It helps developers and analysts define and solve decision-making problems, from simple comparisons to more structured evaluation models.
 
