@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Data.Normalization;
+﻿namespace McdaToolkit.Data.Operations.Normalization;
 
 /// <summary>
 /// Specifies the method used to normalize criteria values in multi-criteria decision analysis (MCDA).

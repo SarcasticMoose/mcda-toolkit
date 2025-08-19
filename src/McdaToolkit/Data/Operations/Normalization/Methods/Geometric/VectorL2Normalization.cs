@@ -1,7 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Data.Normalization.Methods.Abstraction;
+using McdaToolkit.Data.Operations.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.Data.Normalization.Methods.Geometric;
+namespace McdaToolkit.Data.Operations.Normalization.Methods.Geometric;
 
 internal class VectorL2Normalization : IVectorNormalizator<double>
 {

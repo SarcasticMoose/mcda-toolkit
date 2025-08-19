@@ -1,6 +1,6 @@
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.Data.Normalization.Methods.Abstraction;
+namespace McdaToolkit.Data.Operations.Normalization.Methods.Abstraction;
 
 /// <summary>
 /// Column normalization generic abstraction

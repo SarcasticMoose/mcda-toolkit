@@ -1,10 +1,9 @@
-﻿using McdaToolkit.Data.Normalization;
-using McdaToolkit.Data.Normalization.Methods.Abstraction;
-using McdaToolkit.Data.Normalization.Methods.Geometric;
-using McdaToolkit.Data.Normalization.Methods.Linear;
-using McdaToolkit.Data.Normalization.Methods.NonLinear;
+﻿using McdaToolkit.Data.Operations.Normalization.Methods.Abstraction;
+using McdaToolkit.Data.Operations.Normalization.Methods.Geometric;
+using McdaToolkit.Data.Operations.Normalization.Methods.Linear;
+using McdaToolkit.Data.Operations.Normalization.Methods.NonLinear;
 
-namespace McdaToolkit;
+namespace McdaToolkit.Data.Operations.Normalization;
 
 internal class NormalizationMethodFactory
 {

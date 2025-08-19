@@ -1,7 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Data.Normalization.Methods.Abstraction;
+using McdaToolkit.Data.Operations.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.Data.Normalization.Methods.NonLinear;
+namespace McdaToolkit.Data.Operations.Normalization.Methods.NonLinear;
 
 internal class LogarithmicNormalization : IVectorNormalizator<double>
 {

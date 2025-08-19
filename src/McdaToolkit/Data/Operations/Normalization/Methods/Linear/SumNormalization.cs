@@ -1,7 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Data.Normalization.Methods.Abstraction;
+using McdaToolkit.Data.Operations.Normalization.Methods.Abstraction;
 
-namespace McdaToolkit.Data.Normalization.Methods.Linear;
+namespace McdaToolkit.Data.Operations.Normalization.Methods.Linear;
 
 internal class SumNormalization : IVectorNormalizator<double>
 {
