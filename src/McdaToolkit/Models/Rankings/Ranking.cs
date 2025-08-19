@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace McdaToolkit.Models.Ranking;
+namespace McdaToolkit.Models.Rankings;
 
 /// <summary>
 /// Represents a read-only ranking of alternatives, sorted in descending order.
@@ -8,7 +8,7 @@ namespace McdaToolkit.Models.Ranking;
 /// <typeparam name="T">
 /// The type of the identifier or data associated with each alternative. Must implement <see cref="IComparable{T}"/>.
 /// </typeparam>
-public record struct Ranking<T> : IEnumerable<RankingRow<T>> 
+public readonly record struct Ranking<T> : IEnumerable<RankingRow<T>> 
     where T : struct, IEquatable<T>, IComparable<T>
 {
     internal Ranking(List<RankingRow<T>> rows)

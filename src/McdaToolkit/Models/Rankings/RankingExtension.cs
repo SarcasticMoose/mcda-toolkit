@@ -1,4 +1,4 @@
-namespace McdaToolkit.Models.Ranking;
+namespace McdaToolkit.Models.Rankings;
 
 internal static class RankingExtension
 {
