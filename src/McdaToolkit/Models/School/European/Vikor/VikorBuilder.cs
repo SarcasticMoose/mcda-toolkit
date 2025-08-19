@@ -1,5 +1,5 @@
-using McdaToolkit.Data.Normalization;
-using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
+using McdaToolkit.Data.Operations;
+using McdaToolkit.Data.Operations.Normalization;
 
 namespace McdaToolkit.Models.School.European.Vikor;
 
@@ -27,10 +27,10 @@ public sealed class VikorBuilder
     public Vikor Build()
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
-        var matrixNormalizationService = new MatrixNormalizatorService(normalizationMethod);
+        var matrixOperations = new MatrixOperations(normalizationMethod);
         
         return new Vikor(
-            matrixNormalizationService,
+            matrixOperations,
             _vikorParameters);
     }
 }

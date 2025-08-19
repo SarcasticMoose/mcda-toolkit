@@ -1,28 +1,28 @@
 ﻿using LightResults;
 using McdaToolkit.Data;
-using McdaToolkit.Data.Normalization.Services.Abstraction;
+using McdaToolkit.Data.Operations.Normalization.Service.MatrixNormalizator;
 using McdaToolkit.Extensions;
 using McdaToolkit.Models.Abstraction;
-using McdaToolkit.Models.Ranking;
+using McdaToolkit.Models.Rankings;
 
 namespace McdaToolkit.Models.School.European.Vikor;
 
 public sealed class Vikor : IMcdaMethod<Ranking<VikorScore>>
 {
-    private readonly IMatrixNormalizationService _matrixNormalizationService;
+    private readonly IMatrixNormalizator _matrixNormalizator;
     private readonly VikorParameters _parameters;
 
     internal Vikor(
-        IMatrixNormalizationService normalizationMatrixService,
+        IMatrixNormalizator normalizationMatrixService,
         VikorParameters parameters)
     {
-        _matrixNormalizationService = normalizationMatrixService;
+        _matrixNormalizator = normalizationMatrixService;
         _parameters = parameters;
     }
     
     public IResult<Ranking<VikorScore>> Run(McdaInputData data)
     {
-        var normalizedMatrix = _matrixNormalizationService.NormalizeMatrix(data.Matrix,data.Types);
+        var normalizedMatrix = _matrixNormalizator.Normalize(data.Matrix,data.Types);
         var fStar = normalizedMatrix.GetColMax();
         var fMinus = normalizedMatrix.GetColMin();
         

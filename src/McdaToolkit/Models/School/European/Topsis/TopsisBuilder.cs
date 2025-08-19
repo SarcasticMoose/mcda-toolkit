@@ -1,5 +1,5 @@
-using McdaToolkit.Data.Normalization;
-using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
+using McdaToolkit.Data.Operations;
+using McdaToolkit.Data.Operations.Normalization;
 
 namespace McdaToolkit.Models.School.European.Topsis;
 
@@ -18,7 +18,7 @@ public sealed class TopsisBuilder
     public Topsis Build()
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
-        var normalizationService = new MatrixNormalizatorService(normalizationMethod);
+        var normalizationService = new MatrixOperations(normalizationMethod);
         return new Topsis(normalizationService);
     }
 }

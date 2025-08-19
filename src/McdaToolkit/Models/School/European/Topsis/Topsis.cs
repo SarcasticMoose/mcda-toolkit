@@ -2,20 +2,20 @@ using LightResults;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Data;
-using McdaToolkit.Data.Normalization.Services.Abstraction;
-using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
+using McdaToolkit.Data.Operations;
+using McdaToolkit.Data.Operations.Normalization.Service.MatrixNormalizator;
 using McdaToolkit.Models.Abstraction;
-using McdaToolkit.Models.Ranking;
+using McdaToolkit.Models.Rankings;
 
 namespace McdaToolkit.Models.School.European.Topsis;
 
 public sealed class Topsis : IMcdaMethod<Ranking<double>>
 {
-    private readonly IMatrixNormalizationService _normalizationServiceServiceService;
+    private readonly IMatrixNormalizator _matrixOperations;
     
-    internal Topsis(MatrixNormalizatorService matrixNormalizationServiceService)
+    internal Topsis(MatrixOperations matrixMatrixOperations)
     {
-        _normalizationServiceServiceService = matrixNormalizationServiceService;
+        _matrixOperations = matrixMatrixOperations;
     }
     
     private Vector<double> IdealValues(
@@ -45,7 +45,7 @@ public sealed class Topsis : IMcdaMethod<Ranking<double>>
 
     public IResult<Ranking<double>> Run(McdaInputData data)
     {
-        var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(data.Matrix, data.Types);
+        var normalizedMatrix = _matrixOperations.Normalize(data.Matrix, data.Types);
         var weightedMatrix = normalizedMatrix.MapIndexed((i, j, value) => data.Weights[j] * data.Matrix[i, j]);
 
         var idealBest = IdealValues(weightedMatrix, true);
