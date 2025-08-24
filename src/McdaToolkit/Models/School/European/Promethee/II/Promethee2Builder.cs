@@ -1,6 +1,7 @@
 using McdaToolkit.Data.Normalization;
 using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
-using McdaToolkit.Models.School.European.Promethee.PreferenceFunctions.Factory;
+using McdaToolkit.Models.School.European.Promethee.Preference.Abstraction;
+using McdaToolkit.Models.School.European.Promethee.Preference.Functions.FShape;
 
 namespace McdaToolkit.Models.School.European.Promethee.II;
 
@@ -8,7 +9,7 @@ public sealed class Promethee2Builder
 {
     private NormalizationMethod _normalizationMethod;
 
-    private PreferenceFunction _preferenceFunction;
+    private IPreferenceFunction _preferenceFunction;
 
     public static Promethee2Builder Create() => new Promethee2Builder();
     
@@ -18,9 +19,12 @@ public sealed class Promethee2Builder
         return this;
     }
 
-    public Promethee2Builder WithPreferenceFunction(PreferenceFunction preferenceFunction)
+    public Promethee2Builder WithPreferenceFunction<TBuilder>(Action<TBuilder> action)
+        where TBuilder : IPreferenceFunctionBuilder<IPreferenceFunction>, new()
     {
-        _preferenceFunction = preferenceFunction;
+        var instance = new TBuilder();
+        action.Invoke(instance); 
+        _preferenceFunction = instance.Build();
         return this;
     }
     
@@ -28,7 +32,6 @@ public sealed class Promethee2Builder
     {
         var normalizationMethod = new NormalizationMethodFactory().Create(_normalizationMethod);
         var normalizationService = new MatrixNormalizatorService(normalizationMethod);
-        var preferenceFunction = new PreferenceFunctionFactory().Create(_preferenceFunction);
-        return new Promethee2(normalizationService, preferenceFunction);
+        return new Promethee2(normalizationService, _preferenceFunction);
     }
 }
