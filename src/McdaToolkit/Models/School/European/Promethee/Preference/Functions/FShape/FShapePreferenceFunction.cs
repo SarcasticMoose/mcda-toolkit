@@ -17,9 +17,9 @@ public class FShapePreferenceFunction : PreferenceFunctionBase
     public FShapePreferenceFunction(double threshold)
     {
         _p = threshold;
-        _criterias.Add(_ => 0.0, (parameters) => parameters.Item1 <= parameters.Item2);
-        _criterias.Add((dp) => dp, (parameters) => (0.0 <= parameters.Item1) && (parameters.Item1 <= parameters.Item2));
-        _criterias.Add(_ => 1.0, (parameters) => parameters.Item1 > parameters.Item2);
+        _criterias.Add(_ => 0.0, (parameters) => parameters.Item1 <= 0.0);
+        _criterias.Add(dp => dp, (parameters) => parameters.Item1 > 0.0 && parameters.Item1 < parameters.Item2);
+        _criterias.Add(_ => 1.0, (parameters) => parameters.Item1 >= parameters.Item2);
     }
 
     /// <summary>
