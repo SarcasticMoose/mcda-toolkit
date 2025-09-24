@@ -52,13 +52,13 @@ public class PreferenceFunctionTests
     {
         var expectedFShape = Matrix<double>.Build.DenseOfArray(new double[,]
         {
-            { 0.66666667, 1, 1, 1, 1, 1, 0, 1, 1, 0 },
-            { 0, 1, 1, 0, 1, 0.66666667, 1, 0.60869565, 0, 0 },
+            { 0.3333333333333333, 1, 1, 0.5, 0.7, 1, 0, 1, 1, 0 },
+            { 0, 0.625, 0.5, 0, 0.5, 0.3333333333333333, 1, 0.30434782608695654, 0, 0 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0.88888889, 0.875, 0, 1, 1, 0, 1, 0.60869565, 1, 1 }
+            { 0.4444444444444444, 0.4375, 0, 1, 1, 0, 1, 0.30434782608695654, 1, 1 }
         });
 
-        var preferenceFunction = new FShapePreferenceFunction(0.0);
+        var preferenceFunction = new FShapePreferenceFunction(1.0);
         var result = preferenceFunction.Execute(_matrix!);
 
         Assert.True(result.EnumerateIndexed()

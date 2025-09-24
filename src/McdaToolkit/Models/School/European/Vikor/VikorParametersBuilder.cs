@@ -4,8 +4,8 @@ public sealed class VikorParametersBuilder
 {
     private double _v;
 
-    private VikorParametersBuilder(){}
-    
+    private VikorParametersBuilder() { }
+
     /// <summary>
     /// Creates a new instance of the <see cref="VikorParametersBuilder"/>.
     /// </summary>
@@ -20,7 +20,7 @@ public sealed class VikorParametersBuilder
     public VikorParametersBuilder WithV(double v)
     {
         _v = v;
-        return this;    
+        return this;
     }
 
     /// <summary>

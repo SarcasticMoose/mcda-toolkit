@@ -15,7 +15,6 @@ namespace McdaToolkit.Models.School.European.Promethee.II;
 public sealed class Promethee2Builder
 {
     private NormalizationMethod _normalizationMethod;
-    private IPreferenceFunction? _preferenceFunction;
 
     /// <summary>
     /// Creates a new instance of <see cref="Promethee2Builder"/>.
@@ -32,6 +31,8 @@ public sealed class Promethee2Builder
     /// <returns>
     /// The current <see cref="Promethee2Builder"/> instance to allow fluent configuration.
     /// </returns>
+    private IPreferenceFunction? _preferenceFunction;
+
     public Promethee2Builder WithNormalizationMethod(NormalizationMethod normalizationMethod)
     {
         _normalizationMethod = normalizationMethod;
@@ -64,7 +65,7 @@ public sealed class Promethee2Builder
         _preferenceFunction = instance.Build();
         return this;
     }
-    
+
     /// <summary>
     /// Builds a new instance of the <see cref="Promethee2"/> method
     /// using the configured parameters.
