@@ -7,8 +7,7 @@
 **MCDA Toolkit** is a lightweight .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks. It helps developers and analysts define and solve decision-making problems, from simple comparisons to more structured evaluation models.
 
 ### 🚀 Key Features
-**.NET 6** and **.NET Standard 2.0** Support
-Compatible with both .NET 6 and .NET Standard 2.0, making it suitable for modern applications as well as legacy or cross-platform projects.
+**.NET 6** and **.NET Standard 2.0 Support**: making it suitable for modern applications as well as legacy or cross-platform projects.
 
 ### ⚡ Easy to Use
 Designed to be simple and straightforward — no unnecessary setup, no configuration files. You can define and run a decision model with just a few lines of code.
