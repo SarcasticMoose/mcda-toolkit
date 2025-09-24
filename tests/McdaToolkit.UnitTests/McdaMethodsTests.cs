@@ -3,7 +3,7 @@ using McdaToolkit.Data.Builders;
 using McdaToolkit.Data.Normalization;
 using McdaToolkit.Models.Ranking;
 using McdaToolkit.Models.School.European.Promethee.II;
-using McdaToolkit.Models.School.European.Promethee.PreferenceFunctions.Factory;
+using McdaToolkit.Models.School.European.Promethee.Preference.Functions.FShape;
 using McdaToolkit.Models.School.European.Topsis;
 using McdaToolkit.Models.School.European.Vikor;
 
@@ -267,7 +267,12 @@ public class McdaMethodsTests
         var promethee2 = Promethee2Builder
             .Create()
             .WithNormalizationMethod(NormalizationMethod.MinMax)
-            .WithPreferenceFunction(PreferenceFunction.Fshape)
+            .WithPreferenceFunction<FShapePreferenceFunctionBuilder>(builder =>
+            {
+                builder
+                    .WithPreferenceThreshold(0.0)
+                    .Build();
+            })
             .Build();
 
         var result = promethee2.Run(data);

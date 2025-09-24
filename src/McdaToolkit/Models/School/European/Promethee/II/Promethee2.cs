@@ -4,7 +4,7 @@ using McdaToolkit.Data;
 using McdaToolkit.Data.Normalization.Services.MatrixNormalizator;
 using McdaToolkit.Models.Abstraction;
 using McdaToolkit.Models.Ranking;
-using McdaToolkit.Models.School.European.Promethee.PreferenceFunctions.Abstraction;
+using McdaToolkit.Models.School.European.Promethee.Preference.Abstraction;
 
 namespace McdaToolkit.Models.School.European.Promethee.II;
 
