@@ -2,5 +2,5 @@ namespace McdaToolkit.Models.Abstraction;
 
 public record McdaExecutionOptions
 {
-    public RankingOptions RankingOptions { get; set; }
+    public RankingOptions RankingOptions { get; set; } = new();
 }
