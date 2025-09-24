@@ -5,7 +5,11 @@ name: stable
 run-name: Release ${{github.ref_name}}
 on:
   push:
-    branches: 'master'
+    tags:
+      - 'v*'         
+      - 'v*-alpha*'  
+      - 'v*-beta*' 
+      - 'v*-rc*'
 env:
   NuGetDirectory: ${{ github.workspace}}/nuget
 defaults:
