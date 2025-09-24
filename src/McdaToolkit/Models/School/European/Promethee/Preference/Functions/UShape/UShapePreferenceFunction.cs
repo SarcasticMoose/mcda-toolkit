@@ -15,9 +15,9 @@ public class UShapePreferenceFunction : PreferenceFunctionBase
     private Dictionary<Func<double,double>, Func<(double,double),bool>> _criterias = new();
     private double _q;
     
-    public UShapePreferenceFunction(double q)
+    public UShapePreferenceFunction(double threshold)
     {
-        _q = q;
+        _q = threshold;
         _criterias.Add(_ => 0.0,parameters => parameters.Item1 <= parameters.Item2);
         _criterias.Add(_ => 1.0,parameters => parameters.Item1 > parameters.Item2);
     }
