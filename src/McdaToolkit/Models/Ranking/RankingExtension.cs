@@ -1,3 +1,7 @@
+using McdaToolkit.Extensions;
+using McdaToolkit.Models.Abstraction;
+using McdaToolkit.Models.School.European.Promethee.II;
+
 namespace McdaToolkit.Models.Ranking;
 
 internal static class RankingExtension
@@ -17,18 +21,21 @@ internal static class RankingExtension
     /// A <see cref="Ranking{T}"/> object representing the ranked alternatives,
     /// sorted by their original order (i.e., alternative index), with assigned ranks and scores.
     /// </returns>
-    public static Ranking<TValue> CreateRanking<TValue>(this IEnumerable<TValue> scores) 
+    public static Ranking<TValue> CreateRanking<TValue>(
+        this IEnumerable<TValue> scores,
+        RankingOptions options
+    )
         where TValue : struct, IComparable<TValue>, IEquatable<TValue>
     {
-        return new Ranking<TValue>(scores
+        var enumerableRanking = scores
             .Select((value, index) => new { index, value })
             .OrderByDescending(x => x.value)
-            .Select((x, index) => new RankingRow<TValue>(
-                x.index + 1,
-                index + 1,
-                x.value)
-            )
-            .OrderBy(x => x.Alternative)
-            .ToList());
+            .Select((x, index) => new RankingRow<TValue>(x.index + 1, index + 1, x.value));
+
+        enumerableRanking = options.OrderDescendingByScore
+            ? enumerableRanking.OrderByDescending(x => x.Score)
+            : enumerableRanking.OrderBy(x => x.Alternative);
+
+        return new Ranking<TValue>(enumerableRanking.ToList());
     }
 }

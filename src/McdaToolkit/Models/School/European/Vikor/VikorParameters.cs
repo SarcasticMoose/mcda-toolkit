@@ -19,13 +19,16 @@ public record VikorParameters
     public static VikorParameters Create(double v)
     {
         if (v is < 0.0 or > 1.0)
-        {   
-            throw new ArgumentOutOfRangeException(nameof(v), v, "Value must be between 0.0 and 1.0.");
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(v),
+                v,
+                "Value must be between 0.0 and 1.0."
+            );
         }
         return new VikorParameters(v);
     }
 
-    
     /// <summary>
     /// Initializes a new instance of the <see cref="VikorParameters"/> class.
     /// </summary>
