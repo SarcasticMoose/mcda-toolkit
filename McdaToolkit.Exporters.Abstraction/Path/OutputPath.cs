@@ -13,4 +13,6 @@ public class OutputPath
     {
         return _fullPath;
     }
+    
+    public static OutputPath Default => new(System.IO.Path.Join(Environment.CurrentDirectory, ""));
 }

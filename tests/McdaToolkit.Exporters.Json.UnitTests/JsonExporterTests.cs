@@ -29,12 +29,12 @@ public class JsonExporterTests
                 .WithFileNameGenerator(new DateTimeFileNameGenerator())
                 .Build()
         };
-        var exporter = new JsonExporter(
-            setting,
-            _fileWriter);
+        var exporter = new JsonExporterBuilder(_fileWriter)
+            .WithSettings(setting)
+            .Build();
+        
         await exporter.ExportAsync(new ExecutionDetails()
         {
-            
         }, CancellationToken.None);
     }
 }

@@ -6,6 +6,6 @@ namespace McdaToolkit.Exporters.Json;
 
 public class JsonExporterSettings : IExporterSettings
 {
-    public JsonSerializerOptions JsonSerializerOptions { get; set; } = JsonSerializerOptions.Default;
-    public OutputPath Path { get; internal set; }
+    public JsonSerializerOptions JsonSerializerOptions { get; init; } = JsonSerializerOptions.Default;
+    public OutputPath Path { get; init; } = OutputPath.Default;
 }

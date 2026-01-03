@@ -2,7 +2,7 @@
 
 namespace McdaToolkit.Exporters.Abstraction;
 
-public interface IExporterSettings
+internal interface IExporterSettings
 {
     public OutputPath Path { get; }
 }
