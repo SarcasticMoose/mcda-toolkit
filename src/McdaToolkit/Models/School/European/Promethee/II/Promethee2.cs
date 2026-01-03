@@ -72,7 +72,9 @@ public class Promethee2 : McdaMethod<double>
         return flowMatrix;
     }
 
-    protected override IEnumerable<double> Execute(McdaInputData data)
+    public override string Name => MethodStaticNames.Promethee2;
+
+    internal override IEnumerable<double> Execute(McdaInputData data)
     {
         var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(
             data.Matrix,

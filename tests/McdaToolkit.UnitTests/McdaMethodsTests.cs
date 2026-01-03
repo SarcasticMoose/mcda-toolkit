@@ -54,6 +54,7 @@ public class McdaMethodsTests
         topsisResult.IsSuccess(out var value);
 
         var actual = value!
+            .Ranking
             .Select(x => new RankingRow<double>(x.Alternative, x.Rank, x.Score.Round(3)))
             .ToList();
 
@@ -205,6 +206,7 @@ public class McdaMethodsTests
         result.IsSuccess(out var value);
 
         var actual = value!
+            .Ranking
             .Select(x => new RankingRow<VikorScore>(
                 x.Alternative,
                 x.Rank,
@@ -279,6 +281,7 @@ public class McdaMethodsTests
         result.IsSuccess(out var value);
 
         var actual = value!
+            .Ranking
             .RankingItems.Select(x => new RankingRow<double>(
                 x.Alternative,
                 x.Rank,

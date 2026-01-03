@@ -9,7 +9,7 @@ internal sealed class InternalFileWriter : IFileWriter
 {
     private readonly int _bufferSize;
 
-    public InternalFileWriter(int bufferSize)
+    public InternalFileWriter(int bufferSize = 8192)
     {
         _bufferSize = bufferSize;
     }
@@ -46,7 +46,6 @@ internal sealed class InternalFileWriter : IFileWriter
                 await fileStream.WriteAsync(buffer.AsMemory(0, currentReadBytes), ct);
                 totalWritedBytes += currentReadBytes;
             }
-
             if (totalWritedBytes == 0) return new NoneDataWrited();
 
             await fileStream.FlushAsync(ct);

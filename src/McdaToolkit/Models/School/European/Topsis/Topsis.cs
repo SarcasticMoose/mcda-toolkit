@@ -35,7 +35,9 @@ public sealed class Topsis : McdaMethod<double>
         );
     }
 
-    protected override IEnumerable<double> Execute(McdaInputData data)
+    public override string Name => MethodStaticNames.Topsis;
+
+    internal override IEnumerable<double> Execute(McdaInputData data)
     {
         var normalizedMatrix = _normalizationServiceServiceService.NormalizeMatrix(
             data.Matrix,

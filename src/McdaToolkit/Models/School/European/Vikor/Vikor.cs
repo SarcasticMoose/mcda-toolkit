@@ -18,7 +18,9 @@ public sealed class Vikor : McdaMethod<VikorScore>
         _parameters = parameters;
     }
 
-    protected override IEnumerable<VikorScore> Execute(McdaInputData data)
+    public override string Name => MethodStaticNames.Vikor;
+
+    internal override IEnumerable<VikorScore> Execute(McdaInputData data)
     {
         var normalizedMatrix = _matrixNormalizationService.NormalizeMatrix(data.Matrix, data.Types);
         var fStar = normalizedMatrix.GetColMax();
