@@ -24,7 +24,7 @@ public class JsonExporterTests
             {
                 WriteIndented =  true
             },
-            Path = new InternalJsonOutputPathBuilder()
+            Path = new JsonOutputPathBuilder()
                 .WithDirectory("test_directory")
                 .WithFileNameGenerator(new DateTimeFileNameGenerator())
                 .Build()
