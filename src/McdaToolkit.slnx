@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="src/McdaToolkit/McdaToolkit.csproj" />
+  <Project Path="lib/McdaToolkit/McdaToolkit.csproj" />
   <Project Path="tests/McdaToolkit.UnitTests/McdaToolkit.UnitTests.csproj" />
 </Solution>

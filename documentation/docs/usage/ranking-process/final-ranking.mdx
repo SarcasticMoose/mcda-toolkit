@@ -1,0 +1,47 @@
+﻿---
+sidebar_position: 5
+---
+
+# Ranking
+
+The `Ranking<T>` component represents a sorted structure ``IReadOnlyCollection<T>`` of alternatives,
+ordered from best to worst based on their scores. It implements the `IEnumerable<T>` interface,
+allowing it to be iterated over.
+
+```csharp showLineNumbers
+public sealed record Ranking<T> : IEnumerable<RankingRow<T>> 
+    where T : IComparable<T>
+{
+    private readonly IReadOnlyCollection<RankingRow<T>> _rows;
+
+    public Ranking(IEnumerable<RankingRow<T>> rows)
+    {
+        _rows = rows.ToArray();
+    }
+    
+    public IReadOnlyCollection<RankingRow<T>> RankingItems 
+        => _rows;
+    
+    public IEnumerator<RankingRow<T>> GetEnumerator()
+        => RankingItems.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+}
+```
+
+A `Ranking` exposes a **ranking rows**. Each row represents one alternative and contains
+
+```csharp showLineNumbers
+public sealed record RankingRow<T>
+    where T : IComparable<T>
+{
+    public int AlternativeIndex { get; }
+    public int Rank { get;  }
+    public T Score { get; }
+}
+```
+
+- **Alternative**: A unique number identifying the option.
+- **Rank**: The position in the list (1 = best).
+- **Score**: A numeric value showing how well the option performed.

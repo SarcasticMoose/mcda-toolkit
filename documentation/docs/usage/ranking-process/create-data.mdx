@@ -1,0 +1,74 @@
+---
+sidebar_position : 1
+---
+
+# Creating data
+
+## Data Preparation
+
+Let’s start by preparing the data — this is the essential first step in any multi-criteria decision analysis. 
+Your need to ensure that the results are meaningful and useful for decision-making.
+
+:::info
+Raw data should be not normalized, during the method execution data will be normalized depends on method configuration
+:::
+
+
+### Decision Matrix ($M$)
+
+The matrix is built as follows:
+- rows : alternatives
+- columns : decision criterion
+
+```csharp showLineNumbers
+double[,] matrix = 
+{
+    { 120, 1500 }, 
+    { 2000, 1800 }
+}
+```
+
+### Weights Vector ($W$)
+
+The weights have to meet the assumption $ \sum_{i=1}^{n} w_i = 1 $ where $n$ is the number of criteria (i.e. the number of columns in the decision matrix).
+
+```csharp showLineNumbers
+double[] weights = [0.5,0.5]
+```
+
+### Criteria Decision Vector ($C$)
+
+They will represent as vector of $ \{ c_1, c2, \dots, cn \} \in [-1, 1] $, where $n$ is the number of criteria. 
+
+* **1** for **benefit** criteria (the higher, the better)
+* **-1** for **cost** criteria (the lower, the better)
+
+```csharp showLineNumbers
+int[] criteriaTypes = [-1,-1]
+```
+
+## Build data
+
+The `DataBuilder` provides a fluent interface for constructing the input data used across decision-making methods.
+It encapsulates the definition of:
+* decision criteria types,
+* associated weights,
+* the decision matrix containing performance scores for each alternative.
+
+```csharp showLineNumbers
+var data = new DataBuilder()
+    .AddWeights(weights)
+    .AddDecisionCriteria(types)
+    .AddDecisionMatrix(matrix)
+    .Build();
+```
+The builder enforces data consistency at build time — for example, it checks that:
+* the number of weights matches the number of criteria,
+* each row in the matrix corresponds to a single alternative,
+* each row contains scores for all criteria.
+
+Use this builder to safely construct the shared input data required by all MCDA methods.
+
+:::warning
+If you don't use any of the methods, an exception  will happen.
+:::

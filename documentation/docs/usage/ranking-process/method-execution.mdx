@@ -1,0 +1,30 @@
+﻿---
+sidebar_position: 4
+---
+
+# Execution
+Each decision-making method in the toolkit implements the `IMcdaMethod<T>` interface, which exposes a single method:
+
+```csharp
+public interface IMcdaMethod<T>
+{
+     IResult<T> Run(McdaInputData data);
+}
+```
+
+## Run
+`Run()` takes previous build data of type `McdaInputData` as parameters
+
+```csharp showLineNumbers
+Ranking<T> result = method.Run(data);
+```
+
+## Stateless Execution
+The `Run()` method is stateless. It does not retain any internal data state between executions *(except method internal configuration)*.
+This means:
+* You can reuse the same method instance multiple times.
+* You can provide different input data on each call.
+* There's no need to re-initialize or reset the method.
+
+## Next Steps
+To learn how to extract and interpret the results from `Ranking<T>`, see the [Ranking](final-ranking.mdx).

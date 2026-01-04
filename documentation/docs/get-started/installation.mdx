@@ -1,0 +1,40 @@
+---
+sidebar_position: 1
+---
+
+# Installation
+
+### What you'll need
+
+- [.NET SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) version 6.0 or above
+
+:::info
+
+**.NET Standard 2.0** is also supported, check compatibility with your version in [docs](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
+
+:::
+
+## NuGet Package
+
+To add a NuGet package to your project, use the following command:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+    <TabItem value="Dotnet" label="Dotnet" default>
+        ```bash
+        dotnet add package McdaToolkit
+        ```
+    </TabItem>
+    <TabItem value="PackageReference" label="PackageReference">
+        ```bash
+        <PackageReference Include="McdaToolkit" Version="3.0.1" />
+        ```
+    </TabItem>
+    <TabItem value="PackageManager" label="PackageManager">
+        ```bash
+        NuGet\Install-Package McdaToolkit -Version 3.0.1
+        ```
+    </TabItem>
+</Tabs>
