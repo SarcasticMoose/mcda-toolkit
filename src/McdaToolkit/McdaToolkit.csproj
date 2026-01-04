@@ -11,7 +11,7 @@
         <Authors>Jakub Tokarczyk</Authors>
         <LangVersion>latest</LangVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
         <Copyright>© 2026 Jakub Tokarczyk</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
