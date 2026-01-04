@@ -34,14 +34,25 @@ var setting = new JsonExporterSettings()
     {
         WriteIndented =  true
     },
-    Path = new InternalJsonOutputPathBuilder()
+    Path = new JsonOutputPathBuilder()
         .WithDirectory("test_directory")
         .WithFileNameGenerator(new DateTimeFileNameGenerator())
         .Build()
 };
 
 var exporter = new JsonExporterBuilder()
-    .WithSettings(setting)
+    .WithSettings(new JsonExporterBuilder(_fileWriter)
+            .WithSettings(new JsonExporterSettings()
+            {
+                JsonSerializerOptions = new()
+                {
+                    WriteIndented = true
+                },
+                Path = new JsonOutputPathBuilder()
+                    .WithDirectory("test_directory")
+                    .WithFileNameGenerator(new DateTimeFileNameGenerator())
+                    .Build()
+            }))
     .Build();
 
 await exporter.ExportAsync(executionDetails, CancellationToken.None);

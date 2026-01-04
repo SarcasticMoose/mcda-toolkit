@@ -18,19 +18,18 @@ public class JsonExporterTests
     [Test]
     public async Task Test1()
     {
-        var setting = new JsonExporterSettings()
-        {
-            JsonSerializerOptions = new()
-            {
-                WriteIndented =  true
-            },
-            Path = new JsonOutputPathBuilder()
-                .WithDirectory("test_directory")
-                .WithFileNameGenerator(new DateTimeFileNameGenerator())
-                .Build()
-        };
         var exporter = new JsonExporterBuilder(_fileWriter)
-            .WithSettings(setting)
+            .WithSettings(new JsonExporterSettings()
+            {
+                JsonSerializerOptions = new()
+                {
+                    WriteIndented = true
+                },
+                Path = new JsonOutputPathBuilder()
+                    .WithDirectory("test_directory")
+                    .WithFileNameGenerator(new DateTimeFileNameGenerator())
+                    .Build()
+            })
             .Build();
         
         await exporter.ExportAsync(new ExecutionDetails()

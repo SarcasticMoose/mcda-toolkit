@@ -1,6 +1,7 @@
 using System.Text;
 using McdaToolkit.Exporters.Abstraction.FileFormat;
 using McdaToolkit.Exporters.Abstraction.FileName;
+using McdaToolkit.Exporters.Abstraction.FileName.Generators;
 
 namespace McdaToolkit.Exporters.Abstraction.Path;
 
@@ -8,15 +9,10 @@ public abstract class OutputPathBuilder<TFileFormat>  :
     IOutputPathBuilder
     where TFileFormat : IFileFormat, new()
 {
-    private IFileNameGenerator _fileNameGenerator;
-    private IFileFormat _fileFormat;
-    private string _directory;
+    private IFileNameGenerator? _fileNameGenerator;
+    private IFileFormat _fileFormat = new TFileFormat();
+    private string? _directory;
 
-    public OutputPathBuilder()
-    {
-        _fileFormat = new TFileFormat();
-    }
-    
     public IOutputPathBuilder WithDirectory(string directory)
     {
         _directory = directory;
@@ -31,6 +27,9 @@ public abstract class OutputPathBuilder<TFileFormat>  :
 
     public OutputPath Build()
     {
+        _fileNameGenerator ??= new DateTimeFileNameGenerator();
+        _directory ??= Environment.CurrentDirectory;
+        
         var fileName = new StringBuilder();
         fileName.Append(_fileNameGenerator.Generate());
         fileName.Append('.');
