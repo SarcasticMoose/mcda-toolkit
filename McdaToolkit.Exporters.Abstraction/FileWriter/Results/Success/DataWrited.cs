@@ -1,3 +1,9 @@
-namespace McdaToolkit.Exporters.Abstraction.FileWriter.Results.Success;
-
-public record DataWrited(int WritedBytes) : ISuccessFileOperation;
+namespace McdaToolkit.Exporters.Abstraction.FileWriter.Results.Success
+{
+    public class DataWrited : ISuccessFileOperation
+    {
+        public DataWrited(int writedBytes)
+        {
+        }
+    }
+}

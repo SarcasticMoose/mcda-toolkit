@@ -1,6 +1,7 @@
-namespace McdaToolkit.Exporters.Abstraction;
-
-public static class StaticNames
+namespace McdaToolkit.Exporters.Abstraction
 {
-    public static string FileFirstSegment => "McdaToolkit-ExportedRun";
+    public static class StaticNames
+    {
+        public static string FileFirstSegment => "McdaToolkit-ExportedRun";
+    }
 }

@@ -1,6 +1,7 @@
-namespace McdaToolkit.Exporters.Json;
-
-public static class JsonExporterConstNames
+namespace McdaToolkit.Exporters.Json
 {
-    public const string Json = "json";
+    public static class JsonExporterConstNames
+    {
+        public const string Json = "json";
+    }
 }

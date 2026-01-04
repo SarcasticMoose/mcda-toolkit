@@ -1,8 +1,9 @@
 using McdaToolkit.Exporters.Abstraction.FileFormat;
 
-namespace McdaToolkit.Exporters.Json;
-
-public class JsonFileFormat : IFileFormat
+namespace McdaToolkit.Exporters.Json
 {
-    public string Format => JsonExporterConstNames.Json;
+    public class JsonFileFormat : IFileFormat
+    {
+        public string Format => JsonExporterConstNames.Json;
+    }
 }

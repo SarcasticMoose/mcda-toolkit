@@ -1,3 +1,4 @@
-namespace McdaToolkit.Exporters.Abstraction.FileWriter.Results.Success;
-
-public record NoneDataWrited : ISuccessFileOperation;
+namespace McdaToolkit.Exporters.Abstraction.FileWriter.Results.Success
+{
+    public class NoneDataWrited : ISuccessFileOperation {}
+}

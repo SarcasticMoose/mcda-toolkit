@@ -1,9 +1,12 @@
-namespace McdaToolkit.Exporters.Abstraction.FileName.Generators;
+using System;
 
-public sealed class DateTimeFileNameGenerator : FileNameGeneratorBase
+namespace McdaToolkit.Exporters.Abstraction.FileName.Generators
 {
-    protected override string GenerateUniqueName()
+    public sealed class DateTimeFileNameGenerator : FileNameGeneratorBase
     {
-        return DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        protected override string GenerateUniqueName()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        }
     }
 }

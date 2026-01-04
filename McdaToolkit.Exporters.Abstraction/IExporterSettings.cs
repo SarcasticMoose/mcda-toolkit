@@ -1,8 +1,9 @@
 ﻿using McdaToolkit.Exporters.Abstraction.Path;
 
-namespace McdaToolkit.Exporters.Abstraction;
-
-internal interface IExporterSettings
+namespace McdaToolkit.Exporters.Abstraction
 {
-    public OutputPath Path { get; }
+    internal interface IExporterSettings
+    {
+        public OutputPath Path { get; }
+    }
 }

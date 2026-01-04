@@ -1,6 +1,7 @@
-namespace McdaToolkit.Exporters.Abstraction.FileFormat;
-
-public interface IFileFormat
+namespace McdaToolkit.Exporters.Abstraction.FileFormat
 {
-    string Format { get; }
+    public interface IFileFormat
+    {
+        string Format { get; }
+    }
 }

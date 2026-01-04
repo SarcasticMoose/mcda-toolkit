@@ -1,28 +1,29 @@
 using McdaToolkit.Exporters.Abstraction;
 using McdaToolkit.Exporters.Abstraction.FileWriter;
 
-namespace McdaToolkit.Exporters.Json;
-
-public sealed class JsonExporterBuilder
+namespace McdaToolkit.Exporters.Json
 {
-    private IFileWriter? _fileWriter;
-    private JsonExporterSettings? _settings;
-
-    internal JsonExporterBuilder(IFileWriter fileWriter)
+    public sealed class JsonExporterBuilder
     {
-        _fileWriter = fileWriter;
-    }
+        private IFileWriter? _fileWriter;
+        private JsonExporterSettings? _settings;
 
-    public JsonExporterBuilder WithSettings(JsonExporterSettings settings)
-    {
-        _settings = settings;
-        return this;
-    }
+        internal JsonExporterBuilder(IFileWriter fileWriter)
+        {
+            _fileWriter = fileWriter;
+        }
 
-    public IExporter Build()
-    {
-        _fileWriter ??= new InternalFileWriter();
-        _settings ??= new JsonExporterSettings();
-        return new JsonExporter(_settings, _fileWriter);
+        public JsonExporterBuilder WithSettings(JsonExporterSettings settings)
+        {
+            _settings = settings;
+            return this;
+        }
+
+        public IExporter Build()
+        {
+            _fileWriter ??= new InternalFileWriter();
+            _settings ??= new JsonExporterSettings();
+            return new JsonExporter(_settings, _fileWriter);
+        }
     }
 }

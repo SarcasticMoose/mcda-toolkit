@@ -1,6 +1,7 @@
-namespace McdaToolkit.Exporters.Abstraction.FileName;
-
-public interface IFileNameGenerator
+namespace McdaToolkit.Exporters.Abstraction.FileName
 {
-    public string Generate();
+    public interface IFileNameGenerator
+    {
+        public string Generate();
+    }
 }

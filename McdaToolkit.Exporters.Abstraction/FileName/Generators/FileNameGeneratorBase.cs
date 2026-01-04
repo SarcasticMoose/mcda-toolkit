@@ -1,17 +1,18 @@
 using System.Text;
 
-namespace McdaToolkit.Exporters.Abstraction.FileName.Generators;
-
-public abstract class FileNameGeneratorBase : IFileNameGenerator
+namespace McdaToolkit.Exporters.Abstraction.FileName.Generators
 {
-    protected abstract string GenerateUniqueName();
-    
-    public string Generate()
+    public abstract class FileNameGeneratorBase : IFileNameGenerator
     {
-        return new StringBuilder()
-            .Append(StaticNames.FileFirstSegment)
-            .Append('_')
-            .Append(GenerateUniqueName())
-            .ToString();
+        protected abstract string GenerateUniqueName();
+    
+        public string Generate()
+        {
+            return new StringBuilder()
+                .Append(StaticNames.FileFirstSegment)
+                .Append('_')
+                .Append(GenerateUniqueName())
+                .ToString();
+        }
     }
 }

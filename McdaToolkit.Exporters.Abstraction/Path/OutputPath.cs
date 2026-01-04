@@ -1,18 +1,21 @@
-namespace McdaToolkit.Exporters.Abstraction.Path;
+using System;
 
-public class OutputPath
+namespace McdaToolkit.Exporters.Abstraction.Path
 {
-    private readonly string _fullPath;
-
-    internal OutputPath(string fullPath)
+    public class OutputPath
     {
-        _fullPath = fullPath;
-    }
+        private readonly string _fullPath;
 
-    public override string ToString()
-    {
-        return _fullPath;
-    }
+        internal OutputPath(string fullPath)
+        {
+            _fullPath = fullPath;
+        }
+
+        public override string ToString()
+        {
+            return _fullPath;
+        }
     
-    public static OutputPath Default => new(System.IO.Path.Join(Environment.CurrentDirectory, ""));
+        public static OutputPath Default => new OutputPath(System.IO.Path.Join(Environment.CurrentDirectory, ""));
+    }
 }
