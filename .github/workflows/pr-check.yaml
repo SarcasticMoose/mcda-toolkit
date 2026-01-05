@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: CoverageReport # Artifact name        
-          path: TestResults # Directory containing files to upload
+          path: coveragereport # Directory containing files to upload
 
       - name: Publish coverage summary
         shell: pwsh
