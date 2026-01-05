@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
+        <Copyright>© 2026 Jakub Tokarczyk</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/SarcasticMoose/mcda-toolkit</RepositoryUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup Label="Resources">
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\..\images\icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\McdaToolkit\McdaToolkit.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.Exporters.Json.UnitTests" />
+        <InternalsVisibleTo Include="McdaToolkit.Exporters.Json" />
+    </ItemGroup>
+
+</Project>
