@@ -25,6 +25,6 @@
     <Using Include="Xunit" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\McdaToolkit\McdaToolkit.csproj" />
+    <ProjectReference Include="..\..\lib\McdaToolkit\McdaToolkit.csproj" />
   </ItemGroup>
 </Project>

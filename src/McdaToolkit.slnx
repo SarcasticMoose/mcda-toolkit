@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="lib/McdaToolkit.Exporters.Abstraction/McdaToolkit.Exporters.Abstraction.csproj" />
+  <Project Path="lib/McdaToolkit.Exporters.Json/McdaToolkit.Exporters.Json.csproj" />
+  <Project Path="lib/McdaToolkit/McdaToolkit.csproj" />
+  <Project Path="tests/McdaToolkit.UnitTests/McdaToolkit.UnitTests.csproj" />
+</Solution>
