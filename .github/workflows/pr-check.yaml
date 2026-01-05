@@ -42,8 +42,3 @@ jobs:
         with:
           name: CoverageReport # Artifact name        
           path: coveragereport # Directory containing files to upload
-
-      - name: Publish coverage summary
-        shell: pwsh
-        run: |
-          Get-Content coveragereport/SummaryGithub.md | Add-Content $env:GITHUB_STEP_SUMMARY
