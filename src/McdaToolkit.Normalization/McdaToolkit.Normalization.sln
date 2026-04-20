@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McdaToolkit.Normalization", "McdaToolkit.Normalization.csproj", "{1E973183-8F61-EE79-FD43-45F98317C763}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E973183-8F61-EE79-FD43-45F98317C763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E973183-8F61-EE79-FD43-45F98317C763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E973183-8F61-EE79-FD43-45F98317C763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E973183-8F61-EE79-FD43-45F98317C763}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EDF67E0-0FCE-47A2-BD9C-8B609A93CF7F}
+	EndGlobalSection
+EndGlobal

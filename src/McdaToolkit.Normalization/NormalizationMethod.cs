@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Data.Normalization;
+﻿namespace McdaToolkit.Normalization;
 
 /// <summary>
 /// Specifies the method used to normalize criteria values in multi-criteria decision analysis (MCDA).
@@ -9,5 +9,5 @@ public enum NormalizationMethod
     Vector = 2,
     Logarithmic = 3,
     Sum = 4,
-    Max = 5
+    Max = 5,
 }
