@@ -2,10 +2,6 @@
 
 Normalization module for [MCDA Toolkit](https://github.com/SarcasticMoose/mcda-toolkit). Provides vector normalization methods, cost/benefit transformers, and a pipeline step that integrates with the MCDA processing pipeline.
 
-## Requirements
-
-**.NET 8** or higher.
-
 ## Available Normalization Methods
 
 | Method | Enum value | Formula |
@@ -29,13 +25,14 @@ The transformation is applied automatically when the normalization step processe
 
 ### As a pipeline step
 
-The typical entry point — builds a step that plugs directly into an MCDA pipeline:
+`IPreProcessingStep<T>` is a building block of an MCDA pipeline. The step is registered via the builder and executed as part of the pipeline during processing.
+
+> [!IMPORTANT]
+> The normalization step is **optional** — if the input data has already been normalized upstream, this step can be skipped. The order of steps in the pipeline matters: normalization must be applied before any method that assumes normalized input.
 
 ```csharp
 INormalizationStepBuilder<double> builder = // resolved from DI or created manually
 IPreProcessingStep<double> step = builder
     .WithMethod(NormalizationMethod.MinMax)
     .Build();
-
-Result<McdaProblem<double>> result = step.Process(problem);
 ```
