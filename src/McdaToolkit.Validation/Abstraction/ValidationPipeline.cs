@@ -1,7 +1,7 @@
 using System.Numerics;
 using LightResults;
 using McdaToolkit.Models.Mcda;
-using McdaToolkit.Validation.MatrixValidation.Context;
+using McdaToolkit.Validation.Context;
 
 namespace McdaToolkit.Validation.Abstraction;
 

@@ -2,9 +2,9 @@ using System.Numerics;
 using LightResults;
 using McdaToolkit.Models.Mcda;
 using McdaToolkit.Validation.Abstraction;
-using McdaToolkit.Validation.MatrixValidation.Rules;
+using McdaToolkit.Validation.Rules;
 
-namespace McdaToolkit.Validation.MatrixValidation;
+namespace McdaToolkit.Validation;
 
 public static class McdaInputValidation
 {

@@ -1,10 +1,10 @@
 using System.Numerics;
 using LightResults;
 using McdaToolkit.Validation.Abstraction;
-using McdaToolkit.Validation.MatrixValidation.Context;
-using McdaToolkit.Validation.MatrixValidation.Errors;
+using McdaToolkit.Validation.Context;
+using McdaToolkit.Validation.Errors;
 
-namespace McdaToolkit.Validation.MatrixValidation.Rules;
+namespace McdaToolkit.Validation.Rules;
 
 internal sealed class SupportedNumericTypeRule<T> : IValidationRule<RawMcdaInput<T>>
     where T : struct, IFloatingPointIeee754<T>

@@ -1,7 +1,7 @@
 using System.Numerics;
 using McdaToolkit.Models.Mcda;
 
-namespace McdaToolkit.Validation.MatrixValidation.Context;
+namespace McdaToolkit.Validation.Context;
 
 internal readonly record struct RawMcdaInput<T>(
     T[,]? Matrix,
