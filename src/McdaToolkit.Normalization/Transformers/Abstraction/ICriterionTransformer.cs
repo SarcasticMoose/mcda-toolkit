@@ -1,9 +1,12 @@
+using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace McdaToolkit.Normalization.Transformers.Abstraction;
 
-public interface ICriterionTransformer<T> 
-    where T : struct, IEquatable<T>, IFormattable
+/// <summary>Applies a cost/benefit transformation to a criterion vector before normalization.</summary>
+public interface ICriterionTransformer<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
-    Vector<T> Transform(Vector<T> data);
+    /// <summary>Transforms the criterion vector according to its type.</summary>
+    MathNet.Numerics.LinearAlgebra.Vector<T> Transform(MathNet.Numerics.LinearAlgebra.Vector<T> data);
 }

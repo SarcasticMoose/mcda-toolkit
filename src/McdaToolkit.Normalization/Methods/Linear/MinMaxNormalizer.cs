@@ -1,33 +1,16 @@
+using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Types;
 
 namespace McdaToolkit.Normalization.Methods.Linear;
 
-internal class MinMaxNormalizer<T> : IVectorNormalizer<T> 
-    where T : struct, IEquatable<T>, IFormattable
+internal class MinMaxNormalizer<T> : IVectorNormalizer<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
-    private readonly IScalarMath<T> _scalarOperation;
-    private readonly IVectorAggregator<T> _vectorAggregator;
-    
-    public MinMaxNormalizer(    
-        IScalarMath<T> scalarOperation,
-        IVectorAggregator<T> vectorAggregator)
+    public MathNet.Numerics.LinearAlgebra.Vector<T> Normalize(MathNet.Numerics.LinearAlgebra.Vector<T> data)
     {
-        _scalarOperation = scalarOperation;
-        _vectorAggregator = vectorAggregator;
-    }
-
-    public Vector<T> Normalize(Vector<T> data)
-    {
-        var max = _vectorAggregator.Max(data);
-        var min = _vectorAggregator.Min(data);
-        var diff = _scalarOperation.Subtract(max, min);
-        return data.Map(x =>
-            _scalarOperation.Divide(
-                _scalarOperation.Subtract(x, min),
-                diff
-            )
-        );
+        var max = data.Max();
+        var min = data.Min();
+        return data.Map(x => (x - min) / (max - min));
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace McdaToolkit.Extensions
 {
+    /// <summary>Extension methods for <see cref="IEnumerable{T}"/>.</summary>
     public static class EnumerableExtentions
     {
+        /// <summary>Converts a jagged enumerable to a rectangular 2D array.</summary>
         public static T[,] To2DArray<T>(this IEnumerable<IEnumerable<T>> source)
         {
             var sourceToArray = source.ToArray();

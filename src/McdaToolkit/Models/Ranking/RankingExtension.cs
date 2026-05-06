@@ -1,6 +1,4 @@
-using McdaToolkit.Extensions;
 using McdaToolkit.Models.Abstraction;
-using McdaToolkit.Models.School.European.Promethee.II;
 
 namespace McdaToolkit.Models.Ranking;
 

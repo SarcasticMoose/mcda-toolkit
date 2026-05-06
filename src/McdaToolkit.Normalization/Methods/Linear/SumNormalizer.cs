@@ -1,23 +1,17 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+using System.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Types;
 
 namespace McdaToolkit.Normalization.Methods.Linear;
 
 internal class SumNormalizer<T> : IVectorNormalizer<T>
-    where T : struct, IEquatable<T>, IFormattable
+    where T : struct, IFloatingPointIeee754<T>
 {
-    private readonly IScalarMath<T> _scalarOperation;
-
-    public SumNormalizer(    
-        IScalarMath<T> scalarOperation)
+    public MathNet.Numerics.LinearAlgebra.Vector<T> Normalize(MathNet.Numerics.LinearAlgebra.Vector<T> data)
     {
-        _scalarOperation = scalarOperation;
-    }
-
-    public Vector<T> Normalize(Vector<T> data)
-    {
-        var sum = data.Aggregate(_scalarOperation.Zero, (acc, x) => _scalarOperation.Add(acc, x));
-        return !_scalarOperation.IsZero(sum) ? data.Map(x => _scalarOperation.Divide(x, sum)) : data.Map(_ => _scalarOperation.Zero);
+        var sum = data.Aggregate(T.Zero, (acc, x) => acc + x);
+        return T.IsZero(sum)
+            ? data.Map(_ => T.Zero)
+            : data.Map(x => x / sum);
     }
 }

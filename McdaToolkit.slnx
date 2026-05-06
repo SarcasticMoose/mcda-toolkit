@@ -1,4 +1,10 @@
 <Solution>
-  <Project Path="src/McdaToolkit/McdaToolkit.csproj" />
-  <Project Path="tests/McdaToolkit.UnitTests/McdaToolkit.UnitTests.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/McdaToolkit.Normalization/McdaToolkit.Normalization.csproj" />
+    <Project Path="src/McdaToolkit.Validation/McdaToolkit.Validation.csproj" />
+    <Project Path="src/McdaToolkit/McdaToolkit.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/McdaToolkit.Normalization.UnitTests/McdaToolkit.Normalization.UnitTests.csproj" />
+  </Folder>
 </Solution>
