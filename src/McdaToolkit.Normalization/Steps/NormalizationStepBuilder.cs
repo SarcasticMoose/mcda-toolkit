@@ -6,7 +6,8 @@ using McdaToolkit.Pipeline.Steps;
 
 namespace McdaToolkit.Normalization.Steps;
 
-public sealed class NormalizationStepBuilder<T> : INormalizationStepBuilder<T>
+/// <summary>Configures and builds a normalization step for an MCDA pipeline.</summary>
+public sealed class NormalizationStepBuilder<T>
     where T : struct, IFloatingPointIeee754<T>
 {
     private readonly INormalizerResolver _resolver;
@@ -21,14 +22,14 @@ public sealed class NormalizationStepBuilder<T> : INormalizationStepBuilder<T>
         _transformerRegistry = transformerRegistry;
     }
     
-    public INormalizationStepBuilder<T> WithMethod(NormalizationMethod method)
+    public NormalizationStepBuilder<T> WithMethod(NormalizationMethod method)
     {
         var resolver = _resolver.Resolve<T>(method);
         _vectorNormalizer = resolver;   
         return this;
     }
 
-    internal IProcessingStep<T> Build()
+    public IProcessingStep<T> Build()
     {
         _vectorNormalizer ??= _resolver.Resolve<T>(NormalizationMethod.MinMax);
         return new NormalizationStep<T>(_vectorNormalizer, _transformerRegistry);
