@@ -1,8 +1,6 @@
 using System.Numerics;
-using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Normalization.Methods.Geometric;
-using McdaToolkit.Normalization.Methods.Linear;
-using McdaToolkit.Normalization.Methods.NonLinear;
+using McdaToolkit.Normalization.Abstractions;
+using McdaToolkit.Normalization.Normalizers;
 
 namespace McdaToolkit.Normalization.UnitTests;
 

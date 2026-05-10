@@ -1,6 +1,6 @@
-using McdaToolkit.Normalization.Methods.Abstraction;
-using McdaToolkit.Normalization.Methods.Linear;
-using McdaToolkit.Normalization.Transformers.Types;
+using McdaToolkit.Normalization.Abstractions;
+using McdaToolkit.Normalization.Normalizers;
+using McdaToolkit.Normalization.Transformers;
 
 namespace McdaToolkit.Normalization.UnitTests;
 

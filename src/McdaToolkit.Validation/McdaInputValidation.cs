@@ -1,7 +1,5 @@
 using System.Numerics;
 using LightResults;
-using McdaToolkit.Models.Mcda;
-using McdaToolkit.Validation.Abstraction;
 using McdaToolkit.Validation.Rules;
 
 namespace McdaToolkit.Validation;

@@ -3,8 +3,10 @@
     <Project Path="src/McdaToolkit.Normalization/McdaToolkit.Normalization.csproj" />
     <Project Path="src/McdaToolkit.Validation/McdaToolkit.Validation.csproj" />
     <Project Path="src/McdaToolkit/McdaToolkit.csproj" />
+    <Project Path="src\McdaToolkit.Pipeline\McdaToolkit.Pipeline.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/McdaToolkit.Normalization.UnitTests/McdaToolkit.Normalization.UnitTests.csproj" />
+    <Project Path="tests/McdaToolkit.Validation.UnitTests/McdaToolkit.Validation.UnitTests.csproj" />
   </Folder>
 </Solution>

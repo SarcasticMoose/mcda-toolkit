@@ -1,5 +1,5 @@
 using System.Numerics;
-using McdaToolkit.Normalization.Methods.Abstraction;
+using McdaToolkit.Normalization.Abstractions;
 
 namespace McdaToolkit.Normalization;
 

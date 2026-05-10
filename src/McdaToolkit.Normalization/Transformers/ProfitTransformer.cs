@@ -1,0 +1,9 @@
+using System.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+namespace McdaToolkit.Normalization.Transformers;
+
+internal class ProfitTransformer<T> : ICriterionTransformer<T>
+    where T : struct, IFloatingPointIeee754<T>
+{
+    public MathNet.Numerics.LinearAlgebra.Vector<T> Transform(MathNet.Numerics.LinearAlgebra.Vector<T> data) => data;
+}

@@ -3,7 +3,7 @@
 [![Stable](https://badgen.net/nuget/v/mcdatoolkit/v?color=blue&label=Stable)](https://www.nuget.org/packages/McdaToolkit)
 [![License](https://badgen.net/badge/license/MIT/blue?label=License)](https://github.com/SarcasticMoose/mcda-toolkit/blob/master/LICENSE.txt)
 
-**MCDA Toolkit** is a lightweight .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks.
+**MCDA Toolkit** is a fluent .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks.
 
 > [!NOTE]
 > Before getting started, check out the [documentation](https://sarcasticmoose.github.io/mcda-toolkit-docs).

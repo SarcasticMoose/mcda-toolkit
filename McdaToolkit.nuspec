@@ -8,7 +8,7 @@
     <license type="expression">MIT</license>
     <readme>README.md</readme>
     <icon>icon.png</icon>
-    <description>A lightweight .NET library for Multi-Criteria Decision Analysis (MCDA)</description>
+    <description>A fluent .NET library for Multi-Criteria Decision Analysis (MCDA)</description>
     <repository type="git" url="https://github.com/SarcasticMoose/mcda-toolkit" />
 
     <dependencies>
@@ -26,7 +26,15 @@
           target="lib/net8.0/" />
     <file src="src/McdaToolkit.Normalization/bin/Release/net8.0/McdaToolkit.Normalization.dll"
           target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Normalization/bin/Release/net8.0/McdaToolkit.Normalization.xml"
+          target="lib/net8.0/" />
     <file src="src/McdaToolkit.Validation/bin/Release/net8.0/McdaToolkit.Validation.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Validation/bin/Release/net8.0/McdaToolkit.Validation.xml"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Pipeline/bin/Release/net8.0/McdaToolkit.Pipeline.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Pipeline/bin/Release/net8.0/McdaToolkit.Pipeline.xml"
           target="lib/net8.0/" />
 
     <!-- assets -->

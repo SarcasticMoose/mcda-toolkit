@@ -1,6 +1,4 @@
 using System.Numerics;
-using McdaToolkit.Models.Mcda;
-using McdaToolkit.Normalization.Transformers.Abstraction;
 
 namespace McdaToolkit.Normalization.Transformers;
 

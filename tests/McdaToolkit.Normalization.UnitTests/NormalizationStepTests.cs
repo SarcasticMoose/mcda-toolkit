@@ -1,8 +1,7 @@
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Models.Builders;
-using McdaToolkit.Models.Mcda;
-using McdaToolkit.Normalization.Methods.Linear;
-using McdaToolkit.Normalization.Step;
+using McdaToolkit.Builders;
+using McdaToolkit.Normalization.Normalizers;
+using McdaToolkit.Normalization.Steps;
 using McdaToolkit.Normalization.Transformers;
 
 namespace McdaToolkit.Normalization.UnitTests;

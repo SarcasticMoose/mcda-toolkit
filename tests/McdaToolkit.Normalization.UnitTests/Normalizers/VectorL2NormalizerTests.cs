@@ -1,5 +1,5 @@
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Normalization.Methods.Geometric;
+using McdaToolkit.Normalization.Normalizers;
 
 namespace McdaToolkit.Normalization.UnitTests.Normalizers;
 
