@@ -17,7 +17,7 @@ public sealed class McdaInputValidationTests
         double[,] matrix = { { 1, 2 }, { 3, 4 } };
         var criteria = BuildCriteria(0.5, 0.5);
 
-        var result = McdaInputValidation.Validate(matrix, criteria);
+        var result = new McdaInputValidation().Validate(matrix, criteria);
 
         Assert.True(result.IsSuccess());
     }
@@ -27,7 +27,7 @@ public sealed class McdaInputValidationTests
     {
         var criteria = BuildCriteria(0.5, 0.5);
 
-        var result = McdaInputValidation.Validate<double>(null, criteria);
+        var result = new McdaInputValidation().Validate<double>(null, criteria);
 
         Assert.True(result.IsFailure());
     }
@@ -37,7 +37,7 @@ public sealed class McdaInputValidationTests
     {
         double[,] matrix = { { 1, 2 }, { 3, 4 } };
 
-        var result = McdaInputValidation.Validate<double>(matrix, null);
+        var result = new McdaInputValidation().Validate<double>(matrix, null);
 
         Assert.True(result.IsFailure());
     }
@@ -45,7 +45,7 @@ public sealed class McdaInputValidationTests
     [Fact]
     public void Validate_ReturnsBothErrors_WhenMatrixAndCriteriaAreNull()
     {
-        var result = McdaInputValidation.Validate<double>(null, null);
+        var result = new McdaInputValidation().Validate<double>(null, null);
 
         Assert.True(result.IsFailure());
         Assert.Equal(2, result.Errors.Count);
@@ -57,7 +57,7 @@ public sealed class McdaInputValidationTests
         double[,] matrix = { { 1, 2 }, { 3, 4 } };
         var criteria = BuildCriteria(0.3, 0.3);
 
-        var result = McdaInputValidation.Validate(matrix, criteria);
+        var result = new McdaInputValidation().Validate(matrix, criteria);
 
         Assert.True(result.IsFailure());
     }
@@ -68,7 +68,7 @@ public sealed class McdaInputValidationTests
         double[,] matrix = { { 1, 2, 3 }, { 4, 5, 6 } };
         var criteria = BuildCriteria(0.5, 0.5);
 
-        var result = McdaInputValidation.Validate(matrix, criteria);
+        var result = new McdaInputValidation().Validate(matrix, criteria);
 
         Assert.True(result.IsFailure());
     }
@@ -83,7 +83,7 @@ public sealed class McdaInputValidationTests
             new CriteriaBuilder<Half>().WithType(CriterionType.Benefit).WithWeight((Half)0.5).Build(),
         };
 
-        var result = McdaInputValidation.Validate(matrix, criteria);
+        var result = new McdaInputValidation().Validate(matrix, criteria);
 
         Assert.True(result.IsFailure());
     }
@@ -98,7 +98,7 @@ public sealed class McdaInputValidationTests
             new CriteriaBuilder<float>().WithType(CriterionType.Benefit).WithWeight(0.5f).Build(),
         };
 
-        var result = McdaInputValidation.Validate(matrix, criteria);
+        var result = new McdaInputValidation().Validate(matrix, criteria);
 
         Assert.True(result.IsSuccess());
     }

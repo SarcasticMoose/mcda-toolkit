@@ -22,7 +22,7 @@ public class NormalizationStepBuilderTests
         var resolver = Substitute.For<INormalizerResolver>();
         resolver.Resolve<double>(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
 
-        var builder = new InternalNormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
+        var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder.Build();
         var problem = SingleBenefitProblem(1.0, 3.0, 5.0);
 
@@ -40,7 +40,7 @@ public class NormalizationStepBuilderTests
         var resolver = Substitute.For<INormalizerResolver>();
         resolver.Resolve<double>(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
 
-        var builder = new InternalNormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
+        var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder.WithMethod(NormalizationMethod.Max).Build();
         var problem = SingleBenefitProblem(2.0, 4.0, 8.0);
 
@@ -58,7 +58,7 @@ public class NormalizationStepBuilderTests
         var resolver = Substitute.For<INormalizerResolver>();
         resolver.Resolve<double>(Arg.Any<NormalizationMethod>()).Returns(new MinMaxNormalizer<double>());
 
-        var builder = new InternalNormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
+        var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
         var returned = builder.WithMethod(NormalizationMethod.Sum);
 
@@ -72,7 +72,7 @@ public class NormalizationStepBuilderTests
         resolver.Resolve<double>(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
         resolver.Resolve<double>(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
 
-        var builder = new InternalNormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
+        var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder
             .WithMethod(NormalizationMethod.MinMax)
             .WithMethod(NormalizationMethod.Max)

@@ -8,7 +8,7 @@ using McdaToolkit.Pipeline.Steps;
 
 namespace McdaToolkit.Normalization.Steps;
 
-internal sealed class NormalizationStep<T> : IPreProcessingStep<T>
+internal sealed class NormalizationStep<T> : IProcessingStep<T>
     where T : struct, IFloatingPointIeee754<T>
 {
     private readonly IVectorNormalizer<T> _normalizer;

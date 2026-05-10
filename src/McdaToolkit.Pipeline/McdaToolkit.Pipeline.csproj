@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\McdaToolkit\McdaToolkit.csproj" />
+      <ProjectReference Include="..\McdaToolkit.Validation\McdaToolkit.Validation.csproj" />
     </ItemGroup>
 
 </Project>

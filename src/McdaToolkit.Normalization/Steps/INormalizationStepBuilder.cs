@@ -9,5 +9,4 @@ public interface INormalizationStepBuilder<T>
 {
     /// <summary>Selects the normalization method to apply.</summary>
     INormalizationStepBuilder<T> WithMethod(NormalizationMethod method);
-    IPreProcessingStep<T> Build();
 }

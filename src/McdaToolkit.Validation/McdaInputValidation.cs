@@ -4,9 +4,9 @@ using McdaToolkit.Validation.Rules;
 
 namespace McdaToolkit.Validation;
 
-public static class McdaInputValidation
+public class McdaInputValidation : IMcdaInputValidation
 {
-    public static IResult Validate<T>(T[,]? matrix, List<CriterionDefinition<T>>? criteria)
+    public IResult Validate<T>(T[,]? matrix, List<CriterionDefinition<T>>? criteria)
         where T : struct, IFloatingPointIeee754<T>
         => new ValidationPipeline<T>()
             .AddStructuralRule(new SupportedNumericTypeRule<T>())
