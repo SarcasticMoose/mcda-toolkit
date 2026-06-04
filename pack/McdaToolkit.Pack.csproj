@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>McdaToolkit</PackageId>
+
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeReferencedProjects>false</IncludeReferencedProjects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\McdaToolkit.Core\McdaToolkit.Core.csproj"
+                      PrivateAssets="all" />
+    <ProjectReference Include="..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj"
+                      PrivateAssets="all" />
+    <ProjectReference Include="..\src\McdaToolkit.Validation\McdaToolkit.Validation.csproj"
+                      PrivateAssets="all" />
+    <ProjectReference Include="..\src\McdaToolkit.Pipeline\McdaToolkit.Pipeline.csproj"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
