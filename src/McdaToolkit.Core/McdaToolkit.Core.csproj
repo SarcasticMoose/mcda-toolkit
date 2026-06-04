@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.UnitTests" />
+        <InternalsVisibleTo Include="McdaToolkit.Pipeline" />
+    </ItemGroup>
+
+    <ItemGroup Label="Dependencies">
+        <PackageReference Include="LightResults" />
+        <PackageReference Include="MathNet.Numerics" />
+    </ItemGroup>
+</Project>
