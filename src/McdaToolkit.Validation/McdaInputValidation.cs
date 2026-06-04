@@ -1,10 +1,11 @@
 using System.Numerics;
 using LightResults;
+using McdaToolkit.Core;
 using McdaToolkit.Validation.Rules;
 
 namespace McdaToolkit.Validation;
 
-public class McdaInputValidation : IMcdaInputValidation
+internal sealed class McdaInputValidation : IMcdaInputValidation
 {
     public IResult Validate<T>(T[,]? matrix, List<CriterionDefinition<T>>? criteria)
         where T : struct, IFloatingPointIeee754<T>

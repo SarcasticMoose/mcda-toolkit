@@ -1,8 +1,9 @@
 using System.Numerics;
 using LightResults;
-using McdaToolkit.Abstractions;
+using McdaToolkit.Core;
+using McdaToolkit.Core.Abstractions;
+using McdaToolkit.Core.Ranking;
 using McdaToolkit.Pipeline.Steps;
-using McdaToolkit.Ranking;
 
 namespace McdaToolkit.Pipeline;
 

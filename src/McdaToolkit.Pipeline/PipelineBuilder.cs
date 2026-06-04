@@ -1,5 +1,6 @@
 using System.Numerics;
-using McdaToolkit.Builders;
+using McdaToolkit.Core;
+using McdaToolkit.Core.Builders;
 using McdaToolkit.Validation;
 
 namespace McdaToolkit.Pipeline;

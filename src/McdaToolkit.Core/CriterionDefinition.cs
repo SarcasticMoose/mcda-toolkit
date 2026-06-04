@@ -1,4 +1,4 @@
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>Defines a single decision criterion with its name, type, and weight.</summary>
 public record CriterionDefinition<T>

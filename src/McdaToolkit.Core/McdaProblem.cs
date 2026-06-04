@@ -1,6 +1,6 @@
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>Represents an MCDA problem: a decision matrix paired with criterion definitions.</summary>
 public record McdaProblem<T> where T : struct, IEquatable<T>, IFormattable

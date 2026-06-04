@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace McdaToolkit.Ranking;
+namespace McdaToolkit.Core.Ranking;
 
 /// <summary>
 /// Represents a read-only ranking of alternatives, sorted in descending order.

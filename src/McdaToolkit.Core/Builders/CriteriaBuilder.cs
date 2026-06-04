@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace McdaToolkit.Builders;
+namespace McdaToolkit.Core.Builders;
 
 /// <summary>Fluent builder for creating a <see cref="CriterionDefinition{T}"/>.</summary>
 public class CriteriaBuilder<T>

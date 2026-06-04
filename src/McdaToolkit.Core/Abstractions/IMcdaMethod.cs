@@ -1,4 +1,4 @@
-﻿namespace McdaToolkit.Abstractions;
+﻿namespace McdaToolkit.Core.Abstractions;
 
 /// <summary>Contract for MCDA methods that compute per-alternative scores.</summary>
 public interface IMcdaMethod<T>

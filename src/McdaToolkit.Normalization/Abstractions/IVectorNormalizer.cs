@@ -1,5 +1,4 @@
 using System.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace McdaToolkit.Normalization.Abstractions;
 
@@ -7,7 +6,7 @@ namespace McdaToolkit.Normalization.Abstractions;
 /// Defines a contract for vector normalization strategies.
 /// </summary>
 /// <typeparam name="T">
-/// Element type of the <see cref="Vector{T}"/>. Must be <see cref="IFloatingPointIeee754{T}"/>.
+/// Element type of the <see cref="MathNet.Numerics.LinearAlgebra.Vector{T}"/>. Must be <see cref="IFloatingPointIeee754{T}"/>.
 /// </typeparam>
 /// <remarks>
 /// Implementations encapsulate a specific normalization method
@@ -28,7 +27,7 @@ public interface IVectorNormalizer<T>
     /// Input vector to normalize.
     /// </param>
     /// <returns>
-    /// A new <see cref="Vector{T}"/> instance containing normalized values.
+    /// A new <see cref="MathNet.Numerics.LinearAlgebra.Vector{T}"/> instance containing normalized values.
     /// </returns>
     MathNet.Numerics.LinearAlgebra.Vector<T> Normalize(MathNet.Numerics.LinearAlgebra.Vector<T> data);
 }

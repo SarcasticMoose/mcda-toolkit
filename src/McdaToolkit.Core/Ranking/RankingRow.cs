@@ -1,4 +1,4 @@
-namespace McdaToolkit.Ranking;
+namespace McdaToolkit.Core.Ranking;
 
 /// <summary>
 /// Represents a single row in a ranking of MCDA alternatives,
