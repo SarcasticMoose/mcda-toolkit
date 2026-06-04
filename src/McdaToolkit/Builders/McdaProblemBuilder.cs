@@ -42,7 +42,7 @@ public class McdaProblemBuilder<T>
 
     internal McdaProblem<T> Build() => new()
     {
-        Data = _matrix,
+        Data = _matrix ?? Matrix<T>.Build.DenseOfArray(new T[0,0]),
         Criteria = [.._criteria.Select(c => c.Build())]
     };
 }

@@ -2,6 +2,9 @@ using System.Numerics;
 
 namespace McdaToolkit.Ranking;
 
+/// <summary>
+/// Provides extension methods for ranking decision alternatives.
+/// </summary>
 public static class RankingExtension
 {
     /// <summary>
@@ -30,6 +33,6 @@ public static class RankingExtension
             ? enumerableRanking.OrderByDescending(x => x.Score)
             : enumerableRanking.OrderBy(x => x.Alternative);
 
-        return new Ranking<TValue>(enumerableRanking.ToList());
+        return new Ranking<TValue>([.. enumerableRanking]);
     }
 }
