@@ -1,7 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\McdaToolkit.Validation\McdaToolkit.Validation.csproj" />
     <ProjectReference Include="..\..\src\McdaToolkit\McdaToolkit.csproj" />
