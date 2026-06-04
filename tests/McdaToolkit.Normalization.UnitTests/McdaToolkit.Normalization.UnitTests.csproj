@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj" />
+  </ItemGroup>
+</Project>
