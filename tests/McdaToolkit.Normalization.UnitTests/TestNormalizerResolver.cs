@@ -4,12 +4,12 @@ using McdaToolkit.Normalization.Normalizers;
 
 namespace McdaToolkit.Normalization.UnitTests;
 
-public sealed class TestNormalizerResolver : INormalizerResolver
+public sealed class TestNormalizerResolver<T> : INormalizerResolver<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
     public NormalizationMethod? LastResolvedMethod { get; private set; }
 
-    public IVectorNormalizer<T> Resolve<T>(NormalizationMethod method)
-        where T : struct, IFloatingPointIeee754<T>
+    public IVectorNormalizer<T> Resolve(NormalizationMethod method)
     {
         LastResolvedMethod = method;
         return method switch

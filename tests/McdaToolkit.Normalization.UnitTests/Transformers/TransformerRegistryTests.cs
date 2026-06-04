@@ -45,6 +45,6 @@ public class TransformerRegistryTests
     [Fact]
     public void Get_InvalidType_ThrowsArgumentOutOfRangeException()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => _sut.Get((CriterionType)999));
+        Assert.Throws<InvalidOperationException>(() => _sut.Get((CriterionType)999));
     }
 }

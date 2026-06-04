@@ -1,5 +1,4 @@
 using System.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Abstractions;
 
 namespace McdaToolkit.Normalization.Normalizers;
@@ -7,10 +6,11 @@ namespace McdaToolkit.Normalization.Normalizers;
 internal class LogarithmicNormalizer<T> : IVectorNormalizer<T>
     where T : struct, IFloatingPointIeee754<T>
 {
+    public NormalizationMethod Implements => NormalizationMethod.Logarithmic;
+
     public MathNet.Numerics.LinearAlgebra.Vector<T> Normalize(MathNet.Numerics.LinearAlgebra.Vector<T> data)
     {
-        var product = data.Aggregate(T.One, (acc, x) => acc * x);
-        var denom = T.Log(product);
+        var denom = data.LogProduct();
         return T.IsZero(denom)
             ? data.Map(_ => T.Zero)
             : data.Map(x => T.Log(x) / denom);

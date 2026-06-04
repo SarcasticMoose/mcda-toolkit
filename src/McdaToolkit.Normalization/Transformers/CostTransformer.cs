@@ -1,4 +1,5 @@
 using System.Numerics;
+using McdaToolkit.Normalization.Transformers.Abstraction;
 namespace McdaToolkit.Normalization.Transformers;
 
 internal class CostTransformer<T> : ICriterionTransformer<T>
@@ -6,7 +7,7 @@ internal class CostTransformer<T> : ICriterionTransformer<T>
 {
     public MathNet.Numerics.LinearAlgebra.Vector<T> Transform(MathNet.Numerics.LinearAlgebra.Vector<T> data)
     {
-        var max = data.Max();
+        var max = data.Maximum();
         return data.Map(x => max - x);
     }
 }

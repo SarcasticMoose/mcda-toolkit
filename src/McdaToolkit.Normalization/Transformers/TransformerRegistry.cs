@@ -1,4 +1,6 @@
+using System;
 using System.Numerics;
+using McdaToolkit.Normalization.Transformers.Abstraction;
 
 namespace McdaToolkit.Normalization.Transformers;
 
@@ -11,6 +13,6 @@ internal sealed class TransformerRegistry<T> : ITransformerRegistry<T>
         {
             CriterionType.Benefit => new ProfitTransformer<T>(),
             CriterionType.Cost => new CostTransformer<T>(),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new InvalidOperationException($"Unknown criterion type: {type}")
         };
 }

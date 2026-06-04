@@ -17,6 +17,11 @@ public interface IVectorNormalizer<T>
     where T : struct, IFloatingPointIeee754<T>
 {
     /// <summary>
+    /// Gets the normalization method implemented by this normalizer.
+    /// </summary>
+    NormalizationMethod Implements { get; }
+
+    /// <summary>
     /// Normalizes the specified vector according to the implemented strategy.
     /// </summary>
     /// <param name="data">

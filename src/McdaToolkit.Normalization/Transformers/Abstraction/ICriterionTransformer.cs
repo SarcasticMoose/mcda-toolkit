@@ -1,7 +1,7 @@
 using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.Normalization.Transformers;
+namespace McdaToolkit.Normalization.Transformers.Abstraction;
 
 /// <summary>Applies a cost/benefit transformation to a criterion vector before normalization.</summary>
 public interface ICriterionTransformer<T>

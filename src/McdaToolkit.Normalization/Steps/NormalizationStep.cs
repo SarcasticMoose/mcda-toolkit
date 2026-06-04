@@ -2,32 +2,25 @@ using System.Numerics;
 using LightResults;
 using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Abstractions;
-using McdaToolkit.Normalization.Transformers;
-using McdaToolkit.Pipeline;
+using McdaToolkit.Normalization.Transformers.Abstraction;
 using McdaToolkit.Pipeline.Steps;
 
 namespace McdaToolkit.Normalization.Steps;
 
-internal sealed class NormalizationStep<T> : IProcessingStep<T>
+internal sealed class NormalizationStep<T>(
+    IVectorNormalizer<T> normalizer,
+    ITransformerRegistry<T> transformerRegistry) : IProcessingStep<T>
     where T : struct, IFloatingPointIeee754<T>
 {
-    private readonly IVectorNormalizer<T> _normalizer;
-    private readonly ITransformerRegistry<T> _transformerRegistry;
-
-    public NormalizationStep(
-        IVectorNormalizer<T> normalizer,
-        ITransformerRegistry<T> transformerRegistry)
-    {
-        _normalizer = normalizer;
-        _transformerRegistry = transformerRegistry;
-    }
+    private readonly IVectorNormalizer<T> _normalizer = normalizer;
+    private readonly ITransformerRegistry<T> _transformerRegistry = transformerRegistry;
 
     public Result<McdaProblem<T>> Process(McdaProblem<T> mcdaProblem)
     {
-        var rows = mcdaProblem.Data.RowCount;
-        var cols = mcdaProblem.Data.ColumnCount;
+        int rows = mcdaProblem.Data.RowCount;
+        int cols = mcdaProblem.Data.ColumnCount;
 
-        var result = Matrix<T>.Build.Dense(rows, cols);
+        Matrix<T> result = Matrix<T>.Build.Dense(rows, cols);
         for (int j = 0; j < cols; j++)
         {
             var column = mcdaProblem.Data.Column(j);

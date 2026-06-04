@@ -19,8 +19,8 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void Build_WithoutWithMethod_DefaultsToMinMax()
     {
-        var resolver = Substitute.For<INormalizerResolver>();
-        resolver.Resolve<double>(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
+        var resolver = Substitute.For<INormalizerResolver<double>>();
+        resolver.Resolve(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
 
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder.Build();
@@ -28,7 +28,7 @@ public class NormalizationStepBuilderTests
 
         step.Process(problem).IsSuccess(out var result);
 
-        resolver.Received(1).Resolve<double>(NormalizationMethod.MinMax);
+        resolver.Received(1).Resolve(NormalizationMethod.MinMax);
         Assert.Equal(0.0, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(0.5, result.Data[1, 0], tolerance: 1e-10);
         Assert.Equal(1.0, result.Data[2, 0], tolerance: 1e-10);
@@ -37,8 +37,8 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_Max_UsesMaxNormalizer()
     {
-        var resolver = Substitute.For<INormalizerResolver>();
-        resolver.Resolve<double>(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
+        var resolver = Substitute.For<INormalizerResolver<double>>();
+        resolver.Resolve(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
 
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder.WithMethod(NormalizationMethod.Max).Build();
@@ -46,7 +46,7 @@ public class NormalizationStepBuilderTests
 
         step.Process(problem).IsSuccess(out var result);
 
-        resolver.Received(1).Resolve<double>(NormalizationMethod.Max);
+        resolver.Received(1).Resolve(NormalizationMethod.Max);
         Assert.Equal(0.25, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(0.50, result.Data[1, 0], tolerance: 1e-10);
         Assert.Equal(1.00, result.Data[2, 0], tolerance: 1e-10);
@@ -55,8 +55,8 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_ReturnsBuilderForChaining()
     {
-        var resolver = Substitute.For<INormalizerResolver>();
-        resolver.Resolve<double>(Arg.Any<NormalizationMethod>()).Returns(new MinMaxNormalizer<double>());
+        var resolver = Substitute.For<INormalizerResolver<double>>();
+        resolver.Resolve(Arg.Any<NormalizationMethod>()).Returns(new MinMaxNormalizer<double>());
 
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
@@ -68,9 +68,9 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_CalledTwice_UsesLastMethod()
     {
-        var resolver = Substitute.For<INormalizerResolver>();
-        resolver.Resolve<double>(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
-        resolver.Resolve<double>(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
+        var resolver = Substitute.For<INormalizerResolver<double>>();
+        resolver.Resolve(NormalizationMethod.MinMax).Returns(new MinMaxNormalizer<double>());
+        resolver.Resolve(NormalizationMethod.Max).Returns(new MaxNormalizer<double>());
 
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
         var step = builder

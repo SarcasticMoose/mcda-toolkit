@@ -17,7 +17,7 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void Build_WithoutWithMethod_DefaultsToMinMax()
     {
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
         builder.Build();
@@ -29,7 +29,7 @@ public class NormalizationStepBuilderTests
     public void Build_WithoutWithMethod_ProducesMinMaxBehavior()
     {
         // [1, 3, 5] → MinMax → [0, 0.5, 1]
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var step = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>()).Build();
 
         step.Process(SingleBenefitProblem(1.0, 3.0, 5.0)).IsSuccess(out var result);
@@ -42,7 +42,7 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_Max_ResolvesMaxMethod()
     {
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
         builder.WithMethod(NormalizationMethod.Max).Build();
@@ -54,7 +54,7 @@ public class NormalizationStepBuilderTests
     public void WithMethod_Max_ProducesMaxBehavior()
     {
         // [2, 4, 8] → MaxNorm → [0.25, 0.5, 1]
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var step = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>())
             .WithMethod(NormalizationMethod.Max)
             .Build();
@@ -69,7 +69,7 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_ReturnsBuilderForChaining()
     {
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
         var returned = builder.WithMethod(NormalizationMethod.Sum);
@@ -80,7 +80,7 @@ public class NormalizationStepBuilderTests
     [Fact]
     public void WithMethod_CalledTwice_UsesLastMethod()
     {
-        var resolver = new TestNormalizerResolver();
+        var resolver = new TestNormalizerResolver<double>();
         var builder = new NormalizationStepBuilder<double>(resolver, new TransformerRegistry<double>());
 
         builder.WithMethod(NormalizationMethod.MinMax).WithMethod(NormalizationMethod.Max).Build();

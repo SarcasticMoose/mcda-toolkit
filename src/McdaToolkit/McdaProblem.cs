@@ -6,8 +6,8 @@ namespace McdaToolkit;
 public record McdaProblem<T> where T : struct, IEquatable<T>, IFormattable
 {
     /// <summary>Decision matrix where rows are alternatives and columns are criteria.</summary>
-    public Matrix<T> Data { get; init; }
+    public required Matrix<T> Data { get; init; }
 
     /// <summary>Criteria definitions including type and weight for each column.</summary>
-    public CriterionDefinition<T>[] Criteria { get; init; }
+    public required CriterionDefinition<T>[] Criteria { get; init; }
 }

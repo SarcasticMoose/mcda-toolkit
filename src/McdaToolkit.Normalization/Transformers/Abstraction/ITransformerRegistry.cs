@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace McdaToolkit.Normalization.Transformers;
+namespace McdaToolkit.Normalization.Transformers.Abstraction;
 
 /// <summary>Provides the appropriate criterion transformer for a given <see cref="CriterionType"/>.</summary>
 public interface ITransformerRegistry<T> where T : struct, IFloatingPointIeee754<T>

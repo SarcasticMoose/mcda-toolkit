@@ -5,15 +5,20 @@ using McdaToolkit.Validation;
 
 namespace McdaToolkit.Pipeline;
 
-/// <summary>Pipeline builder phase unlocked after data is set. Allows adding processing steps and building the executor.</summary>
+/// <summary>
+/// Pipeline builder phase unlocked after data is set. Allows adding processing steps and building the executor.
+/// </summary>
 public class ConfiguredPipelineBuilder<T> where T : struct, IFloatingPointIeee754<T>
 {
-    private readonly List<IProcessingStep<T>> _steps = new();
+    private readonly List<IProcessingStep<T>> _steps = [];
     private readonly McdaExecutionOptions _options;
     private readonly IMcdaInputValidation? _validation;
     private readonly McdaProblem<T> _problem;
 
-    internal ConfiguredPipelineBuilder(McdaProblem<T> problem, McdaExecutionOptions options, IMcdaInputValidation? validation)
+    internal ConfiguredPipelineBuilder(
+        McdaProblem<T> problem,
+        McdaExecutionOptions options,
+        IMcdaInputValidation? validation)
     {
         _problem = problem;
         _options = options;

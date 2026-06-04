@@ -8,12 +8,7 @@ namespace McdaToolkit.Pipeline;
 public class PipelineBuilder<T> where T : struct, IFloatingPointIeee754<T>
 {
     private readonly McdaExecutionOptions _options = new();
-    private readonly IMcdaInputValidation? _validation;
-
-    public PipelineBuilder(IMcdaInputValidation? validation = null)
-    {
-        _validation = validation;
-    }
+    private readonly IMcdaInputValidation _validation = new McdaInputValidation();
 
     /// <summary>Configures execution options for the pipeline.</summary>
     public PipelineBuilder<T> ConfigureExecution(Action<McdaExecutionOptions> configure)
