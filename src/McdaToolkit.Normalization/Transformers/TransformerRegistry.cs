@@ -7,7 +7,6 @@ namespace McdaToolkit.Normalization.Transformers;
 internal sealed class TransformerRegistry<T> : ITransformerRegistry<T>
     where T : struct, IFloatingPointIeee754<T>
 {
-
     public ICriterionTransformer<T> Get(CriterionType type)
         => type switch
         {
