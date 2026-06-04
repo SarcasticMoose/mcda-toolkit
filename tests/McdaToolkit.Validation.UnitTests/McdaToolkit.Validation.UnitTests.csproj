@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\src\McdaToolkit.Validation\McdaToolkit.Validation.csproj" />
-    <ProjectReference Include="..\..\src\McdaToolkit\McdaToolkit.csproj" />
+    <ProjectReference Include="..\..\src\McdaToolkit.Core\McdaToolkit.Core.csproj" />
   </ItemGroup>
 </Project>
