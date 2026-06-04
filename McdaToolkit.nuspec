@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>McdaToolkit</id>
+    <version>4.1.1</version>
+    <authors>Jakub Tokarczyk</authors>
+    <copyright>© 2026 Jakub Tokarczyk</copyright>
+    <license type="expression">MIT</license>
+    <readme>README.md</readme>
+    <icon>icon.png</icon>
+    <description>A fluent .NET library for Multi-Criteria Decision Analysis (MCDA)</description>
+    <repository type="git" url="https://github.com/SarcasticMoose/mcda-toolkit" />
+
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="MathNet.Numerics" version="5.0.0" />
+        <dependency id="LightResults" version="9.0.3" />
+      </group>
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="src/McdaToolkit/bin/Release/net8.0/McdaToolkit.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit/bin/Release/net8.0/McdaToolkit.xml"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Normalization/bin/Release/net8.0/McdaToolkit.Normalization.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Normalization/bin/Release/net8.0/McdaToolkit.Normalization.xml"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Validation/bin/Release/net8.0/McdaToolkit.Validation.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Validation/bin/Release/net8.0/McdaToolkit.Validation.xml"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Pipeline/bin/Release/net8.0/McdaToolkit.Pipeline.dll"
+          target="lib/net8.0/" />
+    <file src="src/McdaToolkit.Pipeline/bin/Release/net8.0/McdaToolkit.Pipeline.xml"
+          target="lib/net8.0/" />
+
+    <!-- assets -->
+    <file src="README.md"        target="\" />
+    <file src="images/icon.png"  target="\" />
+  </files>
+</package>
