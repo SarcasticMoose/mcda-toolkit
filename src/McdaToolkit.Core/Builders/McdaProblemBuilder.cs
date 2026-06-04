@@ -1,7 +1,7 @@
 using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace McdaToolkit.Builders;
+namespace McdaToolkit.Core.Builders;
 
 /// <summary>Fluent builder for creating an <see cref="McdaProblem{T}"/>.</summary>
 public class McdaProblemBuilder<T>

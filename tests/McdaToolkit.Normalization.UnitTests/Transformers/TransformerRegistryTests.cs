@@ -1,4 +1,5 @@
 using MathNet.Numerics.LinearAlgebra;
+using McdaToolkit.Core;
 using McdaToolkit.Normalization.Transformers;
 
 namespace McdaToolkit.Normalization.UnitTests.Transformers;

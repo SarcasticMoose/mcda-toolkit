@@ -1,5 +1,4 @@
 using System.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 using McdaToolkit.Normalization.Transformers.Abstraction;
 namespace McdaToolkit.Normalization.Transformers;
 

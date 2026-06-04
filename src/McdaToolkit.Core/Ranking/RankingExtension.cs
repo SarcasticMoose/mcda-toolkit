@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace McdaToolkit.Ranking;
+namespace McdaToolkit.Core.Ranking;
 
 /// <summary>
 /// Provides extension methods for ranking decision alternatives.

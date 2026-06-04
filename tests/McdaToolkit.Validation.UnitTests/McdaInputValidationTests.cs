@@ -1,4 +1,5 @@
-using McdaToolkit.Builders;
+using McdaToolkit.Core;
+using McdaToolkit.Core.Builders;
 
 namespace McdaToolkit.Validation.UnitTests;
 

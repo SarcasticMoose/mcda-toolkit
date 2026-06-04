@@ -1,4 +1,4 @@
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>Specifies whether a criterion should be maximized or minimized.</summary>
 public enum CriterionType

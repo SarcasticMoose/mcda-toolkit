@@ -1,5 +1,6 @@
 using MathNet.Numerics.LinearAlgebra;
-using McdaToolkit.Builders;
+using McdaToolkit.Core;
+using McdaToolkit.Core.Builders;
 using McdaToolkit.Normalization.Steps;
 using McdaToolkit.Normalization.Transformers;
 

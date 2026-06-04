@@ -1,4 +1,4 @@
-namespace McdaToolkit.Ranking;
+namespace McdaToolkit.Core.Ranking;
 
 /// <summary>Controls how the final ranking is ordered.</summary>
 public record RankingOptions

@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>
 /// Provides extension methods for <see cref="MathNet.Numerics.LinearAlgebra.Vector{T}"/> vectors.

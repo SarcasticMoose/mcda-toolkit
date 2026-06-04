@@ -1,6 +1,6 @@
-using McdaToolkit.Ranking;
+using McdaToolkit.Core.Ranking;
 
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>Holds the result of a solved MCDA problem.</summary>
 public record McdaSolved<T> where T : struct, IEquatable<T>, IComparable<T>

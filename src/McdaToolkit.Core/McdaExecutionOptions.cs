@@ -1,6 +1,6 @@
-using McdaToolkit.Ranking;
+using McdaToolkit.Core.Ranking;
 
-namespace McdaToolkit;
+namespace McdaToolkit.Core;
 
 /// <summary>Options that control MCDA method execution behaviour.</summary>
 public record McdaExecutionOptions
