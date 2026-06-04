@@ -1,0 +1,340 @@
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-background-color: #0b0f14;
+  --ifm-background-surface-color: #0f1621;
+  --ifm-navbar-background-color: rgba(11, 15, 20, 0.85);
+  --ifm-toc-border-color: rgba(255,255,255,0.06);
+  --ifm-hr-border-color: rgba(255,255,255,0.06);
+  --ifm-font-color-base: rgba(255,255,255,0.87);
+}
+
+/* ── Navbar ── */
+[data-theme='dark'] .navbar {
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ── Doc layout ── */
+[data-theme='dark'] .main-wrapper {
+  background: #0b0f14;
+}
+
+/* subtle radial glow behind doc content */
+[data-theme='dark'] .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module {
+  position: relative;
+}
+
+/* ── Doc content typography ── */
+.markdown {
+  --ifm-heading-font-weight: 700;
+  --ifm-h1-font-size: 2rem;
+  --ifm-h2-font-size: 1.4rem;
+  --ifm-h3-font-size: 1.1rem;
+}
+
+.markdown h1 {
+  letter-spacing: -0.03em;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 1.75rem;
+}
+
+.markdown h2 {
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+  padding-top: 0.5rem;
+  position: relative;
+}
+
+.markdown h2::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 1.2em;
+  background: var(--ifm-color-primary);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.markdown h3 {
+  letter-spacing: -0.01em;
+  opacity: 0.9;
+  margin-top: 2rem;
+}
+
+.markdown p {
+  line-height: 1.8;
+  opacity: 0.87;
+}
+
+.markdown a {
+  text-underline-offset: 3px;
+}
+
+/* ── Sidebar ── */
+[data-theme='dark'] .theme-doc-sidebar-container {
+  border-right: 1px solid rgba(255,255,255,0.05);
+  background: #0b0f14;
+}
+
+[data-theme='dark'] .menu {
+  padding: 0.75rem;
+}
+
+[data-theme='dark'] .menu__link {
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.15s, background 0.15s;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.9);
+}
+
+[data-theme='dark'] .menu__link--active {
+  background: rgba(37,194,160,0.1) !important;
+  color: #25c2a0 !important;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .menu__list-item-collapsible:hover {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+}
+
+[data-theme='dark'] .menu__caret::before {
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ── Code blocks ── */
+[data-theme='dark'] .prism-code {
+  background: #0d1117 !important;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+[data-theme='dark'] div[class*='codeBlockContainer'] {
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.4),
+    0 8px 32px rgba(0,0,0,0.4);
+}
+
+[data-theme='dark'] div[class*='codeBlockTitle'] {
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.4);
+  border-radius: 10px 10px 0 0;
+}
+
+[data-theme='dark'] div[class*='buttonGroup'] button {
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+[data-theme='dark'] div[class*='buttonGroup'] button:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── Inline code ── */
+[data-theme='dark'] code:not([class]) {
+  background: rgba(37,194,160,0.08);
+  border: 1px solid rgba(37,194,160,0.15);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.875em;
+  color: #4fddbf;
+}
+
+/* ── Tables ── */
+[data-theme='dark'] table {
+  display: table !important;
+  width: 100% !important;
+  overflow: visible !important;
+  border-collapse: collapse !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+
+[data-theme='dark'] table th {
+  background: rgba(255,255,255,0.035) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  padding: 0.65rem 1.25rem;
+}
+
+[data-theme='dark'] table td {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  padding: 0.7rem 1.25rem;
+  color: rgba(255,255,255,0.82);
+}
+
+[data-theme='dark'] table tr:last-child td {
+  border-bottom: none !important;
+}
+
+[data-theme='dark'] table tr:hover td {
+  background: rgba(37,194,160,0.04) !important;
+}
+
+/* ── Mermaid ── */
+[data-theme='dark'] .docusaurus-mermaid-container svg {
+  background: transparent !important;
+}
+
+[data-theme='dark'] .docusaurus-mermaid-container {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+
+/* ── Admonitions ── */
+[data-theme='dark'] .alert {
+  border-radius: 10px;
+  border-width: 0;
+  border-left: 3px solid;
+  background: rgba(255,255,255,0.025);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+[data-theme='dark'] .alert--info {
+  border-left-color: #3b82f6;
+  background: rgba(59,130,246,0.06);
+}
+
+[data-theme='dark'] .alert--warning {
+  border-left-color: #f59e0b;
+  background: rgba(245,158,11,0.06);
+}
+
+[data-theme='dark'] .alert--danger {
+  border-left-color: #ef4444;
+  background: rgba(239,68,68,0.06);
+}
+
+[data-theme='dark'] .alert--success {
+  border-left-color: #25c2a0;
+  background: rgba(37,194,160,0.06);
+}
+
+/* ── TOC ── */
+[data-theme='dark'] .table-of-contents {
+  border-left: 1px solid rgba(255,255,255,0.06);
+  padding-left: 1rem;
+}
+
+.table-of-contents__link {
+  font-size: 0.82rem;
+  opacity: 0.45;
+  transition: opacity 0.15s, color 0.15s;
+  line-height: 1.6;
+}
+
+.table-of-contents__link:hover {
+  opacity: 0.8;
+}
+
+.table-of-contents__link--active {
+  opacity: 1;
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+/* ── Pagination ── */
+[data-theme='dark'] .pagination-nav__link {
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+[data-theme='dark'] .pagination-nav__link:hover {
+  border-color: rgba(37,194,160,0.3);
+  background: rgba(37,194,160,0.04);
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .pagination-nav__label {
+  font-size: 0.8rem;
+  opacity: 0.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Breadcrumbs ── */
+[data-theme='dark'] .breadcrumbs__link {
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  opacity: 0.4;
+}
+
+/* ── Search ── */
+[data-theme='dark'] .navbar__search-input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 8px;
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+[data-theme='dark'] .navbar__search-input:focus {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(37,194,160,0.4);
+  box-shadow: 0 0 0 3px rgba(37,194,160,0.08);
+  outline: none;
+}
+
+[data-theme='dark'] .navbar__search-input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+[data-theme='dark'] .search-result-match {
+  color: #25c2a0;
+}

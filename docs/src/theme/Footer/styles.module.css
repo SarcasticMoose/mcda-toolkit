@@ -1,0 +1,102 @@
+.footer {
+  background: #080c10;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 3rem 0 1.5rem;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+}
+
+.brandName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.01em;
+}
+
+.brandDesc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+  max-width: 200px;
+}
+
+.groups {
+  display: flex;
+  gap: 4rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.groupTitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 2px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55) !important;
+  text-decoration: none !important;
+  transition: color 0.15s;
+}
+
+.link:hover {
+  color: #4fddbf !important;
+}
+
+.link svg {
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.link:hover svg {
+  opacity: 1;
+}
+
+.bottom {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 2rem 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .groups {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}

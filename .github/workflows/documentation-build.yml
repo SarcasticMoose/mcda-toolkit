@@ -1,0 +1,88 @@
+name: Deploy Docs
+
+on:
+  workflow_run:
+    workflows:
+      - "stable"
+    types:
+      - completed
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish DLLs
+        run: |
+          for project in src/McdaToolkit.*/; do
+            dotnet publish "$project" -c Release -f net8.0 --no-self-contained
+          done
+
+      - name: Install xmldocmd
+        run: dotnet tool install -g xmldocmd
+
+      - name: Generate API docs
+        run: |
+          for dll in src/McdaToolkit.*/bin/Release/net8.0/publish/McdaToolkit.*.dll; do
+            name=$(basename "$dll" .dll)
+            out="docs/api/$name"
+            mkdir -p "$out"
+            xmldocmd "$dll" "$out"
+            echo "{\"label\": \"$name\"}" > "$out/_category_.json"
+          done
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Sanitize docs
+        run: python scripts/sanitize.py docs/api
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
+
+      - name: Install dependencies
+        working-directory: docs
+        run: npm ci
+
+      - name: Build Docusaurus
+        working-directory: docs
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,7 +6,7 @@
 **MCDA Toolkit** is a fluent .NET library designed to support Multi-Criteria Decision Analysis (MCDA) tasks.
 
 > [!NOTE]
-> Before getting started, check out the [documentation](https://sarcasticmoose.github.io/mcda-toolkit-docs).
+> Before getting started, check out the [documentation](https://sarcasticmoose.github.io/mcda-toolkit).
 
 
 ## Requirements
