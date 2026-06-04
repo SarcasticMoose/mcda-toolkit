@@ -1,0 +1,127 @@
+name: deploy
+run-name: Release from master
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  NuGetDirectory: ${{ github.workspace }}/nuget
+
+jobs:
+  precondition:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(grep -oP '(?<=<Version>).*?(?=</Version>)' Directory.Build.props)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check if tag exists
+        shell: bash
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="v$VERSION"
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            exit 1
+          fi
+
+  build:
+    needs: precondition
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Pack
+        run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+
+  tag:
+    needs: [precondition, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create tag
+        uses: actions/github-script@v7
+        env:
+          VERSION: ${{ needs.precondition.outputs.version }}
+          SHA: ${{ github.sha }}
+        with:
+          script: |
+            const version = process.env.VERSION;
+            const sha = process.env.SHA;
+            const tag = `v${version}`;
+
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tag}`,
+              sha: sha
+            });
+
+  deploy:
+    needs: tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish to NuGet
+        shell: pwsh
+        run: |
+          foreach ($file in Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg) {
+              dotnet nuget push $file `
+                --api-key "${{ secrets.NUGET_KEY }}" `
+                --source https://api.nuget.org/v3/index.json `
+                --skip-duplicate
+          }
