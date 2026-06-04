@@ -1,0 +1,8 @@
+{
+  "label": "Pipeline",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Pipeline provides a unified way to compose and execute a full decision analysis flow — from data preparation to final ranking — without managing individual steps manually."
+  }
+}

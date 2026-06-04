@@ -1,0 +1,8 @@
+{
+  "label": "Extensions",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Optional modules that plug into the pipeline as preprocessing steps — data importers, exporters, and other integrations."
+  }
+}
