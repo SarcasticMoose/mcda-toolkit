@@ -1,10 +1,10 @@
 name: deploy
-run-name: Release from master
+run-name: Release ${{ github.ref_name }}
 
 on:
   push:
     branches:
-      - master
+    - master
 
 env:
   NuGetDirectory: ${{ github.workspace }}/nuget
@@ -12,9 +12,9 @@ env:
 jobs:
   precondition:
     runs-on: ubuntu-latest
-
     outputs:
       version: ${{ steps.version.outputs.version }}
+      is-prelease: ${{ steps.version.outputs.is-prelease }}
 
     steps:
       - name: Checkout
@@ -27,7 +27,14 @@ jobs:
         shell: bash
         run: |
           VERSION=$(grep -oP '(?<=<Version>).*?(?=</Version>)' Directory.Build.props)
+
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          if [[ "$VERSION" =~ - ]]; then
+            echo "is-prelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is-prelease=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Check if tag exists
         shell: bash
@@ -35,7 +42,10 @@ jobs:
           VERSION="${{ steps.version.outputs.version }}"
           TAG="v$VERSION"
 
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
+          git fetch --tags
+
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG$"; then
+            echo "Tag $TAG already exists."
             exit 1
           fi
 
@@ -56,23 +66,29 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --configuration Release --no-build --verbosity normal
 
       - name: Pack
-        run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+        run: |
+          dotnet pack \
+            --configuration Release \
+            --no-build \
+            --output ${{ env.NuGetDirectory }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: nuget
-          path: ${{ env.NuGetDirectory }}
+          path: |
+            ${{ env.NuGetDirectory }}/*.nupkg
 
   tag:
     needs: [precondition, build]
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
@@ -97,7 +113,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: `refs/tags/${tag}`,
-              sha: sha
+              sha
             });
 
   deploy:
@@ -116,12 +132,38 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Publish to NuGet
+      - name: Publish packages to NuGet
         shell: pwsh
         run: |
-          foreach ($file in Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg) {
-              dotnet nuget push $file `
+          Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Filter *.nupkg |
+          ForEach-Object {
+              dotnet nuget push $_.FullName `
                 --api-key "${{ secrets.NUGET_KEY }}" `
                 --source https://api.nuget.org/v3/index.json `
                 --skip-duplicate
           }
+
+  release:
+    needs: [deploy, precondition]
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ needs.precondition.outputs.version }}
+          name: Release v${{ needs.precondition.outputs.version }}
+          body: Release version ${{ needs.precondition.outputs.version }}
+          artifacts: |
+            ${{ env.NuGetDirectory }}/*.nupkg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: ${{ needs.precondition.outputs.is-prelease }}
