@@ -1,8 +1,10 @@
+using System.Numerics;
+
 namespace McdaToolkit.Core;
 
 /// <summary>Defines a single decision criterion with its name, type, and weight.</summary>
 public record CriterionDefinition<T>
-    where T : struct, IEquatable<T>, IFormattable
+    where T : struct, IFloatingPointIeee754<T>
 {
     /// <summary>Display name of the criterion.</summary>
     public string? Name { get; private set; }

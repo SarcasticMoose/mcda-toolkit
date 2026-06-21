@@ -10,7 +10,7 @@ allowing it to be iterated over.
 
 ```csharp
 public sealed record Ranking<T> : IEnumerable<RankingRow<T>> 
-    where T : IComparable<T>
+    where T : IFloatingPointIeee754<T>
 {
     private readonly IReadOnlyCollection<RankingRow<T>> _rows;
 
@@ -34,7 +34,7 @@ A `Ranking` exposes a **ranking rows**. Each row represents one alternative and 
 
 ```csharp
 public sealed record RankingRow<T>
-    where T : IComparable<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
     public int AlternativeIndex { get; }
     public int Rank { get;  }

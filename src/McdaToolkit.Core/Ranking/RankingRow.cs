@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace McdaToolkit.Core.Ranking;
 
 /// <summary>
@@ -8,7 +10,7 @@ namespace McdaToolkit.Core.Ranking;
 /// The type of the score assigned to the alternative
 /// </typeparam>
 public record struct RankingRow<T>
-    where T : struct, IComparable<T>, IEquatable<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
     internal RankingRow(int alternative, int rank, T score)
     {

@@ -33,6 +33,6 @@ public static class RankingExtension
             ? enumerableRanking.OrderByDescending(x => x.Score)
             : enumerableRanking.OrderBy(x => x.Alternative);
 
-        return new Ranking<TValue>([.. enumerableRanking]);
+        return new Ranking<TValue>(enumerableRanking);
     }
 }

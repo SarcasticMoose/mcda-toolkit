@@ -1,9 +1,11 @@
+using System.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace McdaToolkit.Core;
 
 /// <summary>Represents an MCDA problem: a decision matrix paired with criterion definitions.</summary>
-public record McdaProblem<T> where T : struct, IEquatable<T>, IFormattable
+public record McdaProblem<T>
+    where T : struct, IFloatingPointIeee754<T>
 {
     /// <summary>Decision matrix where rows are alternatives and columns are criteria.</summary>
     public required Matrix<T> Data { get; init; }
