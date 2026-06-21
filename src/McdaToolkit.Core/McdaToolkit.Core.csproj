@@ -6,9 +6,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="McdaToolkit.UnitTests" />
         <InternalsVisibleTo Include="McdaToolkit.Pipeline" />
+        <InternalsVisibleTo Include="McdaToolkit.Normalization" />
+        <InternalsVisibleTo Include="McdaToolkit.Extensions.Algorithms.Vikor" />
     </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.Core.UnitTests" />
+        <InternalsVisibleTo Include="McdaToolkit.Normalization.UnitTests" />
+        <InternalsVisibleTo Include="McdaToolkit.Validation.UnitTests" />
+        <InternalsVisibleTo Include="McdaToolkit.Extensions.Algorithms.Vikor.UnitTests" />
+    </ItemGroup>
+
 
     <ItemGroup Label="Dependencies">
         <PackageReference Include="LightResults" />

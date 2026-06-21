@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj" />
+    <ProjectReference Include="..\src\McdaToolkit.Extensions.Algorithms.Vikor\McdaToolkit.Extensions.Algorithms.Vikor.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+</Project>

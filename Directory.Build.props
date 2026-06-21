@@ -20,4 +20,8 @@
         <None Include="$(MSBuildThisFileDirectory)\images\icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
+    <ItemGroup Condition="'$(IsPackable)' == true">
+    	<None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
 </Project>

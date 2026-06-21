@@ -5,11 +5,20 @@
     <Project Path="src/McdaToolkit.Validation/McdaToolkit.Validation.csproj" />
     <Project Path="src/McdaToolkit.Pipeline/McdaToolkit.Pipeline.csproj" />
   </Folder>
+  <Folder Name="/src/extensions/">
+    <Project Path="src\McdaToolkit.Extensions.Algorithms.Vikor\McdaToolkit.Extensions.Algorithms.Vikor.csproj" />
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/McdaToolkit.Normalization.UnitTests/McdaToolkit.Normalization.UnitTests.csproj" />
+    <Project Path="tests/McdaToolkit.Pipeline.UnitTests/McdaToolkit.Pipeline.UnitTests.csproj" />
     <Project Path="tests/McdaToolkit.Validation.UnitTests/McdaToolkit.Validation.UnitTests.csproj" />
+    <Project Path="tests/McdaToolkit.Extensions.Algorithms.Vikor.UnitTests/McdaToolkit.Extensions.Algorithms.Vikor.UnitTests.csproj" />
+    <Project Path="tests/McdaToolkit.Core.UnitTests/McdaToolkit.Core.UnitTests.csproj" />
   </Folder>
   <Folder Name="/pack/">
     <Project Path="pack/McdaToolkit.Pack.csproj" />
+  </Folder>
+  <Folder Name="/sample/">
+    <Project Path="sample/McdaToolkit.Normalization.Sample.csproj" />
   </Folder>
 </Solution>

@@ -36,20 +36,27 @@ function Feature({title, description}: FeatureItem) {
   );
 }
 
-const codeExample = `new PipelineBuilder<double>()
-    .ConfigureExecution(o => o.Precision = 4)
-    .WithData(b => b
-        .WithMatrix(matrix)
-        .AddCriterion(c => c
-          .WithType(CriterionType.Benefit)
-          .WithWeight(0.5))
-        .AddCriterion(c => c
-          .WithType(CriterionType.Cost)
-          .WithWeight(0.5)))
-    .AddProcessingStep(new NormalizationStepBuilder<double>()
-        .WithMethod(NormalizationMethod.MinMax))
-    .Build()
-    .Execute(new Vikor<double>());`;
+const codeExample = `vvar pipelineExecutor = new PipelineBuilder<double>()
+    .WithData(data =>
+    {
+        data.WithMatrix(new[,]
+        {
+            /// add matrix data here
+        });
+        data.AddCriterion(criterion =>
+        {
+          /// add criterion data here
+        });
+    })
+    .AddNormalizationStep(configure => configure.WithMethod(NormalizationMethod.MinMax))
+    .Build();
+
+var vikor = new VikorBuilder<double>()
+    .WithParameters(parameters => parameters.WithV(0.1))
+    .Build();
+
+var pipelineResult = pipelineExecutor.IsSuccess(out var executor);
+executor.Execute(vikor).IsSuccess(out var ranking);`;
 
 export default function HomepageFeatures(): ReactNode {
   return (

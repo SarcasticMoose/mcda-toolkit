@@ -4,10 +4,28 @@ sidebar_position: 1
 
 # Overview
 
-Extensions are separate NuGet packages that add functionality to the pipeline without being part of the core toolkit. You install only what you need.
+The toolkit is designed in a modular, package-based architecture. Instead of providing all features in a single monolithic library, functionality is split into separate NuGet packages that you can include only when needed.
 
-Each extension provides one or more pipeline steps — importers, exporters, or other preprocessing modules — that plug directly into `PipelineBuilder` the same way built-in steps do. There's no special integration required.
+This means you install and use only the parts of the system that are relevant to your use case, keeping your project lightweight and avoiding unnecessary dependencies.
+
+## Modular design
+
+Each feature set is delivered as an independent package. These packages extend the core functionality of the toolkit without being part of the base library.
+
+This approach allows you to compose the system based on your requirements rather than relying on a fixed, all-in-one solution.
 
 ## Why separate packages?
 
-The core toolkit has no external dependencies. Extensions bring their own — CSV parsers, JSON serializers, XML libraries. Keeping them separate means you don't pay for dependencies you don't use.
+The core library is intentionally kept minimal. Additional functionality is provided through optional packages that may introduce external dependencies such as:
+
+- file format parsers (CSV, JSON, XML),
+- serialization libraries,
+- domain-specific processing components.
+
+By separating them, you avoid pulling in dependencies and features you do not use.
+
+## Usage model
+
+You only include the packages that are necessary for your workflow. Each extension integrates seamlessly with the core APIs, without requiring special configuration or additional setup steps.
+
+This keeps the system flexible, lightweight, and easy to maintain while still allowing it to scale in functionality when needed.

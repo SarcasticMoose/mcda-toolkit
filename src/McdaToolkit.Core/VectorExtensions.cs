@@ -1,5 +1,4 @@
 using System.Numerics;
-
 namespace McdaToolkit.Core;
 
 /// <summary>
