@@ -11,4 +11,7 @@
       <ProjectReference Include="..\McdaToolkit.Validation\McdaToolkit.Validation.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="McdaToolkit.Normalization" />
+    </ItemGroup>
 </Project>

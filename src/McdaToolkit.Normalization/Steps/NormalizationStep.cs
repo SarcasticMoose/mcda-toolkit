@@ -10,13 +10,13 @@ namespace McdaToolkit.Normalization.Steps;
 
 internal sealed class NormalizationStep<T>(
     IVectorNormalizer<T> normalizer,
-    ITransformerRegistry<T> transformerRegistry) : IProcessingStep<T>
+    ITransformerRegistry<T> transformerRegistry) : IPreProcessingStep<T>
     where T : struct, IFloatingPointIeee754<T>
 {
     private readonly IVectorNormalizer<T> _normalizer = normalizer;
     private readonly ITransformerRegistry<T> _transformerRegistry = transformerRegistry;
 
-    public Result<McdaProblem<T>> Process(McdaProblem<T> mcdaProblem)
+    public Result<McdaProblem<T>> Execute(McdaProblem<T> mcdaProblem)
     {
         int rows = mcdaProblem.Data.RowCount;
         int cols = mcdaProblem.Data.ColumnCount;

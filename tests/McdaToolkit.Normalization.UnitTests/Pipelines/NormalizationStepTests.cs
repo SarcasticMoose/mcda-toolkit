@@ -15,7 +15,7 @@ public class NormalizationStepTests
         var criteria = types
             .Select(t => new CriteriaBuilder<double>().WithType(t).Build())
             .ToArray();
-        return new McdaProblem<double> { Data = matrix, Criteria = criteria };
+        return McdaProblem<double>.Create(matrix,criteria);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class NormalizationStepTests
             new TransformerRegistry<double>());
         var problem = BuildProblem(new[,] { { 1.0 }, { 3.0 }, { 5.0 } }, CriterionType.Benefit);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(0.0, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(0.5, result.Data[1, 0], tolerance: 1e-10);
@@ -43,7 +43,7 @@ public class NormalizationStepTests
             new TransformerRegistry<double>());
         var problem = BuildProblem(new[,] { { 8.0 }, { 4.0 }, { 2.0 } }, CriterionType.Cost);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(0.0, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(4.0 / 6.0, result.Data[1, 0], tolerance: 1e-10);
@@ -63,7 +63,7 @@ public class NormalizationStepTests
             CriterionType.Benefit,
             CriterionType.Cost);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(0.0, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(0.5, result.Data[1, 0], tolerance: 1e-10);
@@ -82,7 +82,7 @@ public class NormalizationStepTests
             new TransformerRegistry<double>());
         var problem = BuildProblem(new[,] { { 2.0 }, { 4.0 }, { 8.0 } }, CriterionType.Benefit);
 
-        var result = step.Process(problem);
+        var result = step.Execute(problem);
 
         Assert.True(result.IsSuccess(out _));
     }
@@ -98,7 +98,7 @@ public class NormalizationStepTests
             CriterionType.Benefit,
             CriterionType.Benefit);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(3, result!.Data.RowCount);
         Assert.Equal(2, result.Data.ColumnCount);
@@ -113,7 +113,7 @@ public class NormalizationStepTests
             new TransformerRegistry<double>());
         var problem = BuildProblem(new[,] { { 2.0 }, { 4.0 }, { 8.0 } }, CriterionType.Benefit);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(0.25, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(0.50, result.Data[1, 0], tolerance: 1e-10);

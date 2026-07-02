@@ -32,7 +32,7 @@ public class CriteriaBuilder<T>
     }
 
     /// <summary>Creates the <see cref="CriterionDefinition{T}"/> from the configured values.</summary>
-    public CriterionDefinition<T> Build()
+    internal CriterionDefinition<T> Build()
     {
         return CriterionDefinition<T>.Create(_name, _type, _weight);
     }

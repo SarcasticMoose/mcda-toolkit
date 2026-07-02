@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\McdaToolkit.Extensions.Algorithms.Vikor\McdaToolkit.Extensions.Algorithms.Vikor.csproj" />
+    <ProjectReference Include="..\..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj" />
+    <ProjectReference Include="..\..\src\McdaToolkit.Pipeline\McdaToolkit.Pipeline.csproj" />
+  </ItemGroup>
+</Project>

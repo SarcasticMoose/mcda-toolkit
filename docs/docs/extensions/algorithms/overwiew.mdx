@@ -1,0 +1,85 @@
+---
+title: "Overview"
+position: 1
+---
+
+# Overview
+
+Each MCDA (Multi-Criteria Decision Analysis) method implements the base interface:
+
+```csharp
+public interface IMcdaMethod<TInput, TOutput>
+    where TInput : struct, IFloatingPointIeee754<TInput>
+    where TOutput : IMcdaResult<TInput>
+```
+
+where:
+- `TValue` represents the type of input criteria values (IEE764 floating-point values)
+- `TResult<TValue>` represents the method-specific result type produced by the algorithm.
+
+:::note
+At present, all algorithms operate on IEEE 754 floating-point types `IFloatingPointIeee754<T>`. Support for fuzzy numbers is planned as part of the long-term roadmap and will be introduced in a future release.
+:::
+
+## Execution model
+
+MCDA methods are designed as **stateless computational components**. Their responsibility is limited to performing algorithm-specific calculations, while execution and data management are handled externally.
+
+### Execution orchestration
+
+* Methods are executed by an external **orchestrator**.
+* The orchestrator manages the execution lifecycle and coordinates the evaluation process.
+* MCDA methods are not responsible for controlling when or how they are executed.
+
+### Data handling
+
+* Input data is provided by the **pipeline** at runtime.
+* Methods receive a fully prepared and validated decision problem.
+* Input data remains immutable throughout the execution process.
+
+### Stateless design
+
+* Methods do not store input data.
+* Methods do not persist intermediate results between executions.
+* Each execution is independent and reproducible.
+
+### Restricted execution
+
+The `Execute` method is intentionally marked as `internal`:
+
+```csharp
+internal TOutput[] Execute(McdaProblem<TInput> problem);
+```
+
+where:
+- `TValue` represents the type of input criteria values (IEE764 floating-point values)
+- `TResult<TValue>` represents the method-specific result type produced by the algorithm.
+
+This means:
+
+* MCDA methods cannot be executed directly by library consumers.
+* Direct access to the execution logic is restricted.
+* All evaluations must be performed through the orchestrator.
+
+This design guarantees a consistent execution flow, centralized validation, and uniform result processing across all MCDA methods.
+
+### Ranking conversion
+
+MCDA algorithms typically produce method-specific outputs rather than a final ranking. For example, a method may calculate preference values, utility measures, outranking relations, or other intermediate results that are unique to the algorithm.
+
+To provide a unified output model, each method exposes an internal ranking converter:
+```csharp
+internal interface IMcdaRankingConverter<TInput, TResult>
+    where TInput : struct, IFloatingPointIeee754<TInput>
+    where TResult : IMcdaResult<TInput>
+{
+    Ranking<TInput> Convert(TResult[] result, RankingOptions<TInput> options);
+}
+```
+After execution:
+
+- The orchestrator invokes the method and obtains an array of method-specific results (`TResult[]`).
+- The corresponding ranking converter transforms these results into a common `Ranking<TInput>` representation.
+- The resulting ranking is returned to the caller.
+
+This separation allows each algorithm to expose its native result structure while still providing a consistent ranking.

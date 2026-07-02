@@ -8,26 +8,14 @@ public class McdaProblemBuilder<T>
     where T : struct, IFloatingPointIeee754<T>
 {
     private Matrix<T>? _matrix;
-    private readonly List<CriteriaBuilder<T>> _criteria = new();
+    private readonly List<CriteriaBuilder<T>> _criteria = [];
 
-    /// <summary>Sets the decision matrix.</summary>
-    public McdaProblemBuilder<T> WithMatrix(Matrix<T> matrix)
-    {
-        _matrix = matrix;
-        return this;
-    }
+    internal McdaProblemBuilder() {}
 
     /// <summary>Sets the decision matrix from a 2D array (rows × columns).</summary>
     public McdaProblemBuilder<T> WithMatrix(T[,] matrix)
     {
         _matrix = Matrix<T>.Build.DenseOfArray(matrix);
-        return this;
-    }
-
-    /// <summary>Sets the decision matrix from a row-major sequence.</summary>
-    public McdaProblemBuilder<T> WithMatrix(IEnumerable<IEnumerable<T>> rows)
-    {
-        _matrix = Matrix<T>.Build.DenseOfRows(rows);
         return this;
     }
 
@@ -40,9 +28,5 @@ public class McdaProblemBuilder<T>
         return this;
     }
 
-    internal McdaProblem<T> Build() => new()
-    {
-        Data = _matrix ?? Matrix<T>.Build.DenseOfArray(new T[0,0]),
-        Criteria = [.._criteria.Select(c => c.Build())]
-    };
+    internal McdaProblem<T> Build() => McdaProblem<T>.Create(_matrix ?? Matrix<T>.Build.DenseOfArray(new T[0, 0]), [.. _criteria.Select(c => c.Build())]);
 }

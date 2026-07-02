@@ -1,0 +1,109 @@
+# VIKOR (VlseKriterijumska Optimizacija I Kompromisno Resenje)
+
+VIKOR is a multi-criteria decision-making method based on **compromise ranking**. It is designed to identify a solution that is closest to the ideal while maintaining a balance between conflicting criteria.
+
+The method evaluates a set of alternatives by measuring their distance from the **ideal (best)** and **anti-ideal (worst)** solutions across all criteria.
+
+## Instalation
+
+To use the VIKOR method, you need to install the `McdaToolkit.Extensions.Algorithms.Vikor` package:
+
+```bash
+dotnet add package McdaToolkit.Extensions.Algorithms.Vikor
+```
+
+## Usage
+
+To use the VIKOR method, create an instance of `VikorMethod` via the `VikorMethodBuilder`.
+
+```csharp
+var vikor = new VikorMethodBuilder<double>()
+    .WithParameters(parameters => parameters.WithV(0.1))
+    .Build();
+```
+
+Evaluate an alternative using the `Execute` method of the executor:
+
+```csharp
+/// with previously created executor
+var ranking = executor.Execute(vikor)
+```
+
+
+## Core idea
+
+VIKOR focuses on selecting a **compromise solution** rather than strictly optimal performance in every criterion.
+
+It assumes that:
+- each criterion has an ideal value (best achievable),
+- each criterion has a worst acceptable value,
+- real-world decisions require balancing trade-offs between criteria.
+
+### Evaluation process
+
+The algorithm operates in three main steps:
+
+#### 1. Normalization and utility measurement
+Each alternative is evaluated against all criteria and transformed into comparable utility measures.
+
+#### 2. Computation of VIKOR metrics
+
+For each alternative, three core measures are calculated:
+
+- **S (Group utility measure)** – represents the overall distance from the ideal solution  
+- **R (Individual regret measure)** – represents the worst-case deviation among criteria  
+- **Q (VIKOR index)** – composite ranking score combining S and R  
+
+#### 3. Ranking of alternatives
+
+Alternatives are ranked based on ascending values of **Q**, where lower values represent better compromise solutions.
+
+Additional decision rules may be applied to determine whether a single compromise solution or a set of acceptable solutions should be selected.
+
+### Result representation
+
+VIKOR produces a dedicated result type:
+
+`VikorMethodResult<TValue>`
+
+This structure represents the computed values for each alternative, including:
+- S (utility measure),
+- Q (compromise score),
+- R (regret measure),
+
+## VIKOR parameters
+
+The VIKOR method is controlled by a single key parameter:
+
+### V (strategy weight)
+
+`V ∈ [0.0, 1.0]` represents the weight of the **majority strategy (group utility)** in the final compromise solution.
+
+It determines the balance between two opposing decision strategies:
+
+- **Group utility (S)** – representing overall satisfaction across all criteria
+- **Individual regret (R)** – representing the worst-case dissatisfaction among criteria
+
+
+### Interpretation
+
+- `V → 1.0`
+  - The method prioritizes **group utility (S)**
+  - The solution favors overall performance across all criteria
+  - Suitable when consensus and collective performance are more important
+
+- `V → 0.0`
+  - The method prioritizes **individual regret (R)**
+  - The solution minimizes the worst-case criterion deviation
+  - Suitable when risk aversion is important
+
+- `V = 0.5`
+  - Balanced trade-off between group utility and individual regret
+  - Default compromise configuration
+
+
+:::caution 
+The parameter must satisfy:
+- `0.0 ≤ V ≤ 1.0`
+Values outside this range are invalid and will result in an exception during parameter creation.
+:::

@@ -3,20 +3,16 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>McdaToolkit</PackageId>
-
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IncludeReferencedProjects>false</IncludeReferencedProjects>
+    <Description>A flexible .NET library for Multi-Criteria Decision Analysis (MCDA). Provides a pipeline-based architecture for structuring, evaluating, and solving decision-making problems with multiple conflicting criteria using pluggable MCDA methods and extensions.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\McdaToolkit.Core\McdaToolkit.Core.csproj"
-                      PrivateAssets="all" />
-    <ProjectReference Include="..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj"
-                      PrivateAssets="all" />
-    <ProjectReference Include="..\src\McdaToolkit.Validation\McdaToolkit.Validation.csproj"
-                      PrivateAssets="all" />
-    <ProjectReference Include="..\src\McdaToolkit.Pipeline\McdaToolkit.Pipeline.csproj"
-                      PrivateAssets="all" />
+    <ProjectReference Include="..\src\McdaToolkit.Core\McdaToolkit.Core.csproj" />
+    <ProjectReference Include="..\src\McdaToolkit.Normalization\McdaToolkit.Normalization.csproj" />
+    <ProjectReference Include="..\src\McdaToolkit.Validation\McdaToolkit.Validation.csproj" />
+    <ProjectReference Include="..\src\McdaToolkit.Pipeline\McdaToolkit.Pipeline.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,9 +5,9 @@ using McdaToolkit.Core;
 namespace McdaToolkit.Pipeline.Steps;
 
 /// <summary>Represents a single pre-processing step in an MCDA pipeline.</summary>
-public interface IProcessingStep<T> : IPipelineStep<T>  
+public interface IPreProcessingStep<T> : IPipelineStep<T>
     where T :  struct, IFloatingPointIeee754<T>
 {
     /// <summary>Applies the pre-processing transformation to the given problem and returns the modified result.</summary>
-    Result<McdaProblem<T>> Process(McdaProblem<T> problem);
+    Result<McdaProblem<T>> Execute(McdaProblem<T> problem);
 }

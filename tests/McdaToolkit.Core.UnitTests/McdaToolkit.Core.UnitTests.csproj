@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\McdaToolkit.Core\McdaToolkit.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -14,7 +14,7 @@ public class NormalizationStepBuilderTests
     {
         var matrix = Matrix<double>.Build.DenseOfColumnArrays(values);
         var criteria = new[] { new CriteriaBuilder<double>().WithType(CriterionType.Benefit).Build() };
-        return new McdaProblem<double> { Data = matrix, Criteria = criteria };
+        return McdaProblem<double>.Create(matrix,criteria);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class NormalizationStepBuilderTests
         var step = builder.Build();
         var problem = SingleBenefitProblem(1.0, 3.0, 5.0);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         resolver.Received(1).Resolve(NormalizationMethod.MinMax);
         Assert.Equal(0.0, result!.Data[0, 0], tolerance: 1e-10);
@@ -45,7 +45,7 @@ public class NormalizationStepBuilderTests
         var step = builder.WithMethod(NormalizationMethod.Max).Build();
         var problem = SingleBenefitProblem(2.0, 4.0, 8.0);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         resolver.Received(1).Resolve(NormalizationMethod.Max);
         Assert.Equal(0.25, result!.Data[0, 0], tolerance: 1e-10);
@@ -80,7 +80,7 @@ public class NormalizationStepBuilderTests
             .Build();
         var problem = SingleBenefitProblem(2.0, 4.0, 8.0);
 
-        step.Process(problem).IsSuccess(out var result);
+        step.Execute(problem).IsSuccess(out var result);
 
         Assert.Equal(0.25, result!.Data[0, 0], tolerance: 1e-10);
         Assert.Equal(1.00, result.Data[2, 0], tolerance: 1e-10);

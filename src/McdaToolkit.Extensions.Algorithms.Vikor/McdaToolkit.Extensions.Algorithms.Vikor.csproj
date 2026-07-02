@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\McdaToolkit.Core\McdaToolkit.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <Description>VIKOR (VlseKriterijumska Optimizacija I Kompromisno Resenje) method implementation for the MCDA Toolkit. Provides compromise-based ranking of alternatives using group utility (S), individual regret (R), and combined measure (Q).</Description>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="McdaToolkit.Extensions.Algorithms.Vikor.UnitTests" />
+  </ItemGroup>
+
+</Project>
